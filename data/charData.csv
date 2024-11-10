@@ -1,0 +1,11 @@
+index,id,buid,vcid,name,lastname,middlename,order,relate
+0,MAYU,CA,MAY,真優,十川,,5,50
+1,SENA,CB,SEN,千奈,七瀬,,3,40
+2,ALICE,CC,ALC,アリス,メイシー,サード,7,20
+3,MOMOKA,CD,MMK,百花,千代田,,6,60
+4,HIKARU,CE,HKR,ひかる,小野坂,,4,80
+5,CHISA,CF,CHS,知紗,榎本,,2,10
+6,MARIA,CG,MRA,真里亜,九重,,1,70
+7,CERBERUS,CI,CBS,ケルベロス,,,8,30
+8,NPC_OTHER,OT,NPC,,,,,
+#以下デバッグ用,,,,,,,,

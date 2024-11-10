@@ -1,0 +1,1756 @@
+
+class ConfigWindow extends SettingWindowBase{
+	var _adv = null;
+
+	var _page = 0;
+	var _create = [false, false, false, false, false];
+	var _base = [];
+	var _baseS = [];
+
+	var _btn = %[];
+	var _group = %[];
+
+	var _hint;
+	var _voiceVolumeGuide;
+	var _sysVoiceVolumeGuide;
+	var _bgvVolumeGuide;
+
+	var _sampleMessageTimer;
+	var _sampleMessage;
+	var _sampleMessageBase;
+
+	var _numberImage;
+	var _number;
+	var NUM_DIGIT = 3;
+
+	var _image = %[];
+
+	var _screenModeChanging = false;
+
+	var _sampleSound;
+	var _capItem = [];
+
+	var SYSTEM   = 0;
+	var SOUND    = 1;
+	var SHORTCUT = 2;
+	var GLOBAL   = 3;
+
+	var SOUND_VOICE  = 0;
+	var SOUND_BGV    = 1;
+	var SOUND_SYSTEM = 2;
+
+	var BUTTON    = 1;
+	var TBUTTON   = 2;
+	var RBUTTON   = 3;
+	var SLIDER    = 4;
+	var VOICE_VBS = 5;	//voice, bgv, system
+	var VOICE_VS  = 6;	//voice, system
+	var VOICE_V   = 7;	//voice
+
+	var CAP_BGM		= 0x0001 << 0;
+	var CAP_SE		= 0x0001 << 1;
+	var CAP_ENVSE	= 0x0001 << 2;
+	var CAP_SYSSE	= 0x0001 << 3;
+	var CAP_MOVIE	= 0x0001 << 4;
+	var CAP_VOICE	= 0x0001 << 5;
+	var CAP_CHAR	= 0x0001 << 6;
+	var CAP_BGV		= 0x0001 << 7;
+
+	var BASE_X = 147;
+	var BASE_Y = 75;
+
+	var IMAGELIST = [
+		["PlayTest"     , "FRM_A0225"], 
+		["CheckButton"  , "FRM_A0231"], 
+		["SliderTrim"   , "FRM_A0241"], 
+		["SliderBase"   , "FRM_A0242"], 
+
+		["Mayu"    , "FRM_C0201"], 
+		["Sena"    , "FRM_C0202"], 
+		["Alice"   , "FRM_C0203"], 
+		["Momoka"  , "FRM_C0204"], 
+		["Hikaru"  , "FRM_C0205"], 
+		["Chisa"   , "FRM_C0206"], 
+		["Maria"   , "FRM_C0207"], 
+		["Cerberus", "FRM_C0208"], 
+		["Other"   , "FRM_C0209"]
+	];
+
+	var BTN_SYSTEM = [
+		%[type:RBUTTON, id:"Window"    , group:"ScreenMode", file:"FRM_B0201", ptn:3, pos:[216, 14], 
+			hint:"ウィンドウモードに変更します"], 
+		%[type:RBUTTON, id:"FullScreen", group:"ScreenMode", file:"FRM_B0202", ptn:3, pos:[348, 14], 
+			hint:"フルスクリーンモードに変更します"], 
+
+		%[type:RBUTTON, id:"SZ1920", group:"ScreenSize", file:"FRM_B0203", ptn:3, pos:[225, 51], 
+			hint:"画面サイズを1920x1080に変更します"], 
+		%[type:RBUTTON, id:"SZ1600", group:"ScreenSize", file:"FRM_B0204", ptn:3, pos:[367, 51], 
+			hint:"画面サイズを1600x900に変更します"], 
+		%[type:RBUTTON, id:"SZ1280", group:"ScreenSize", file:"FRM_B0205", ptn:3, pos:[296, 74], 
+			hint:"画面サイズを1280x720に変更します"], 
+		%[type:RBUTTON, id:"SZ960" , group:"ScreenSize", file:"FRM_B0206", ptn:3, pos:[233, 96], 
+			hint:"画面サイズを960x540に変更します"], 
+		%[type:RBUTTON, id:"SZ640" , group:"ScreenSize", file:"FRM_B0207", ptn:3, pos:[375, 96], 
+			hint:"画面サイズを640x360に変更します"], 
+
+		%[type:TBUTTON, id:"ScreenModeKeep", file:"CheckButton", ptn:4, pos:[180, 120], 
+			hint:"前回終了時の画面設定を保持します"], 
+
+		%[type:TBUTTON, id:"ScreenEffect", file:"CheckButton", ptn:4, pos:[35, 155], 
+			hint:"画面の演出効果を有効にします"], 
+
+		%[type:SLIDER, id:"EffectSpeed", file:"SliderTrim", ptn:1, pos:[218, 187], width:202+13, height:22, range:200, 
+			hint:"画面の演出速度を調整します"], 
+
+		%[type:SLIDER, id:"WindowDepth", file:"SliderTrim", ptn:1, pos:[218, 219], width:202+13, height:22, range:100, 
+			hint:"ウィンドウの濃度を調整します"], 
+
+		%[type:SLIDER, id:"MessageSpeed", file:"SliderTrim", ptn:1, pos:[218, 251], width:202+13, height:22, range:100, 
+			hint:"メッセージの表示速度を調整します"], 
+
+		%[type:SLIDER, id:"AutoMessageSpeed", file:"SliderTrim", ptn:1, pos:[218, 283], width:202+13, height:22, range:100, 
+			hint:"オート時のメッセージ送りの速度を調整します"], 
+
+		%[type:RBUTTON, id:"Font1", group:"Font", file:"CheckButton", ptn:4, pos:[187, 319], 
+			hint:"メッセージフォントをスーラに変更します"], 
+		%[type:RBUTTON, id:"Font2", group:"Font", file:"CheckButton", ptn:4, pos:[330, 319], 
+			hint:"メッセージフォントを筑紫明朝に変更します"], 
+		%[type:RBUTTON, id:"Font3", group:"Font", file:"CheckButton", ptn:4, pos:[187, 345], 
+			hint:"メッセージフォントをハミングに変更します"], 
+		%[type:RBUTTON, id:"Font4", group:"Font", file:"CheckButton", ptn:4, pos:[330, 345], 
+			hint:"メッセージフォントをニューシネマに変更します"], 
+		%[type:RBUTTON, id:"Font5", group:"Font", file:"CheckButton", ptn:4, pos:[187, 370], 
+			hint:"メッセージフォントをロダンカトレアに変更します"], 
+		%[type:RBUTTON, id:"Font6", group:"Font", file:"CheckButton", ptn:4, pos:[330, 370], 
+			hint:"メッセージフォントをロダンハッピーに変更します"], 
+
+		%[type:TBUTTON, id:"FontColor", file:"CheckButton", ptn:4, pos:[180, 456], 
+			hint:"既読メッセージの文字色を変更します"], 
+
+		%[type:TBUTTON, id:"MessageSkip", file:"CheckButton", ptn:4, pos:[528, 13], 
+			hint:"全てのメッセージをスキップします"], 
+
+		%[type:TBUTTON, id:"MessageCancel", file:"CheckButton", ptn:4, pos:[528, 45], 
+			hint:"メッセージ表示途中でクリックされた時、次に進みます"], 
+
+		%[type:TBUTTON, id:"VoiceCut", file:"CheckButton", ptn:4, pos:[528, 77], 
+			hint:"音声再生中にクリックされた時、音声を停止します"], 
+
+		%[type:TBUTTON, id:"EventCamera", file:"CheckButton", ptn:4, pos:[528, 109], 
+			hint:"イベントＣＧ時のカメラ演出を有効にします"], 
+
+		%[type:TBUTTON, id:"SelectedSkip", file:"CheckButton", ptn:4, pos:[528, 141], 
+			hint:"選択肢後もスキップ設定を継続します"], 
+
+		%[type:TBUTTON, id:"SelectedAuto", file:"CheckButton", ptn:4, pos:[528, 173], 
+			hint:"選択肢後もオート設定を継続します"], 
+
+		%[type:TBUTTON, id:"MouseCursor", file:"CheckButton", ptn:4, pos:[528, 205], 
+			hint:"確認ダイアログへのマウスカーソルの自動追尾を行います"], 
+
+		%[type:TBUTTON, id:"RouteGuide", file:"CheckButton", ptn:4, pos:[528, 237], 
+			hint:"ルートガイドを表示します"], 
+
+		%[type:TBUTTON, id:"TriggerCounter", file:"CheckButton", ptn:4, pos:[528, 269], 
+			hint:"絶頂カウンターを表示します"], 
+
+		%[type:TBUTTON, id:"Confirm_Overwrite", file:"CheckButton", ptn:4, pos:[684, 312], 
+			hint:"セーブの上書き確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_Load"     , file:"CheckButton", ptn:4, pos:[859, 312], 
+			hint:"ロード確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_Copy", file:"CheckButton", ptn:4, pos:[684, 339], 
+			hint:"セーブのコピー確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_Move", file:"CheckButton", ptn:4, pos:[771, 339], 
+			hint:"セーブの移動確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_Delete", file:"CheckButton", ptn:4, pos:[859, 339], 
+			hint:"セーブの削除確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_Default"     , file:"CheckButton", ptn:4, pos:[684, 366], 
+			hint:"初期設定に戻す確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_InitRead" , file:"CheckButton", ptn:4, pos:[859, 366], 
+			hint:"既読情報の初期化確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_GameEnd"  , file:"CheckButton", ptn:4, pos:[684, 393], 
+			hint:"ゲーム終了の確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_Title"    , file:"CheckButton", ptn:4, pos:[859, 393], 
+			hint:"タイトル画面に戻る確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_SelectJump", file:"CheckButton", ptn:4, pos:[684, 420], 
+			hint:"選択肢ジャンプを実行する確認を行います"], 
+		%[type:TBUTTON, id:"Confirm_LogJump", file:"CheckButton", ptn:4, pos:[684, 447], 
+			hint:"ログジャンプを実行する確認を行います"]
+	];
+	var BTN_SOUND = [
+		%[type:TBUTTON, id:"PlayBgm"  , file:"CheckButton", ptn:4, pos:[20, 71], cap:CAP_BGM, 
+			hint:"音楽の再生をＯＮ／ＯＦＦします"], 
+		%[type:SLIDER, id:"VolBgm", file:"SliderTrim", ptn:1, pos:[206, 72], width:202+13, height:22, range:100, cap:CAP_BGM, 
+			hint:"音楽の音量を調整します(ドラッグでテスト再生)"], 
+
+		%[type:TBUTTON, id:"PlaySe"   , file:"CheckButton", ptn:4, pos:[20, 103], cap:CAP_SE, 
+			hint:"効果音の再生をＯＮ／ＯＦＦします"], 
+		%[type:SLIDER, id:"VolSe", file:"SliderTrim", ptn:1, pos:[206, 104], width:202+13, height:22, range:100, cap:CAP_SE, 
+			hint:"効果音の音量を調整します(Enterまたはドラッグでテスト再生)"], 
+		%[type:BUTTON, id:"TestSe"   , file:"PlayTest", ptn:2, pos:[461, 99], cap:CAP_SE, 
+			hint:"効果音のテストを行います"], 
+
+		%[type:TBUTTON, id:"PlayEnvSe", file:"CheckButton", ptn:4, pos:[20, 135], cap:CAP_ENVSE, 
+			hint:"環境音の再生をＯＮ／ＯＦＦします"], 
+		%[type:SLIDER, id:"VolEnvSe", file:"SliderTrim", ptn:1, pos:[206, 136], width:202+13, height:22, range:100, cap:CAP_ENVSE, 
+			hint:"環境音の音量を調整します(Enterまたはドラッグでテスト再生)"], 
+		%[type:BUTTON, id:"TestEnvSe" , file:"PlayTest", ptn:2, pos:[461, 131], cap:CAP_ENVSE, 
+			hint:"環境音のテストを行います"], 
+
+		%[type:TBUTTON, id:"PlayMovie", file:"CheckButton", ptn:4, pos:[20, 167], cap:CAP_MOVIE, 
+			hint:"ムービーでの曲の再生をＯＮ／ＯＦＦします"], 
+		%[type:SLIDER, id:"VolMovie", file:"SliderTrim", ptn:1, pos:[206, 168], width:202+13, height:22, range:100, cap:CAP_MOVIE, 
+			hint:"ムービーの音量を調整します(ドラッグでテスト再生)"], 
+
+		%[type:TBUTTON, id:"PlayEcho", file:"CheckButton", ptn:4, pos:[20, 199], cap:CAP_MOVIE, 
+			hint:"お風呂エコーボイスを再生します"], 
+
+		%[type:RBUTTON, id:"TagVoice" , group:"VoiceDetail", file:"FRM_A0214", ptn:3, pos:[499, 68], 
+			hint:"キャラクターの音声を調整します"], 
+		%[type:RBUTTON, id:"TagBgv" , group:"VoiceDetail", file:"FRM_A0215", ptn:3, pos:[649, 68], 
+			hint:"キャラクターのＢＧＶを調整します"], 
+		%[type:RBUTTON, id:"TagSystem" , group:"VoiceDetail", file:"FRM_A0216", ptn:3, pos:[799, 68], 
+			hint:"キャラクターのシステム音を調整します"], 
+
+		%[type:VOICE_VBS, id:"Master"  , pos:[0,   0], cap:CAP_CHAR, hint:"マスター"], 
+		%[type:VOICE_VBS, id:"Mayu"    , pos:[0,  32], cap:CAP_CHAR, hint:"十川真優"], 
+		%[type:VOICE_VBS, id:"Sena"    , pos:[0,  64], cap:CAP_CHAR, hint:"七瀬千奈"], 
+		%[type:VOICE_VBS, id:"Alice"   , pos:[0,  96], cap:CAP_CHAR, hint:"アリス・サード・メイシー"], 
+		%[type:VOICE_VBS, id:"Momoka"  , pos:[0, 128], cap:CAP_CHAR, hint:"千代田百花"], 
+		%[type:VOICE_VS , id:"Hikaru"  , pos:[0, 160], cap:CAP_CHAR, hint:"小野坂ひかる"], 
+		%[type:VOICE_VBS, id:"Chisa"   , pos:[0, 192], cap:CAP_CHAR, hint:"榎本知紗"], 
+		%[type:VOICE_VBS, id:"Maria"   , pos:[0, 224], cap:CAP_CHAR, hint:"九重真里亜"], 
+		%[type:VOICE_V  , id:"Cerberus", pos:[0, 256], cap:CAP_CHAR, hint:"ケルベロス"], 
+		%[type:VOICE_V  , id:"Other"   , pos:[0, 288], cap:CAP_CHAR, hint:"モブキャラ"]
+	];
+	var BTN_SHORTCUT = [
+	];
+	var BTN_GLOBAL = [
+		%[type:RBUTTON, id:"System"  , group:"PageTag", file:"FRM_A0211", ptn:3, pos:[335, 36],
+			hint:"システム設定のページを開きます"], 
+		%[type:RBUTTON, id:"Sound"   , group:"PageTag", file:"FRM_A0213", ptn:3, pos:[551, 36],
+			hint:"サウンド設定のページを開きます"], 
+		%[type:RBUTTON, id:"Shortcut", group:"PageTag", file:"FRM_A0212", ptn:3, pos:[767, 36],
+			hint:"ショートカット一覧のページを開きます"], 
+
+		%[type:BUTTON, id:"Web"         , file:"FRM_A0226", ptn:2, pos:[BASE_X+59, BASE_Y+534],
+			hint:"ブラウザでCUBEのウェブサイトを開きます"], 
+		%[type:BUTTON, id:"Default"     , file:"FRM_A0221", ptn:2, pos:[BASE_X+221, BASE_Y+538],
+			hint:"初期設定に戻します"], 
+		%[type:BUTTON, id:"InitRead"    , file:"FRM_A0227", ptn:2, pos:[BASE_X+329, BASE_Y+538],
+			hint:"既読情報を初期化します"], 
+		%[type:BUTTON, id:"RetTitle"    , file:"FRM_A0222", ptn:2, pos:[BASE_X+715, BASE_Y+538],
+			hint:"タイトルに戻ります"], 
+		%[type:BUTTON, id:"RetRecollect", file:"FRM_A0223", ptn:2, pos:[BASE_X+715, BASE_Y+538],
+			hint:"回想モードに戻ります"], 
+		%[type:BUTTON, id:"GameEnd"     , file:"FRM_A0224", ptn:2, pos:[BASE_X+861, BASE_Y+538],
+			hint:"ゲームを終了します"], 
+
+		%[type:BUTTON, id:"Close"     , file:"FRM_1101", ptn:2, pos:[0, 592],
+			hint:""]
+	];
+
+	function ConfigWindow(win, par, adv=null, fShowReturnMenu=0, fShowEnd=0){
+		super.SettingWindowBase(win, par, true);
+
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		fillRect(0, 0, width, height, 0x60000000);
+		setSizeToImageSize();
+
+		absolute = LAYER_CONFIG;
+		opacity = 0;
+
+		ignoreInvalidItem = true;
+
+		_sampleMessageTimer = new Timer(onSampleMsgOutput, "");
+
+		_adv = adv;
+		setup(fShowReturnMenu, fShowEnd);
+		setPage(sysReg._closeConfigPage);
+	}
+	function finalize(){
+		SaveSystemRegister();
+
+		StopSystemSound();
+
+		stopSampleSound();
+
+		_adv = null;
+
+		InvalidateArray(_base);
+		InvalidateArray(_baseS);
+		InvalidateArray(_btn);
+
+		invalidate _hint;
+		invalidate _voiceVolumeGuide;
+		invalidate _bgvVolumeGuide;
+		invalidate _sysVoiceVolumeGuide;
+		invalidate _sampleMessage;
+		invalidate _sampleMessageBase;
+		_sampleMessageTimer.enabled = false;
+		invalidate _sampleMessageTimer;
+
+		invalidate _number;
+		invalidate _numberImage;
+
+		invalidate _sampleSound;
+
+		for(var i=0;i<IMAGELIST.count;i++){
+			invalidate _image[IMAGELIST[i][0]];
+		}
+
+		sysReg._closeConfigPage = _page;
+
+		super.finalize();
+	}
+
+	function setup(fShowReturnMenu=0, fShowEnd=0){
+		for(var i=0;i<IMAGELIST.count;i++){
+			_image[IMAGELIST[i][0]] = new global.Layer(window, this);
+			with(_image[IMAGELIST[i][0]]){
+				.loadImages(IMAGELIST[i][1]);
+				.setSizeToImageSize();
+			}
+		}
+
+		for(var i=0;i<GLOBAL+1;i++){
+			_base[i] = new global.SelectItemGroupLayer(window, this);
+			_base[i].hasImage = true;
+			_base[i].setPos(BASE_X, BASE_Y);
+		}
+		for(var i=0;i<SOUND_SYSTEM+1;i++){
+			_baseS[i] = new global.SelectItemGroupLayer(window, _base[SOUND]);
+			_baseS[i].hasImage = true;
+			_baseS[i].setSize(483, 319);
+			_baseS[i].setPos(499, 100);
+		}
+		_baseS[SOUND_VOICE].visible = true;
+		with(_base[GLOBAL]){
+			.setSize(1280, 720);
+			.setPos(0, 0);
+			createButton(BTN_GLOBAL, _base[GLOBAL]);
+
+			if(fShowReturnMenu == 0){
+				_btn.RetTitle.visible = false;
+				_btn.RetRecollect.visible = false;
+			}else if(fShowReturnMenu == 1){
+				_btn.RetRecollect.visible = false;
+			}else if(fShowReturnMenu == 2){
+				_btn.RetTitle.visible = false;
+			}
+
+			if(!fShowEnd)		_btn.GameEnd.visible = false;
+
+			.visible = true;
+		}
+		_hint = new global.Layer(window, _base[GLOBAL]);
+		with(_hint){
+			.setSize(904, 29);
+			.setPos(242, 572);
+			.visible = true;
+		}
+		_voiceVolumeGuide = new global.Sprite(window, _baseS[SOUND_VOICE]);
+		with(_voiceVolumeGuide){
+			.hitThreshold = 256;
+			.setSize(3, 280);
+			.fillRect(0, 0, .width, .height, RGBA(255, 64, 0, 196));
+			.opacity = 64;
+			.visible = true;
+		}
+		_bgvVolumeGuide = new global.Sprite(window, _baseS[SOUND_BGV]);
+		with(_bgvVolumeGuide){
+			.hitThreshold = 256;
+			.setSize(3, 280);
+			.fillRect(0, 0, .width, .height, RGBA(255, 64, 196, 196));
+			.opacity = 64;
+			.visible = true;
+		}
+		_sysVoiceVolumeGuide = new global.Sprite(window, _baseS[SOUND_SYSTEM]);
+		with(_sysVoiceVolumeGuide){
+			.hitThreshold = 256;
+			.setSize(3, 280);
+			.fillRect(0, 0, .width, .height, RGBA(0, 255, 64, 196));
+			.opacity = 64;
+			.visible = true;
+		}
+
+		_sampleMessage = new MessageArea(window, _base[SYSTEM].parent, true, global.GetFontFace);
+		with(_sampleMessage){
+			.setSize(431, 54);
+			.setPos(BASE_X+32,BASE_Y+398);
+
+			.setMargin(16, 12, .width-4, .height-4);
+			.setDefaultDrawTextParam(GetDefineColor("white"), 255, true, 3024, GetDefineColor("black"), 3, 0, 0);
+			.setDefaultFontStyle(ADV_FONT_MESS_FACE, 24, ADV_FONT_MESS_INDENT, true);
+			.resetDrawTextParam();
+			.resetFontStyle();
+
+			.setCompleteCall(startSampleMsgOutput);
+
+			.absolute = _base[SOUND].absolute - 1;
+
+			.visible = true;
+		}
+		_sampleMessageBase = new global.Layer(window, _base[SYSTEM].parent);
+		with(_sampleMessageBase){
+			.loadImages("FRM_B0235");
+			.setSizeToImageSize();
+
+			.setPos(BASE_X+32, BASE_Y+398);
+			.absolute = _base[SOUND].absolute - 2;
+			.visible = true;
+			.opacity = ((255 * CONFIG.windowDepth) \ 100);
+		}
+
+		_numberImage = new global.Layer(win, this);
+		with(_numberImage){
+			.loadImages("FRM_A0243");
+			.setSizeToImageSize();
+		}
+		_number = new global.Sprite(win, this);
+		with(_number){
+			.setSize((_numberImage.width\10)*NUM_DIGIT, _numberImage.height);
+			.hitThreshold = 256;
+		}
+
+		for(var i=0;i<_create.count;i++) createPage(i);
+
+		_sampleSound = new WaveSoundBuffer(null);
+	}
+
+	function createPage(page){
+		if(!_create[page]){
+			switch(page){
+			case SYSTEM :
+				_group.PageTag.on(_btn.System);
+				_base[SYSTEM].loadImages("FRM_A0201");
+				_base[SYSTEM].setSizeToImageSize();
+				createButton(BTN_SYSTEM, _base[SYSTEM]);
+				break;
+			case SOUND :
+				_group.PageTag.on(_btn.Sound);
+				_base[SOUND].loadImages("FRM_A0202");
+				_base[SOUND].setSizeToImageSize();
+				createButton(BTN_SOUND, _base[SOUND]);
+				_group.VoiceDetail.on(_btn.TagVoice);
+				break;
+			case SHORTCUT :
+				_group.PageTag.on(_btn.Shortcut);
+				_base[SHORTCUT].loadImages("FRM_A0203");
+				_base[SHORTCUT].setSizeToImageSize();
+				createButton(BTN_SHORTCUT, _base[SHORTCUT]);
+				break;
+			}
+			_create[page] = true;
+		}
+	}
+
+	function setPage(page){
+		for(var i=0;i<3;i++) _base[i].visible = false;
+
+		createPage(page);
+
+		stopSampleMsgOutput();
+
+		switch(page){
+		case SYSTEM :
+			_group.PageTag.on(_btn.System);
+			onSampleMsgOutput();
+			break;
+		case SOUND :
+			_group.PageTag.on(_btn.Sound);
+			break;
+		case SHORTCUT :
+			_group.PageTag.on(_btn.Shortcut);
+			break;
+		}
+
+		applyToConfig();
+		_base[page].visible = true;
+
+		removeChainItemAll();
+		addChainItem(_btn.System);
+		addChainItem(_btn.Sound);
+		addChainItem(_btn.Shortcut);
+		var list;
+		switch(page){
+		case SYSTEM   : list = BTN_SYSTEM; break;
+		case SOUND    : 
+			list = BTN_SOUND; 
+			setVolumeGuide(_voiceVolumeGuide, _btn.Master_VolVoice._trim);
+			setVolumeGuide(_bgvVolumeGuide, _btn.Master_VolBgv._trim);
+			setVolumeGuide(_sysVoiceVolumeGuide, _btn.Master_VolSys._trim);
+			applyVoiceSlider();
+			break;
+		case SHORTCUT : list = BTN_SHORTCUT; break;
+		}
+		for(var i=0;i<list.count;i++){
+			var id = list[i].id;
+			var type = list[i].type;
+			if(type == VOICE_VBS || type == VOICE_VS || type == VOICE_V){
+				if(_btn.TagVoice.isOn()){
+					if(_btn[id+"_PlayVoice"] !== void) addChainItem(_btn[id+"_PlayVoice"]);
+					if(_btn[id+"_VolVoice"] !== void) addChainItem(_btn[id+"_VolVoice"]);
+					if(_btn[id+"_Test"] !== void) addChainItem(_btn[id+"_Test"]);
+				}else if(_btn.TagBgv.isOn()){
+					if(_btn[id+"_PlayBgv"] !== void) addChainItem(_btn[id+"_PlayBgv"]);
+					if(_btn[id+"_VolBgv"] !== void) addChainItem(_btn[id+"_VolBgv"]);
+					if(_btn[id+"_TestBgv"] !== void) addChainItem(_btn[id+"_TestBgv"]);
+				}else if(_btn.TagSystem.isOn()){
+					if(_btn[id+"_PlaySys"] !== void) addChainItem(_btn[id+"_PlaySys"]);
+					if(_btn[id+"_VolSys"] !== void) addChainItem(_btn[id+"_VolSys"]);
+					if(_btn[id+"_TestSys"] !== void) addChainItem(_btn[id+"_TestSys"]);
+				}
+			}else{
+				addChainItem(_btn[list[i].id]);
+			}
+		}
+		addChainItem(_btn.Web);
+		addChainItem(_btn.Default);
+		addChainItem(_btn.InitRead);
+		addChainItem(_btn.RetTitle);
+		addChainItem(_btn.RetRecollect);
+		addChainItem(_btn.GameEnd);
+		addChainItem(_btn.Close);
+		_page = page;
+	}
+
+	function createButton(list, par){
+		for(var i=0;i<list.count;i++){
+			var item = list[i];
+			switch(item.type){
+			case BUTTON :
+				var img = typeof _image[item.file] == "undefined" ? item.file : _image[item.file];
+				_btn[item.id] = new Button(window, par);
+				_btn[item.id].create(img, item.ptn);
+				break;
+			case TBUTTON : 
+				var img = typeof _image[item.file] == "undefined" ? item.file : _image[item.file];
+				_btn[item.id] = new ToggleButton(window, par);
+				_btn[item.id].create(img, item.ptn);
+				break;
+			case RBUTTON : 
+				var img = typeof _image[item.file] == "undefined" ? item.file : _image[item.file];
+				_btn[item.id] = new RadioButton(window, par);
+				_btn[item.id].create(img, item.ptn);
+				if(_group[item.group] === void)
+					_group[item.group] = new RadioButtonGroup();
+				_group[item.group].add(_btn[item.id]);
+				break;
+			case SLIDER : 
+				var img = typeof _image[item.file] == "undefined" ? item.file : _image[item.file];
+				_btn[item.id] = new SliderH(window, par);
+				_btn[item.id].create(img, item.width, item.height, item.ptn, item.range);
+				break;
+			case VOICE_VBS : case VOICE_VS : case VOICE_V : 
+				_btn[item.id] = new global.SelectItemGroupLayer(window, par);
+
+				//--------------------------------------------------------------------------------------
+				if(typeof _image[item.id] != "undefined"){
+					_baseS[SOUND_VOICE].copyRect(item.pos[0], item.pos[1], _image[item.id], 0, 0, _image[item.id].width, _image[item.id].height);
+					_baseS[SOUND_VOICE].copyRect(item.pos[0]+143, item.pos[1], _image.SliderBase, 0, 0, _image.SliderBase.width, _image.SliderBase.height);
+				}
+				_btn[item.id+"_voice"] = new global.SelectItemGroupLayer(window, _baseS[SOUND_VOICE]);
+
+				with(_btn[item.id+"_voice"]){
+					.setSize(483, 31);
+					.setPos(item.pos[0], item.pos[1]);
+					.visible = true;
+				}
+				_btn[item.id+"_PlayVoice"] = new ToggleButton(window, _btn[item.id+"_voice"]);
+				with(_btn[item.id+"_PlayVoice"]){
+					.create(_image.CheckButton, 4);
+					.setPos(152, 4);
+					.hintStr = item.hint + "の音声をＯＮ／ＯＦＦします";
+					.cap = CAP_SYSSE | CAP_CHAR;
+				}
+				_btn[item.id+"_VolVoice"] = new SliderH(window, _btn[item.id+"_voice"]);
+				with(_btn[item.id+"_VolVoice"]){
+					.create(_image.SliderTrim, 202+13, 22, 1, 100);
+					.setPos(197, 5);
+					.hintStr = item.hint + "の音量を調整します(Enterまたはドラッグでテスト再生)";
+					.cap = CAP_VOICE | CAP_CHAR;
+				}
+				_btn[item.id+"_Test"] = new Button(window, _btn[item.id+"_voice"]);
+				with(_btn[item.id+"_Test"]){
+					.create(_image.PlayTest, 2);
+					.setPos(452, 0);
+					.hintStr = item.hint + "の音声のテストを行います";
+					.cap = CAP_VOICE | CAP_CHAR;
+				}
+
+				if(item.type == VOICE_V) break;
+
+				//--------------------------------------------------------------------------------------
+				if(typeof _image[item.id] != "undefined"){
+					_baseS[SOUND_SYSTEM].copyRect(item.pos[0], item.pos[1], _image[item.id], 0, 0, _image[item.id].width, _image[item.id].height);
+					_baseS[SOUND_SYSTEM].copyRect(item.pos[0]+143, item.pos[1], _image.SliderBase, 0, 0, _image.SliderBase.width, _image.SliderBase.height);
+				}
+				_btn[item.id+"_system"] = new global.SelectItemGroupLayer(window, _baseS[SOUND_SYSTEM]);
+				with(_btn[item.id+"_system"]){
+					.setSize(483, 31);
+					.setPos(item.pos[0], item.pos[1]);
+					.visible = true;
+				}
+				_btn[item.id+"_PlaySys"] = new ToggleButton(window, _btn[item.id+"_system"]);
+				with(_btn[item.id+"_PlaySys"]){
+					.create(_image.CheckButton, 4);
+					.setPos(152, 4);
+					.hintStr = item.hint + "のシステム音をＯＮ／ＯＦＦします";
+					.cap = CAP_SYSSE | CAP_CHAR;
+				}
+				_btn[item.id+"_VolSys"] = new SliderH(window, _btn[item.id+"_system"]);
+				with(_btn[item.id+"_VolSys"]){
+					.create(_image.SliderTrim, 202+13, 22, 1, 100);
+					.setPos(197, 5);
+					.hintStr = item.hint + "のシステム音を調整します(Enterまたはドラッグでテスト再生)";
+					.cap = CAP_SYSSE | CAP_CHAR;
+				}
+				_btn[item.id+"_TestSys"] = new Button(window, _btn[item.id+"_system"]);
+				with(_btn[item.id+"_TestSys"]){
+					.create(_image.PlayTest, 2);
+					.setPos(452, 0);
+					.hintStr = item.hint + "のシステム音のテストを行います";
+					.cap = CAP_SYSSE | CAP_CHAR;
+				}
+
+				if(item.type == VOICE_VS) break;
+
+				//--------------------------------------------------------------------------------------
+				if(typeof _image[item.id] != "undefined"){
+					_baseS[SOUND_BGV].copyRect(item.pos[0], item.pos[1], _image[item.id], 0, 0, _image[item.id].width, _image[item.id].height);
+					_baseS[SOUND_BGV].copyRect(item.pos[0]+143, item.pos[1], _image.SliderBase, 0, 0, _image.SliderBase.width, _image.SliderBase.height);
+				}
+				_btn[item.id+"_bgv"] = new global.SelectItemGroupLayer(window, _baseS[SOUND_BGV]);
+				with(_btn[item.id+"_bgv"]){
+					.setSize(483, 31);
+					.setPos(item.pos[0], item.pos[1]);
+					.visible = true;
+				}
+				_btn[item.id+"_PlayBgv"] = new ToggleButton(window, _btn[item.id+"_bgv"]);
+				with(_btn[item.id+"_PlayBgv"]){
+					.create(_image.CheckButton, 4);
+					.setPos(152, 4);
+					.hintStr = item.hint + "のＢＧＶをＯＮ／ＯＦＦします";
+					.cap = CAP_SYSSE | CAP_CHAR;
+				}
+				_btn[item.id+"_VolBgv"] = new SliderH(window, _btn[item.id+"_bgv"]);
+				with(_btn[item.id+"_VolBgv"]){
+					.create(_image.SliderTrim, 202+13, 22, 1, 100);
+					.setPos(197, 5);
+					.hintStr = item.hint + "のＢＧＶを調整します(Enterまたはドラッグでテスト再生)";
+					.cap = CAP_BGV | CAP_CHAR;
+				}
+				_btn[item.id+"_TestBgv"] = new Button(window, _btn[item.id+"_bgv"]);
+				with(_btn[item.id+"_TestBgv"]){
+					.create(_image.PlayTest, 2);
+					.setPos(452, 0);
+					.hintStr = item.hint + "のＢＧＶのテストを行います";
+					.cap = CAP_BGV | CAP_CHAR;
+				}
+			}
+			_btn[item.id].cap = item.cap;
+			_btn[item.id].hintStr = item.hint;
+			_btn[item.id].setPos(item.pos[0], item.pos[1]);
+		}
+	}
+
+	function setVolumeGuide(guide, target){
+		guide.setPos(target.parent.left + target.left + target.width\2 - guide.width\2, target.top + target.height);
+	}
+
+	function onSliderMove(target, key=false){
+		applyToSystem();
+
+		showDrawNumber(target);
+
+		var cnt = 0;
+		for(;cnt<_capItem.count;cnt++){
+			if(_capItem[cnt] == target) break;
+		}
+		if(cnt == _capItem.count)
+			stopSampleSound();
+		else
+			applyToSampleSound();
+
+		switch(target){
+		case _btn.AutoMessageSpeed :
+			onSampleMsgOutput();
+			break;
+		case _btn.Master_VolVoice :
+			setVolumeGuide(_voiceVolumeGuide, _btn.Master_VolVoice._trim);
+			applyVoiceSlider();
+			break;
+		case _btn.Master_VolBgv :
+			setVolumeGuide(_bgvVolumeGuide, _btn.Master_VolBgv._trim);
+			applyVoiceSlider();
+			break;
+		case _btn.Master_VolSys :
+			setVolumeGuide(_sysVoiceVolumeGuide, _btn.Master_VolSys._trim);
+			applyVoiceSlider();
+			break;
+		}
+	}
+
+	function applyVoiceSlider(){
+		var names = ["Mayu", "Sena", "Alice", "Momoka", "Hikaru", "Chisa", "Maria", "Cerberus", "Other"];
+		for(var i=0;i<names.count;i++){
+			_btn[names[i]+"_VolVoice"].resizeWidth((202 * _btn.Master_VolVoice.trim) \ 100 + 12);
+		}
+		var names = ["Mayu", "Sena", "Alice", "Momoka", "Chisa", "Maria"];
+		for(var i=0;i<names.count;i++){
+			_btn[names[i]+"_VolBgv"].resizeWidth((202 * _btn.Master_VolBgv.trim) \ 100 + 12);
+		}
+		var names = ["Mayu", "Sena", "Alice", "Momoka", "Hikaru", "Chisa", "Maria"];
+		for(var i=0;i<names.count;i++){
+			_btn[names[i]+"_VolSys"].resizeWidth((202 * _btn.Master_VolSys.trim) \ 100 + 12);
+		}
+	}
+
+	function onButtonDownL(target){
+		stopSampleSound();
+		applyToSystem();
+
+		switch(target){
+		case _btn.System   : setPage(SYSTEM); break;
+		case _btn.Sound    : setPage(SOUND); break;
+		case _btn.Shortcut : setPage(SHORTCUT); break;
+
+		case _btn.ScreenEffect_OFF : 
+			if(_adv){
+				_adv.flushMoveCamera();
+				_adv.flushAction();
+			}
+			break;
+
+		case _btn.GameEnd :
+			confirm = true;
+			if(CONFIG.confirmWindow[SystemRegister.CONFIRM_END])
+				PlaySystemVoice("ゲーム終了：確認");
+			CallConfirm("ゲームを終了しますか？", SystemRegister.CONFIRM_END, game.exitGame, cancel);
+			break;
+
+		case _btn.Default : 
+			confirm = true;
+			if(CONFIG.confirmWindow[SystemRegister.CONFIRM_DEFAULT])
+				PlaySystemVoice("初期設定に戻す");
+			CallConfirm("初期設定に戻しますか？", SystemRegister.CONFIRM_DEFAULT, defaultSetting, cancel);
+			break;
+
+		case _btn.RetTitle : 
+		case _btn.RetRecollect : 
+			confirm = true;
+			if(IsRecollect()){
+				if(CONFIG.confirmWindow[SystemRegister.CONFIRM_TITLE])
+					PlaySystemVoice("コンフィグ：回想から戻る");
+				CallConfirm("回想に戻りますか？", SystemRegister.CONFIRM_TITLE, returnRecollect, cancel);
+			}else{
+				if(CONFIG.confirmWindow[SystemRegister.CONFIRM_TITLE])
+					PlaySystemVoice("タイトルに戻る");
+				CallConfirm("タイトルに戻りますか？", SystemRegister.CONFIRM_TITLE, returnTitle, cancel);
+			}
+			break;
+
+		case _btn.InitRead : 
+			confirm = true;
+			if(CONFIG.confirmWindow[SystemRegister.CONFIRM_CLEARREADFLAG])
+				PlaySystemVoice("既読情報の初期化");
+			CallConfirm("既読情報を初期化しますか？", SystemRegister.CONFIRM_CLEARREADFLAG, clearReadFlag, cancel);
+			break;
+
+		case _btn.Web : 
+			PlaySystemVoice("ウェブサイト");
+			System.shellExecute("http://www.cuffs-cube.jp/");
+			break;
+
+		case _btn.Close : 
+			hide(300, ConfigDelete);
+			break;
+
+		case _btn.Font1 : 
+		case _btn.Font2 : 
+		case _btn.Font3 : 
+		case _btn.Font4 : 
+		case _btn.Font5 : 
+		case _btn.Font6 : 
+			onSampleMsgOutput();
+			break;
+
+		case _btn.Master_Test		: playSampleSound("Master_VolVoice"); break;
+		case _btn.Master_TestBgv	: playSampleSound("Master_VolBgv"); break;
+		case _btn.Master_TestSys	: playSampleSound("Master_VolSys"); break;
+
+		case _btn.TestSe			: playSampleSound("TestSe"); break;
+		case _btn.TestEnvSe			: playSampleSound("TestEnvSe"); break;
+		case _btn.TestSys			: playSampleSound("TestSys"); break;
+		case _btn.TestVoice			: playSampleSound("TestVoice"); break;
+
+		case _btn.PlayEcho			: applyToSystem(); dm(_btn.PlayEcho.state); break;
+
+		case _btn.TagVoice			: 
+			_baseS[SOUND_VOICE].visible = true;
+			_baseS[SOUND_BGV].visible = false;
+			_baseS[SOUND_SYSTEM].visible = false;
+			setPage(SOUND);
+			break;
+		case _btn.TagBgv			: 
+			_baseS[SOUND_VOICE].visible = false;
+			_baseS[SOUND_BGV].visible = true;
+			_baseS[SOUND_SYSTEM].visible = false;
+			setPage(SOUND);
+			break;
+		case _btn.TagSystem			: 
+			_baseS[SOUND_VOICE].visible = false;
+			_baseS[SOUND_BGV].visible = false;
+			_baseS[SOUND_SYSTEM].visible = true;
+			setPage(SOUND);
+			break;
+
+		case _btn.Mayu_Test				: playSampleSound("Mayu_Test"); break;
+		case _btn.Mayu_PlayVoice		: playSampleSound("Mayu_PlayVoice"); break;
+		case _btn.Mayu_PlayBgv			: playSampleSound("Mayu_PlayBgv"); break;
+		case _btn.Mayu_TestBgv			: playSampleSound("Mayu_VolBgv", true); break;
+		case _btn.Mayu_PlaySys			: playSampleSound("Mayu_PlaySys"); break;
+		case _btn.Mayu_TestSys			: playSampleSound("Mayu_VolSys"); break;
+		case _btn.Sena_Test				: playSampleSound("Sena_Test"); break;
+		case _btn.Sena_PlayVoice		: playSampleSound("Sena_PlayVoice"); break;
+		case _btn.Sena_PlayBgv			: playSampleSound("Sena_PlayBgv"); break;
+		case _btn.Sena_TestBgv			: playSampleSound("Sena_VolBgv", true); break;
+		case _btn.Sena_PlaySys			: playSampleSound("Sena_PlaySys"); break;
+		case _btn.Sena_TestSys			: playSampleSound("Sena_VolSys"); break;
+		case _btn.Alice_Test			: playSampleSound("Alice_Test"); break;
+		case _btn.Alice_PlayVoice		: playSampleSound("Alice_PlayVoice"); break;
+		case _btn.Alice_PlayBgv			: playSampleSound("Alice_PlayBgv"); break;
+		case _btn.Alice_TestBgv			: playSampleSound("Alice_VolBgv", true); break;
+		case _btn.Alice_PlaySys			: playSampleSound("Alice_PlaySys"); break;
+		case _btn.Alice_TestSys			: playSampleSound("Alice_VolSys"); break;
+		case _btn.Momoka_Test			: playSampleSound("Momoka_Test"); break;
+		case _btn.Momoka_PlayVoice		: playSampleSound("Momoka_PlayVoice"); break;
+		case _btn.Momoka_PlayBgv		: playSampleSound("Momoka_PlayBgv"); break;
+		case _btn.Momoka_TestBgv		: playSampleSound("Momoka_VolBgv", true); break;
+		case _btn.Momoka_PlaySys		: playSampleSound("Momoka_PlaySys"); break;
+		case _btn.Momoka_TestSys		: playSampleSound("Momoka_VolSys"); break;
+		case _btn.Hikaru_Test			: playSampleSound("Hikaru_Test"); break;
+		case _btn.Hikaru_PlayVoice		: playSampleSound("Hikaru_PlayVoice"); break;
+		case _btn.Hikaru_PlaySys		: playSampleSound("Hikaru_PlaySys"); break;
+		case _btn.Hikaru_TestSys		: playSampleSound("Hikaru_VolSys"); break;
+		case _btn.Chisa_Test			: playSampleSound("Chisa_Test"); break;
+		case _btn.Chisa_PlayVoice		: playSampleSound("Chisa_PlayVoice"); break;
+		case _btn.Chisa_PlayBgv			: playSampleSound("Chisa_PlayBgv"); break;
+		case _btn.Chisa_TestBgv			: playSampleSound("Chisa_VolBgv", true); break;
+		case _btn.Chisa_PlaySys			: playSampleSound("Chisa_PlaySys"); break;
+		case _btn.Chisa_TestSys			: playSampleSound("Chisa_VolSys"); break;
+		case _btn.Maria_Test			: playSampleSound("Maria_Test"); break;
+		case _btn.Maria_PlayVoice		: playSampleSound("Maria_PlayVoice"); break;
+		case _btn.Maria_PlayBgv			: playSampleSound("Maria_PlayBgv"); break;
+		case _btn.Maria_TestBgv			: playSampleSound("Maria_VolBgv", true); break;
+		case _btn.Maria_PlaySys			: playSampleSound("Maria_PlaySys"); break;
+		case _btn.Maria_TestSys			: playSampleSound("Maria_VolSys"); break;
+		case _btn.Cerberus_Test			: playSampleSound("Cerberus_Test"); break;
+		case _btn.Cerberus_PlayVoice	: playSampleSound("Cerberus_PlayVoice"); break;
+		case _btn.Other_Test			: playSampleSound("Other_Test"); break;
+		case _btn.Other_PlayVoice		: playSampleSound("Other_PlayVoice"); break;
+
+		case _btn.VolSe					: playSampleSound("VolSe"); break;
+		case _btn.VolSys				: playSampleSound("VolSys"); break;
+		case _btn.VolVoice				: playSampleSound("VolVoice"); break;
+		case _btn.Mayu_VolVoice			: playSampleSound("Mayu_VolVoice"); break;
+		case _btn.Sena_VolVoice			: playSampleSound("Sena_VolVoice"); break;
+		case _btn.Alice_VolVoice		: playSampleSound("Alice_VolVoice"); break;
+		case _btn.Momoka_VolVoice		: playSampleSound("Momoka_VolVoice"); break;
+		case _btn.Hikaru_VolVoice		: playSampleSound("Hikaru_VolVoice"); break;
+		case _btn.Chisa_VolVoice		: playSampleSound("Chisa_VolVoice"); break;
+		case _btn.Maria_VolVoice		: playSampleSound("Maria_VolVoice"); break;
+		case _btn.Cerberus_VolVoice		: playSampleSound("Cerberus_VolVoice"); break;
+		case _btn.Other_VolVoice		: playSampleSound("Other_VolVoice"); break;
+		}
+	}
+
+	function onButtonDownR(target){
+		onMouseDown(0, 0, mbRight, 0);
+	}
+
+	function onButtonEnter(target){
+		hint(target.hintStr);
+	}
+	function onButtonLeave(target){
+		hint();
+	}
+
+	function onSliderEnter(target){
+		hint(target.hintStr);
+		showDrawNumber(target);
+
+		switch(target){
+		case _btn.Master_VolVoice : 
+			with(_voiceVolumeGuide){
+				.setBlendingEnvelope(196);
+				.beginActivation(150);
+			}
+			break;
+		case _btn.Master_VolBgv : 
+			with(_bgvVolumeGuide){
+				.setBlendingEnvelope(196);
+				.beginActivation(150);
+			}
+			break;
+		case _btn.Master_VolSys : 
+			with(_sysVoiceVolumeGuide){
+				.setBlendingEnvelope(196);
+				.beginActivation(150);
+			}
+			break;
+		}
+	}
+	function onSliderLeave(target){
+		hint();
+		hideNumber();
+
+		switch(target){
+		case _btn.Master_VolVoice : 
+			with(_voiceVolumeGuide){
+				.setBlendingEnvelope(64);
+				.beginActivation(150);
+			}
+			break;
+		case _btn.Master_VolBgv : 
+			with(_bgvVolumeGuide){
+				.setBlendingEnvelope(64);
+				.beginActivation(150);
+			}
+			break;
+		case _btn.Master_VolSys : 
+			with(_sysVoiceVolumeGuide){
+				.setBlendingEnvelope(64);
+				.beginActivation(150);
+			}
+			break;
+		}
+	}
+
+	function onSliderMoveStart(target){
+		onSliderMove(target);
+		showDrawNumber(target);
+		applyToSystem();
+		switch(target){
+		case _btn.VolSe				: playSampleSound("VolSe", true); break;
+		case _btn.VolEnvSe			: playSampleSound("VolEnvSe", true); break;
+		case _btn.VolMovie			: playSampleSound("VolMovie", true); break;
+		case _btn.Master_VolVoice	: playSampleSound("Master_VolVoice", true); break;
+		case _btn.Master_VolBgv		: playSampleSound("Master_VolBgv", true); break;
+		case _btn.Master_VolSys		: playSampleSound("Master_VolSys", true); break;
+		case _btn.Mayu_VolVoice		: playSampleSound("Mayu_VolVoice", true); break;
+		case _btn.Sena_VolVoice		: playSampleSound("Sena_VolVoice", true); break;
+		case _btn.Alice_VolVoice	: playSampleSound("Alice_VolVoice", true); break;
+		case _btn.Momoka_VolVoice	: playSampleSound("Momoka_VolVoice", true); break;
+		case _btn.Hikaru_VolVoice	: playSampleSound("Hikaru_VolVoice", true); break;
+		case _btn.Chisa_VolVoice	: playSampleSound("Chisa_VolVoice", true); break;
+		case _btn.Maria_VolVoice	: playSampleSound("Maria_VolVoice", true); break;
+		case _btn.Cerberus_VolVoice	: playSampleSound("Cerberus_VolVoice", true); break;
+		case _btn.Other_VolVoice	: playSampleSound("Other_VolVoice", true); break;
+
+		case _btn.Mayu_VolBgv		: playSampleSound("Mayu_VolBgv", true); break;
+		case _btn.Sena_VolBgv		: playSampleSound("Sena_VolBgv", true); break;
+		case _btn.Alice_VolBgv		: playSampleSound("Alice_VolBgv", true); break;
+		case _btn.Momoka_VolBgv		: playSampleSound("Momoka_VolBgv", true); break;
+		case _btn.Chisa_VolBgv		: playSampleSound("Chisa_VolBgv", true); break;
+		case _btn.Maria_VolBgv		: playSampleSound("Maria_VolBgv", true); break;
+
+		case _btn.Mayu_VolSys		: playSampleSound("Mayu_VolSys", true); break;
+		case _btn.Sena_VolSys		: playSampleSound("Sena_VolSys", true); break;
+		case _btn.Alice_VolSys		: playSampleSound("Alice_VolSys", true); break;
+		case _btn.Momoka_VolSys		: playSampleSound("Momoka_VolSys", true); break;
+		case _btn.Hikaru_VolSys		: playSampleSound("Hikaru_VolSys", true); break;
+		case _btn.Chisa_VolSys		: playSampleSound("Chisa_VolSys", true); break;
+		case _btn.Maria_VolSys		: playSampleSound("Maria_VolSys", true); break;
+		}
+	}
+	function onSliderMoveEnd(target){
+		stopSampleSound();
+		applyToSystem();
+	}
+
+	function hint(str=""){
+		with(_hint){
+			.fillRect(0, 0, .width, .height, 0x0);
+
+			if(str == "") return;
+
+			.font.face = GetFontFace("21");
+
+			var info = PRFONT_DIC[.font.face];
+			.drawText(2, 2+info.ratio, str, 0x000000, 255, true, 3024, 0xffffff, 3, 0, 0);
+		}
+	}
+
+	function applyToConfig(){
+		if(_create[0]){
+			_group.ScreenMode.on(window.fullScreen?_btn.FullScreen:_btn.Window);
+
+			if(!_screenModeChanging){
+				_group.ScreenSize.reset();
+				var ww = window.innerWidth;
+				var wh = window.innerHeight;
+				     if(ww >= 1900 && wh >= 1060) _group.ScreenSize.on(_btn.SZ1920);
+				else if(ww == 1600 && wh ==  900) _group.ScreenSize.on(_btn.SZ1600);
+				else if(ww == 1280 && wh ==  720) _group.ScreenSize.on(_btn.SZ1280);
+				else if(ww ==  960 && wh ==  540) _group.ScreenSize.on(_btn.SZ960);
+				else if(ww ==  640 && wh ==  360) _group.ScreenSize.on(_btn.SZ640);
+			}
+
+			_btn.ScreenModeKeep.state = CONFIG.screenModeKeep?1:0;
+
+			_btn.ScreenEffect.state = CONFIG.screenEffect?1:0;
+
+			if(CONFIG.screenEffectSpeed >= 1.0)
+				_btn.EffectSpeed.trim = _btn.EffectSpeed.range - int(100 * CONFIG.screenEffectSpeed);
+			else
+				_btn.EffectSpeed.trim = 100 + int(200 * (1.0-CONFIG.screenEffectSpeed));
+
+			_btn.WindowDepth.trim = CONFIG.windowDepth;
+
+			_btn.MessageSpeed.trim = _btn.MessageSpeed.range - CONFIG.messageSpeed;
+
+			_btn.AutoMessageSpeed.trim = (_btn.AutoMessageSpeed.range*100 - CONFIG.autoSpeed) \ 100;
+
+			switch(CONFIG.fontType){
+			case 0 : _group.Font.on(_btn.Font1); break;
+			case 1 : _group.Font.on(_btn.Font2); break;
+			case 2 : _group.Font.on(_btn.Font3); break;
+			case 3 : _group.Font.on(_btn.Font4); break;
+			case 4 : _group.Font.on(_btn.Font5); break;
+			case 5 : _group.Font.on(_btn.Font6); break;
+			}
+
+			_btn.FontColor.state = CONFIG.readMessColor?1:0;
+
+			_btn.MessageSkip.state = CONFIG.readSkip?0:1;
+
+			_btn.MessageCancel.state = CONFIG.messageFlushOnClick?0:1;
+
+			_btn.VoiceCut.state = CONFIG.voiceStopOnClick?1:0;
+
+			_btn.EventCamera.state = CONFIG.eventCamera?1:0;
+
+			_btn.SelectedSkip.state = CONFIG.lockSkip?1:0;
+
+			_btn.SelectedAuto.state = CONFIG.lockAuto?1:0;
+
+			_btn.MouseCursor.state = CONFIG.mouseTracking?1:0;
+
+			_btn.RouteGuide.state = CONFIG.routeGuide?1:0;
+
+			_btn.TriggerCounter.state = CONFIG.triggerCounterShow?1:0;
+
+			_btn.Confirm_Overwrite.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_OVERWRITE];
+			_btn.Confirm_Load.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_LOAD];
+			_btn.Confirm_Copy.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_COPY];
+			_btn.Confirm_Move.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_MOVE];
+			_btn.Confirm_Delete.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_DELETE];
+			_btn.Confirm_GameEnd.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_END];
+			_btn.Confirm_Default.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_DEFAULT];
+			_btn.Confirm_Title.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_TITLE];
+			_btn.Confirm_InitRead.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_CLEARREADFLAG];
+			_btn.Confirm_SelectJump.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_SELECTJUMP];
+			_btn.Confirm_LogJump.state = CONFIG.confirmWindow[SystemRegister.CONFIRM_LOGJUMP];
+		}
+		if(_create[1]){
+			_btn.PlayBgm.state = CONFIG.muteBgm?0:1;
+			_btn.PlaySe.state = CONFIG.muteSe?0:1;
+			_btn.PlayEnvSe.state = CONFIG.muteEnvSe?0:1;
+			_btn.PlayMovie.state = CONFIG.muteMovie?0:1;
+
+			_btn.VolBgm.trim = int(100 * CONFIG.volBgm);
+			_btn.VolSe.trim = int(100 * CONFIG.volSe);
+			_btn.VolEnvSe.trim = int(100 * CONFIG.volEnvSe);
+			_btn.VolMovie.trim = int(100 * CONFIG.volMovie);
+
+			_btn.PlayEcho.state = CONFIG.echoVoice?1:0;
+
+			_btn.Master_PlayVoice.state = CONFIG.muteVoice?0:1;
+			_btn.Master_PlayBgv.state = CONFIG.muteBgv?0:1;
+			_btn.Master_PlaySys.state = CONFIG.muteSystem?0:1;
+
+			_btn.Master_VolVoice.trim = int(100 * CONFIG.volVoice);
+			_btn.Master_VolBgv.trim = int(100 * CONFIG.volBgv);
+			_btn.Master_VolSys.trim = int(100 * CONFIG.volSystem);
+
+			var ref = CONFIG.voiceDetails;
+			_btn.Mayu_PlayVoice.state     = ref[MAYU     ].mute?0:1;
+			_btn.Sena_PlayVoice.state     = ref[SENA     ].mute?0:1;
+			_btn.Alice_PlayVoice.state    = ref[ALICE    ].mute?0:1;
+			_btn.Momoka_PlayVoice.state   = ref[MOMOKA   ].mute?0:1;
+			_btn.Hikaru_PlayVoice.state   = ref[HIKARU   ].mute?0:1;
+			_btn.Chisa_PlayVoice.state    = ref[CHISA    ].mute?0:1;
+			_btn.Maria_PlayVoice.state    = ref[MARIA    ].mute?0:1;
+			_btn.Cerberus_PlayVoice.state = ref[CERBERUS ].mute?0:1;
+			_btn.Other_PlayVoice.state    = ref[NPC_OTHER].mute?0:1;
+
+			_btn.Mayu_VolVoice.trim     = int(100 * ref[MAYU     ].volume);
+			_btn.Sena_VolVoice.trim     = int(100 * ref[SENA     ].volume);
+			_btn.Alice_VolVoice.trim    = int(100 * ref[ALICE    ].volume);
+			_btn.Momoka_VolVoice.trim   = int(100 * ref[MOMOKA   ].volume);
+			_btn.Hikaru_VolVoice.trim   = int(100 * ref[HIKARU   ].volume);
+			_btn.Chisa_VolVoice.trim    = int(100 * ref[CHISA    ].volume);
+			_btn.Maria_VolVoice.trim    = int(100 * ref[MARIA    ].volume);
+			_btn.Cerberus_VolVoice.trim = int(100 * ref[CERBERUS ].volume);
+			_btn.Other_VolVoice.trim    = int(100 * ref[NPC_OTHER].volume);
+
+			_btn.Mayu_PlayBgv.state     = ref[MAYU     ].muteBgv?0:1;
+			_btn.Sena_PlayBgv.state     = ref[SENA     ].muteBgv?0:1;
+			_btn.Alice_PlayBgv.state    = ref[ALICE    ].muteBgv?0:1;
+			_btn.Momoka_PlayBgv.state   = ref[MOMOKA   ].muteBgv?0:1;
+			_btn.Chisa_PlayBgv.state    = ref[CHISA    ].muteBgv?0:1;
+			_btn.Maria_PlayBgv.state    = ref[MARIA    ].muteBgv?0:1;
+
+			_btn.Mayu_VolBgv.trim     = int(100 * ref[MAYU     ].volumeBgv);
+			_btn.Sena_VolBgv.trim     = int(100 * ref[SENA     ].volumeBgv);
+			_btn.Alice_VolBgv.trim    = int(100 * ref[ALICE    ].volumeBgv);
+			_btn.Momoka_VolBgv.trim   = int(100 * ref[MOMOKA   ].volumeBgv);
+			_btn.Chisa_VolBgv.trim    = int(100 * ref[CHISA    ].volumeBgv);
+			_btn.Maria_VolBgv.trim    = int(100 * ref[MARIA    ].volumeBgv);
+
+			_btn.Mayu_PlaySys.state     = ref[MAYU     ].muteSyv?0:1;
+			_btn.Sena_PlaySys.state     = ref[SENA     ].muteSyv?0:1;
+			_btn.Alice_PlaySys.state    = ref[ALICE    ].muteSyv?0:1;
+			_btn.Momoka_PlaySys.state   = ref[MOMOKA   ].muteSyv?0:1;
+			_btn.Hikaru_PlaySys.state   = ref[HIKARU   ].muteSyv?0:1;
+			_btn.Chisa_PlaySys.state    = ref[CHISA    ].muteSyv?0:1;
+			_btn.Maria_PlaySys.state    = ref[MARIA    ].muteSyv?0:1;
+
+			_btn.Mayu_VolSys.trim     = int(100 * ref[MAYU     ].volumeSyv);
+			_btn.Sena_VolSys.trim     = int(100 * ref[SENA     ].volumeSyv);
+			_btn.Alice_VolSys.trim    = int(100 * ref[ALICE    ].volumeSyv);
+			_btn.Momoka_VolSys.trim   = int(100 * ref[MOMOKA   ].volumeSyv);
+			_btn.Hikaru_VolSys.trim   = int(100 * ref[HIKARU   ].volumeSyv);
+			_btn.Chisa_VolSys.trim    = int(100 * ref[CHISA    ].volumeSyv);
+			_btn.Maria_VolSys.trim    = int(100 * ref[MARIA    ].volumeSyv);
+		}
+	}
+	function applyToSystem(){
+		if(_create[0]){
+			_screenModeChanging = true;
+			if(_btn.Window.isOn() && window.fullScreen == true){
+				if(window.isChangeScreenModeEnable())
+					window.changeScreenMode(false);
+				else
+					_group.ScreenMode.on(_btn.FullScreen);
+			}else if(_btn.FullScreen.isOn() && window.fullScreen == false){
+				if(window.isChangeScreenModeEnable())
+					window.changeScreenMode(true);
+				else
+					_group.ScreenMode.on(_btn.Window);
+			}
+			_screenModeChanging = false;
+
+			if(_btn.SZ1920.isOn()) CONFIG.windowZoom = 150*WINDOW_ZOOM_PER_FILTER;
+			else if(_btn.SZ1600.isOn()) CONFIG.windowZoom = 125*WINDOW_ZOOM_PER_FILTER;
+			else if(_btn.SZ1280.isOn()) CONFIG.windowZoom = 100*WINDOW_ZOOM_PER_FILTER;
+			else if(_btn.SZ960.isOn()) CONFIG.windowZoom = 75*WINDOW_ZOOM_PER_FILTER;
+			else if(_btn.SZ640.isOn()) CONFIG.windowZoom = 50*WINDOW_ZOOM_PER_FILTER;
+			window.zoom = CONFIG.windowZoom;
+
+			CONFIG.screenModeKeep = _btn.ScreenModeKeep.state;
+
+			CONFIG.screenEffect = _btn.ScreenEffect.state;
+
+			if(_btn.EffectSpeed.trim >= 100)
+			//fast
+				CONFIG.screenEffectSpeed = 1.0 - (0.5 * (_btn.EffectSpeed.trim-100) / 100.0);
+			else
+			//slow
+				CONFIG.screenEffectSpeed = 1.0 + (1.0 * (100-_btn.EffectSpeed.trim)) / 100.0;
+
+			CONFIG.windowDepth = _btn.WindowDepth.trim;
+			_sampleMessageBase.opacity = ((255 * CONFIG.windowDepth) \ 100);
+				if(_adv){
+					_adv._msg.windowDepth((255 * CONFIG.windowDepth) \ 100);
+				}
+
+			CONFIG.messageSpeed = _btn.MessageSpeed.range - _btn.MessageSpeed.trim;
+
+			CONFIG.autoSpeed = (_btn.AutoMessageSpeed.range - _btn.AutoMessageSpeed.trim) * 100;
+
+			if(_btn.Font1.isOn()) CONFIG.fontType = 0;
+			else if(_btn.Font2.isOn()) CONFIG.fontType = 1;
+			else if(_btn.Font3.isOn()) CONFIG.fontType = 2;
+			else if(_btn.Font4.isOn()) CONFIG.fontType = 3;
+			else if(_btn.Font5.isOn()) CONFIG.fontType = 4;
+			else if(_btn.Font6.isOn()) CONFIG.fontType = 5;
+
+			CONFIG.readMessColor = _btn.FontColor.state;
+
+			CONFIG.readSkip = _btn.MessageSkip.state?0:1;
+
+			CONFIG.messageFlushOnClick = _btn.MessageCancel.state?0:1;
+
+			CONFIG.voiceStopOnClick = _btn.VoiceCut.state;
+
+			CONFIG.lockSkip = _btn.SelectedSkip.state;
+			CONFIG.lockAuto = _btn.SelectedAuto.state;
+
+			if(_adv){
+				if(CONFIG.eventCamera != _btn.EventCamera.state)
+					_adv.eventCamera(_btn.EventCamera.state);
+			}
+			CONFIG.eventCamera = _btn.EventCamera.state;
+
+			CONFIG.mouseTracking = _btn.MouseCursor.state;
+
+			CONFIG.routeGuide = _btn.RouteGuide.state;
+			if(_adv) _adv.routeGuideEnable(_btn.RouteGuide.state);
+
+			CONFIG.triggerCounterShow = _btn.TriggerCounter.state;
+			if(_adv){
+				if(CONFIG.triggerCounterShow)
+					_adv._msg._orgCounter.visible = true;
+				else
+					_adv._msg._orgCounter.visible = false;
+			}
+
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_OVERWRITE] = _btn.Confirm_Overwrite.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_LOAD] = _btn.Confirm_Load.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_COPY] = _btn.Confirm_Copy.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_MOVE] = _btn.Confirm_Move.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_DELETE] = _btn.Confirm_Delete.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_END] = _btn.Confirm_GameEnd.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_DEFAULT] = _btn.Confirm_Default.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_TITLE] = _btn.Confirm_Title.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_CLEARREADFLAG] = _btn.Confirm_InitRead.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_SELECTJUMP] = _btn.Confirm_SelectJump.state;
+			CONFIG.confirmWindow[SystemRegister.CONFIRM_LOGJUMP] = _btn.Confirm_LogJump.state;
+		}
+		if(_create[1]){
+			CONFIG.muteBgm = _btn.PlayBgm.state?0:1;
+				CONFIG.muteBgm|CONFIG.muteMaster?BGM.configStop():BGM.configPlay();
+			CONFIG.muteSe = _btn.PlaySe.state?0:1;
+				CONFIG.muteSe|CONFIG.muteMaster?SE.configStop():SE.configPlay();
+			CONFIG.muteEnvSe = _btn.PlayEnvSe.state?0:1;
+				CONFIG.muteEnvSe|CONFIG.muteMaster?ENVSE.configStop():ENVSE.configPlay();
+			CONFIG.muteSystem = _btn.Master_PlaySys.state?0:1;
+				//CONFIG.muteSystem?SYSTEMSOUND.configStop():SYSTEMSOUND.configPlay();
+			CONFIG.muteMovie = _btn.PlayMovie.state?0:1;
+			CONFIG.muteVoice = _btn.Master_PlayVoice.state?0:1;
+				if(CONFIG.muteVoice && _adv) VOICE.stop();
+			CONFIG.muteBgv = _btn.Master_PlayBgv.state?0:1;
+				if(_adv){
+					CONFIG.muteBgv|CONFIG.muteMaster?BGV.configStop():BGV.configPlay();
+				}
+
+			CONFIG.echoVoice = _btn.PlayEcho.state;
+
+			CONFIG.volBgm = _btn.VolBgm.trim / 100.0;
+				BGM.volume = CONFIG.volBgm;
+			CONFIG.volSe = _btn.VolSe.trim / 100.0;
+				SE.volume = CONFIG.volSe;
+			CONFIG.volEnvSe = _btn.VolEnvSe.trim / 100.0;
+				ENVSE.volume = CONFIG.volEnvSe;
+			CONFIG.volSystem = _btn.Master_VolSys.trim / 100.0;
+				SYSTEMSOUND.volume = CONFIG.volSystem;
+			CONFIG.volMovie = _btn.VolMovie.trim / 100.0;
+			CONFIG.volVoice = _btn.Master_VolVoice.trim / 100.0;
+				if(_adv){
+					VOICE.volume = CONFIG.volVoice;
+				}
+			CONFIG.volBgv = _btn.Master_VolBgv.trim / 100.0;
+				if(_adv){
+					BGV.volume = CONFIG.volBgv;
+				}
+
+			var ref = CONFIG.voiceDetails;
+			ref[MAYU     ].mute = _btn.Mayu_PlayVoice.state     ?0:1;
+			ref[SENA     ].mute = _btn.Sena_PlayVoice.state     ?0:1;
+			ref[ALICE    ].mute = _btn.Alice_PlayVoice.state    ?0:1;
+			ref[MOMOKA   ].mute = _btn.Momoka_PlayVoice.state   ?0:1;
+			ref[HIKARU   ].mute = _btn.Hikaru_PlayVoice.state   ?0:1;
+			ref[CHISA    ].mute = _btn.Chisa_PlayVoice.state    ?0:1;
+			ref[MARIA    ].mute = _btn.Maria_PlayVoice.state    ?0:1;
+			ref[CERBERUS ].mute = _btn.Cerberus_PlayVoice.state ?0:1;
+			ref[NPC_OTHER].mute = _btn.Other_PlayVoice.state    ?0:1;
+
+			ref[MAYU     ].volume = _btn.Mayu_VolVoice.trim     / 100.0;
+			ref[SENA     ].volume = _btn.Sena_VolVoice.trim     / 100.0;
+			ref[ALICE    ].volume = _btn.Alice_VolVoice.trim    / 100.0;
+			ref[MOMOKA   ].volume = _btn.Momoka_VolVoice.trim   / 100.0;
+			ref[HIKARU   ].volume = _btn.Hikaru_VolVoice.trim   / 100.0;
+			ref[CHISA    ].volume = _btn.Chisa_VolVoice.trim    / 100.0;
+			ref[MARIA    ].volume = _btn.Maria_VolVoice.trim    / 100.0;
+			ref[CERBERUS ].volume = _btn.Cerberus_VolVoice.trim / 100.0;
+			ref[NPC_OTHER].volume = _btn.Other_VolVoice.trim    / 100.0;
+
+			ref[MAYU     ].muteBgv = _btn.Mayu_PlayBgv.state     ?0:1;
+			ref[SENA     ].muteBgv = _btn.Sena_PlayBgv.state     ?0:1;
+			ref[ALICE    ].muteBgv = _btn.Alice_PlayBgv.state    ?0:1;
+			ref[MOMOKA   ].muteBgv = _btn.Momoka_PlayBgv.state   ?0:1;
+			ref[CHISA    ].muteBgv = _btn.Chisa_PlayBgv.state   ?0:1;
+			ref[MARIA   ].muteBgv = _btn.Maria_PlayBgv.state   ?0:1;
+
+			ref[MAYU     ].volumeBgv = _btn.Mayu_VolBgv.trim     / 100.0;
+			ref[SENA     ].volumeBgv = _btn.Sena_VolBgv.trim     / 100.0;
+			ref[ALICE    ].volumeBgv = _btn.Alice_VolBgv.trim    / 100.0;
+			ref[MOMOKA   ].volumeBgv = _btn.Momoka_VolBgv.trim   / 100.0;
+			ref[CHISA   ].volumeBgv = _btn.Chisa_VolBgv.trim   / 100.0;
+			ref[MARIA   ].volumeBgv = _btn.Maria_VolBgv.trim   / 100.0;
+
+			ref[MAYU     ].muteSyv = _btn.Mayu_PlaySys.state     ?0:1;
+			ref[SENA     ].muteSyv = _btn.Sena_PlaySys.state     ?0:1;
+			ref[ALICE    ].muteSyv = _btn.Alice_PlaySys.state    ?0:1;
+			ref[MOMOKA   ].muteSyv = _btn.Momoka_PlaySys.state   ?0:1;
+			ref[HIKARU   ].muteSyv = _btn.Hikaru_PlaySys.state   ?0:1;
+			ref[CHISA    ].muteSyv = _btn.Chisa_PlaySys.state    ?0:1;
+			ref[MARIA    ].muteSyv = _btn.Maria_PlaySys.state    ?0:1;
+
+			ref[MAYU     ].volumeSyv = _btn.Mayu_VolSys.trim     / 100.0;
+			ref[SENA     ].volumeSyv = _btn.Sena_VolSys.trim     / 100.0;
+			ref[ALICE    ].volumeSyv = _btn.Alice_VolSys.trim    / 100.0;
+			ref[MOMOKA   ].volumeSyv = _btn.Momoka_VolSys.trim   / 100.0;
+			ref[HIKARU   ].volumeSyv = _btn.Hikaru_VolSys.trim   / 100.0;
+			ref[CHISA    ].volumeSyv = _btn.Chisa_VolSys.trim    / 100.0;
+			ref[MARIA    ].volumeSyv = _btn.Maria_VolSys.trim    / 100.0;
+
+			if(_adv){
+				var list = VOICE.idList(false);
+				for(var i=0;i<list.count;i++){
+					var id = list[i].id;
+					var vcid = id.substring(0, 3);
+					var obj = VOICE.objectOfId(id);
+					obj.configVolume = ref[VCID_TO_INDEX[vcid]].volume;
+				}
+				VOICE.applyVolume();
+
+				var ref = CONFIG.voiceDetails;
+				var list = BGV.idList(false);
+				for(var i=0;i<list.count;i++){
+					var id = list[i].id;
+					var obj = BGV.objectOfId(id);
+					var index = obj.file.indexOf("_ECH");
+					var fPlayEcho = index != -1;
+					if(_btn.PlayEcho.state == 0 && fPlayEcho){
+					//お風呂エコーOFF
+					//現在お風呂エコーONが再生中なら切り替える
+						var pos = obj.position;
+						_adv.playBgv(%[file:obj.file.substring(0, index), fade:0]);
+						obj = BGV.objectOfId(id);
+						if(obj.isPlay()) obj.position = pos;
+					}else if(CONFIG.echoVoice != 0 && !fPlayEcho){
+					//お風呂エコーON
+					//現在お風呂エコーOFFが再生中なら切り替える
+						var pos = obj.position;
+						if(Storages.isExistentStorage(obj.file+"_ECH.ogg")){
+							_adv.playBgv(%[file:obj.file+"_ECH", fade:0]);
+							obj = BGV.objectOfId(id);
+							if(obj.isPlay()) obj.position = pos;
+						}
+					}
+					obj.configVolume = ref[NAME_TO_INDEX[id]].volumeBgv;
+
+					if(!(CONFIG.muteBgv|CONFIG.muteMaster)){
+						if(ref[NAME_TO_INDEX[id]].muteBgv || CONFIG.muteMaster){
+							if(obj.looping){
+								obj._configStop = true;
+								obj.stop(true);
+							}else{
+								BGV.stop(obj.id);
+							}
+						}else{
+							if(obj._configStop){
+								obj._configStop = false;
+								obj.play();
+							}
+						}
+					}
+				}
+				BGV.applyVolume();
+			}
+		}
+	}
+
+	function startSampleMsgOutput(){
+		_sampleMessage.setCompleteCall(startSampleMsgOutput);
+
+		_sampleMessageTimer.interval = CONFIG.autoSpeed + 5;
+		_sampleMessageTimer.enabled = true;
+
+		_sampleMessage.visible = true;
+		_sampleMessageBase.visible = true;
+	}
+	function stopSampleMsgOutput(){
+		_sampleMessage.setCompleteCall(null);
+		_sampleMessageTimer.enabled = false;
+
+		_sampleMessage.visible = false;
+		_sampleMessageBase.visible = false;
+	}
+	function onSampleMsgOutput(){
+		_sampleMessageTimer.enabled = false;
+
+		_sampleMessage.visible = true;
+		_sampleMessageBase.visible = true;
+
+		with(_sampleMessage){
+			.setCompleteCall(null);
+			.flush();
+			.clear();
+			.setCompleteCall(startSampleMsgOutput);
+
+			.outputSpeed = CONFIG.messageSpeed + 1;
+			.output("サンプルメッセージです");
+		}
+	}
+
+	function showDrawNumber(item, revX=0, revY=0){
+		var num = item.trim;
+		var w = _numberImage.width \ 10;
+		var h = _numberImage.height;
+
+		var count = 0;
+		_number.fillRect(0, 0, _number.width, _number.height, 0x0);
+		if(num){
+			var i = 0;
+			while(num){
+				var cal = num % 10;
+
+				_number.copyRect(_number.width-(i+1)*w, 0, _numberImage, cal*w, 0, w, h);
+
+				count++;
+				num \= 10;
+				i++;
+			}
+		}else{
+			_number.copyRect(_number.width-w, 0, _numberImage, 0, 0, w, h);
+			count++;
+		}
+
+		var pos = new Point();
+		GetAbsolutePos(item._trim, pos, this);
+		var x = pos.x + item._trim.width\2;
+		x -= (NUM_DIGIT-count)*w + (count*w)\2;
+		var y = pos.y - _number.height;
+
+		_number.setPos(x, y);
+
+		if(!_number.visible){
+			with(_number){
+				.opacity = 0;
+				.setBlendingEnvelope(255);
+				.setMovingEnvelope(.left, .top-8, .left, .top, 2);
+				.beginActivation(100);
+				.visible = true;
+			}
+		}
+	}
+	function hideNumber(){
+		_number.visible = false;
+	}
+
+	function playSampleSound(type, loop=false){
+		var file = "";
+		var vol = 100000;
+
+		switch(type){
+		case "PlaySys" : break;
+
+		case "VolMovie" : file = "BGM_OP"; break;
+
+		case "Master_VolVoice" : 
+		case "Master_TestVoice" : file = PlaySystemVoice("音声マスター：ボリューム", false, false, false); break;
+
+		case "VolSe" : 
+		case "TestSe" : file = "SE071"; break;
+
+		case "VolEnvSe" : file = "SE075"; break;
+		case "TestEnvSe" : file = "SE075"; break;
+
+		case "Master_VolBgv" : 
+		case "Master_TestBgv" :			file = PlaySystemVoice("ＢＧＶ：ボリューム", false); break;
+		case "Master_VolSys" : 
+		case "Master_TestSys" :			file = PlaySystemVoice("システム音声：ボリューム", false); break;
+		//-----------------------------------
+		case "Mayu_Test" :			file = PlaySystemVoiceIndex("個別音声：ボリューム", MAYU, false); break;
+		case "Mayu_PlayVoice" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", MAYU, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", MAYU, false);
+									break;
+		case "Mayu_VolVoice" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", MAYU, false); break;
+		case "Mayu_PlayBgv" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("ＢＧＶ：ＯＮ", MAYU, false);
+									else					file = PlaySystemVoiceIndex("ＢＧＶ：ＯＦＦ", MAYU, false);
+									break;
+		case "Mayu_VolBgv" :		file = PlaySystemVoiceIndex("ＢＧＶ：ボリューム", MAYU, false); break;
+		case "Mayu_PlaySys" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("システム音声：ＯＮ", MAYU, false);
+									else					file = PlaySystemVoiceIndex("システム音声：ＯＦＦ", MAYU, false);
+									break;
+		case "Mayu_VolSys" :		file = PlaySystemVoiceIndex("システム音声：ボリューム", MAYU, false); break;
+		//-----------------------------------
+		case "Sena_Test" :			file = PlaySystemVoiceIndex("個別音声：ボリューム", SENA, false); break;
+		case "Sena_PlayVoice" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", SENA, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", SENA, false);
+									break;
+		case "Sena_VolVoice" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", SENA, false); break;
+		case "Sena_PlayBgv" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("ＢＧＶ：ＯＮ", SENA, false);
+									else					file = PlaySystemVoiceIndex("ＢＧＶ：ＯＦＦ", SENA, false);
+									break;
+		case "Sena_VolBgv" :		file = PlaySystemVoiceIndex("ＢＧＶ：ボリューム", SENA, false); break;
+		case "Sena_PlaySys" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("システム音声：ＯＮ", SENA, false);
+									else					file = PlaySystemVoiceIndex("システム音声：ＯＦＦ", SENA, false);
+									break;
+		case "Sena_VolSys" :		file = PlaySystemVoiceIndex("システム音声：ボリューム", SENA, false); break;
+		//-----------------------------------
+		case "Alice_Test" :			file = PlaySystemVoiceIndex("個別音声：ボリューム", ALICE, false); break;
+		case "Alice_PlayVoice" :	if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", ALICE, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", ALICE, false);
+									break;
+		case "Alice_VolVoice" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", ALICE, false); break;
+		case "Alice_PlayBgv" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("ＢＧＶ：ＯＮ", ALICE, false);
+									else					file = PlaySystemVoiceIndex("ＢＧＶ：ＯＦＦ", ALICE, false);
+									break;
+		case "Alice_VolBgv" :		file = PlaySystemVoiceIndex("ＢＧＶ：ボリューム", ALICE, false); break;
+		case "Alice_PlaySys" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("システム音声：ＯＮ", ALICE, false);
+									else					file = PlaySystemVoiceIndex("システム音声：ＯＦＦ", ALICE, false);
+									break;
+		case "Alice_VolSys" :		file = PlaySystemVoiceIndex("システム音声：ボリューム", ALICE, false); break;
+		//-----------------------------------
+		case "Momoka_Test" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", MOMOKA, false); break;
+		case "Momoka_PlayVoice" :	if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", MOMOKA, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", MOMOKA, false);
+									break;
+		case "Momoka_VolVoice" :	file = PlaySystemVoiceIndex("個別音声：ボリューム", MOMOKA, false); break;
+		case "Momoka_PlayBgv" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("ＢＧＶ：ＯＮ", MOMOKA, false);
+									else					file = PlaySystemVoiceIndex("ＢＧＶ：ＯＦＦ", MOMOKA, false);
+									break;
+		case "Momoka_VolBgv" :		file = PlaySystemVoiceIndex("ＢＧＶ：ボリューム", MOMOKA, false); break;
+		case "Momoka_PlaySys" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("システム音声：ＯＮ", MOMOKA, false);
+									else					file = PlaySystemVoiceIndex("システム音声：ＯＦＦ", MOMOKA, false);
+									break;
+		case "Momoka_VolSys" :		file = PlaySystemVoiceIndex("システム音声：ボリューム", MOMOKA, false); break;
+		//-----------------------------------
+		case "Hikaru_Test" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", HIKARU, false); break;
+		case "Hikaru_PlayVoice" :	if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", HIKARU, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", HIKARU, false);
+									break;
+		case "Hikaru_VolVoice" :	file = PlaySystemVoiceIndex("個別音声：ボリューム", HIKARU, false); break;
+		case "Hikaru_PlaySys" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("システム音声：ＯＮ", HIKARU, false);
+									else					file = PlaySystemVoiceIndex("システム音声：ＯＦＦ", HIKARU, false);
+									break;
+		case "Hikaru_VolSys" :		file = PlaySystemVoiceIndex("システム音声：ボリューム", HIKARU, false); break;
+		//-----------------------------------
+		case "Chisa_Test" :			file = PlaySystemVoiceIndex("個別音声：ボリューム", CHISA, false); break;
+		case "Chisa_PlayVoice" :	if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", CHISA, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", CHISA, false);
+									break;
+		case "Chisa_VolVoice" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", CHISA, false); break;
+		case "Chisa_PlayBgv" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("ＢＧＶ：ＯＮ", CHISA, false);
+									else					file = PlaySystemVoiceIndex("ＢＧＶ：ＯＦＦ", CHISA, false);
+									break;
+		case "Chisa_VolBgv" :		file = PlaySystemVoiceIndex("ＢＧＶ：ボリューム", CHISA, false); break;
+		case "Chisa_PlaySys" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("システム音声：ＯＮ", CHISA, false);
+									else					file = PlaySystemVoiceIndex("システム音声：ＯＦＦ", CHISA, false);
+									break;
+		case "Chisa_VolSys" :		file = PlaySystemVoiceIndex("システム音声：ボリューム", CHISA, false); break;
+		//-----------------------------------
+		case "Maria_Test" :			file = PlaySystemVoiceIndex("個別音声：ボリューム", MARIA, false); break;
+		case "Maria_PlayVoice" :	if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", MARIA, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", MARIA, false);
+									break;
+		case "Maria_VolVoice" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", MARIA, false); break;
+		case "Maria_PlayBgv" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("ＢＧＶ：ＯＮ", MARIA, false);
+									else					file = PlaySystemVoiceIndex("ＢＧＶ：ＯＦＦ", MARIA, false);
+									break;
+		case "Maria_VolBgv" :		file = PlaySystemVoiceIndex("ＢＧＶ：ボリューム", MARIA, false); break;
+		case "Maria_PlaySys" :		if(_btn[type].state)	file = PlaySystemVoiceIndex("システム音声：ＯＮ", MARIA, false);
+									else					file = PlaySystemVoiceIndex("システム音声：ＯＦＦ", MARIA, false);
+									break;
+		case "Maria_VolSys" :		file = PlaySystemVoiceIndex("システム音声：ボリューム", MARIA, false); break;
+		//-----------------------------------
+		case "Cerberus_Test" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", CERBERUS, false); break;
+		case "Cerberus_PlayVoice" :	if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", CERBERUS, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", CERBERUS, false);
+									break;
+		case "Cerberus_VolVoice" :	file = PlaySystemVoiceIndex("個別音声：ボリューム", CERBERUS, false); break;
+		//-----------------------------------
+		case "Other_Test" :			file = PlaySystemVoiceIndex("個別音声：ボリューム", NPC_OTHER, false); break;
+		case "Other_PlayVoice" :	if(_btn[type].state)	file = PlaySystemVoiceIndex("個別音声：ＯＮ", NPC_OTHER, false);
+									else					file = PlaySystemVoiceIndex("個別音声：ＯＦＦ", NPC_OTHER, false);
+									break;
+		case "Other_VolVoice" :		file = PlaySystemVoiceIndex("個別音声：ボリューム", NPC_OTHER, false); break;
+		}
+
+		if(file == "") return;
+
+		_capItem.clear();
+
+		if(_btn[type].cap !== void){
+			if(_btn[type].cap & CAP_BGM){
+				_capItem.add(_btn.VolBgm);
+			}
+			if(_btn[type].cap & CAP_SE){
+				_capItem.add(_btn.VolSe);
+			}
+			if(_btn[type].cap & CAP_ENVSE){
+				_capItem.add(_btn.VolEnvSe);
+			}
+			if(_btn[type].cap & CAP_SYSSE){
+				_capItem.add(_btn.Master_VolSys);
+			}
+			if(_btn[type].cap & CAP_MOVIE){
+				_capItem.add(_btn.VolMovie);
+			}
+			if(_btn[type].cap & CAP_VOICE){
+				_capItem.add(_btn.Master_VolVoice);
+			}
+			if(_btn[type].cap & CAP_BGV){
+				_capItem.add(_btn.Master_VolBgv);
+			}
+			if(_btn[type].cap & CAP_CHAR){
+				var name = type.split("_");
+				if(
+				   (name[1].indexOf("TestSys") != -1 && _btn[name[0]+"_TestSys"] !== void) || 
+				   (name[1].indexOf("PlaySys") != -1 && _btn[name[0]+"_PlaySys"] !== void) || 
+				   (name[1].indexOf("PlayVoice") != -1 && _btn[name[0]+"_PlayVoice"] !== void) || 
+				   (name[1].indexOf("VolSys") != -1 && _btn[name[0]+"_VolSys"] !== void)
+				){
+					_capItem.add(_btn[name[0]+"_VolSys"]);
+				}else if(
+				   (name[1].indexOf("TestBgv") != -1 && _btn[name[0]+"_TestBgv"] !== void) || 
+				   (name[1].indexOf("PlayBgv") != -1 && _btn[name[0]+"_PlayBgv"] !== void) || 
+				   (name[1].indexOf("PlayVoice") != -1 && _btn[name[0]+"_PlayVoice"] !== void) || 
+				   (name[1].indexOf("VolBgv") != -1 && _btn[name[0]+"_VolBgv"] !== void)
+				){
+					_capItem.add(_btn[name[0]+"_VolBgv"]);
+				}else if(
+				    (name[1].indexOf("Test") != -1 && _btn[name[0]+"_Test"] !== void) || 
+				    (name[1].indexOf("VolVoice") != -1 && _btn[name[0]+"_VolVoice"] !== void)
+				){
+					_capItem.add(_btn[name[0]+"_VolVoice"]);
+				}
+			}
+		}
+
+		with(_sampleSound){
+			.open(file + ".ogg");
+			.looping = loop;
+			applyToSampleSound();
+			.play();
+		}
+	}
+	function stopSampleSound(){
+		_sampleSound.stop();
+	}
+	function applyToSampleSound(){
+		var vol;
+
+		if(_capItem.count == 0){
+			vol = 0;
+		}else{
+			vol = 100000;
+			for(var i=0;i<_capItem.count;i++)
+				if(_capItem[i] !== void) vol = (vol * _capItem[i].trim) \ 100;
+		}
+		_sampleSound.volume = vol;
+	}
+
+	function defaultSetting(){
+		var tempFullScreen = CONFIG.fullScreen;
+		sysReg.initConfig();
+		CONFIG.fullScreen = tempFullScreen;
+		_screenModeChanging = true;
+		applyToConfig();
+		applyToSystem();
+		setVolumeGuide(_voiceVolumeGuide, _btn.Master_VolVoice._trim);
+		setVolumeGuide(_bgvVolumeGuide, _btn.Master_VolBgv._trim);
+		setVolumeGuide(_sysVoiceVolumeGuide, _btn.Master_VolSys._trim);
+		applyVoiceSlider();
+		_screenModeChanging = false;
+
+		if(_page == SYSTEM) onSampleMsgOutput();
+
+		confirm = false;
+	}
+	function clearReadFlag(){
+		sysReg.clearReadFlag();
+		confirm = false;
+	}
+
+	function returnTitle(){
+		if(_adv === null) return;
+
+		hide(300, ConfigDelete);
+		_adv.returnTo(SCENE_TITLE);
+
+		confirm = false;
+		_adv = null;
+	}
+	function returnRecollect(){
+		if(_adv === null) return;
+
+		hide(300, ConfigDelete);
+		_adv.returnTo(SCENE_MEMORIES);
+
+		confirm = false;
+		_adv = null;
+	}
+
+	var _closeHide = false;
+	function hide(time, func=null){
+		_closeHide = true;
+		HitThresholdSelectItems(chainItem, 256);
+
+		applyToSystem();
+		super.hide(...);
+	}
+
+	var _fOnMouseDown = false;
+	function onMouseDown(x, y, button, shift){
+		if(confirm) return;
+
+		//メッセージが１クリックで２回来てしまうので抑制…
+		//根本的な解決が必要
+		_fOnMouseDown = !_fOnMouseDown;
+		if(_fOnMouseDown) return;
+
+		if(button == mbRight){
+			hide(300, ConfigDelete);
+		}
+	}
+	function onKeyDown(key, shift){
+		if((key == VK_RETURN) && (shift & ssAlt)){
+			applyToConfig();
+		}
+
+		if(confirm) return;
+		if(key == VK_ESCAPE){
+			hide(300, ConfigDelete);
+		}
+		super.onKeyDown(...);
+	}
+
+	function action(ev){
+		if(ev.type == "onClose"){
+			applyToSystem();
+		}else if(ev.type == "onChangeScreenMode"){
+		//画面モードチェンジ
+			applyToConfig();
+		}else if(ev.type == "onMoveSizeEnd" || ev.type == "onMaximizeQuery"){
+		//ウィンドウサイズ変更
+			applyToConfig();
+		}else{
+			super.action(ev);
+		}
+	}
+}
+
+function CallConfig(adv=null, fShowReturnMenu=0, fShowEnd=0){
+	if(IsAnyWindow()) return false;
+
+	SPR_CONFIG = new ConfigWindow(win, win.baseLayer, adv, fShowReturnMenu, fShowEnd);
+	SPR_CONFIG.visible = true;
+	SPR_CONFIG.show(300);
+}
+function ConfigDelete(){
+	if(SPR_CONFIG === null) return;
+	if(SPR_CONFIG._adv !== null) SPR_CONFIG._adv.onCofigClose();
+
+	invalidate SPR_CONFIG;
+	SPR_CONFIG = null;
+}
+function IsShowConfig(){
+	return (SPR_CONFIG != null);
+}

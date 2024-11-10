@@ -1,0 +1,225 @@
+//
+//背景・イベントＣＧの基本情報を設定
+//
+// 背景ファイル名 : %[
+// 		center : "xxx,yyy", 
+// 		tone:[[Rgamma,Rfloor,Rceil],[Ggamma,Gfloor,Gceil],[Bgamma,Bfloor,Bceil],mono_prev,mono_post]
+// ], 
+//
+// center : 基準位置
+// tone : 環境トーン
+//
+var BUSTUP_EMOTION_POS = %[
+	MAY_X : %[こめかみ:["77,-129", "150,-67"], 口:["3,-51,0", "4,96,0"], 頭:["12,-238", "21,-284"], 額:["10,-164", "20,-129"], 顔:["6,-105", "11,-16"]], 
+	MAY_Y : %[こめかみ:["75,-127", "143,-67"], 口:["0,-51,0", "0,94,0"], 頭:["-4,-236", "-9,-280"], 額:["-1,-151", "-11,-128"], 顔:["0,-104", "0,-17"]], 
+	MAY_Z : %[こめかみ:["56,-125", "105,-66"], 口:["-9,-42,0", "-21,102,0"], 頭:["-34,-222", "-63,-281"], 額:["-29,-129", "-61,-86"], 顔:["-21,-91", "-38,0"]], 
+
+	SEN_X : %[こめかみ:["97,-139", "193,-49"], 口:["12,-66,0", "26,96,0"], 頭:["57,-256", "120,-280"], 額:["40,-167", "75,-115"], 顔:["27,-120", "48,-18"]], 
+	SEN_Y : %[こめかみ:["76,-149", "137,-82"], 口:["0,-67,0", "0,91,0"], 頭:["22,-253", "36,-284"], 額:["-12,-169", "-23,-118"], 顔:["-5,-119", "-12,-19"]], 
+	SEN_Z : %[こめかみ:["66,-143", "118,-71"], 口:["-22,-68,0", "-46,92,0"], 頭:["21,-256", "41,-279"], 額:["-22,-173", "-40,-128"], 顔:["-22,-120", "-57,-13"]], 
+
+	ALC_X : %[こめかみ:["95,-114", "185,-72"], 口:["6,-33,0", "10,88,0"], 頭:["33,-216", "65,-275"], 額:["29,-141", "57,-130"], 顔:["18,-88", "30,-19"]], 
+	ALC_Y : %[こめかみ:["77,-159", "151,-46"], 口:["0,-34,0", "0,88,0"], 頭:["15,-225", "29,-293"], 額:["7,-138", "14,-129"], 顔:["5,-86", "0,-15"]], 
+	ALC_Z : %[こめかみ:["69,-116", "129,-73"], 口:["-5,-30,0", "-10,96,0"], 頭:["-9,-216", "-17,-286"], 額:["-19,-131", "-37,-110"], 顔:["-13,-78", "-25,0"]], 
+
+	MMK_X : %[こめかみ:["92,-122", "175,-49"], 口:["12,-40,0", "22,101,0"], 頭:["45,-227", "90,-276"], 額:["31,-151", "63,-124"], 顔:["21,-99", "41,-10"]], 
+	MMK_Y : %[こめかみ:["58,-129", "106,-69"], 口:["-8,-44,0", "-21,94,0"], 頭:["0,-229", "0,-275"], 額:["-23,-151", "-45,-129"], 顔:["-12,-95", "-25,-11"]], 
+	MMK_Z : %[こめかみ:["63,-129", "124,-72"], 口:["-8,-44,0", "-15,94,0"], 頭:["5,-227", "10,-279"], 額:["-28,-150", "-54,-127"], 顔:["-15,-96", "-31,-13"]], 
+
+	HKR_X : %[こめかみ:["76,-136", "141,-41"], 口:["0,-60,0", "0,92,0"], 頭:["-25,-242", "-55,-274"], 額:["10,-163", "26,-114"], 顔:["6,-112", "9,-14"]], 
+	HKR_Y : %[こめかみ:["65,-141", "127,-63"], 口:["-3,-58,0", "-8,96,0"], 頭:["-47,-233", "-96,-264"], 額:["-21,-164", "-46,-124"], 顔:["-11,-112", "-21,-16"]], 
+	HKR_Z : %[こめかみ:["0,0", "0,0"], 口:["0,0,0", "0,0,0"], 頭:["0,0", "0,0"], 額:["", ""], 顔:["0,0", "0,0"]], 
+
+	CHS_X : %[こめかみ:["70,-157", "141,-67"], 口:["0,-75,0", "0,92,0"], 頭:["28,-258", "55,-276"], 額:["0,-182", "0,-128"], 顔:["0,-130", "0,-18"]], 
+	CHS_Y : %[こめかみ:["83,-148", "157,-40"], 口:["9,-74,0", "16,93,0"], 頭:["43,-251", "73,-267"], 額:["23,-176", "45,-110"], 顔:["16,-125", "30,-10"]], 
+	CHS_Z : %[こめかみ:["0,0", "0,0"], 口:["0,0,0", "0,0,0"], 頭:["0,0", "0,0"], 額:["", ""], 顔:["0,0", "0,0"]], 
+
+	MRA_X : %[こめかみ:["81,-161", "159,-51"], 口:["4,-87,0", "0,94,0"], 頭:["17,-276", "32,-288"], 額:["18,-191", "33,-113"], 顔:["10,-138", "18,-12"]], 
+	MRA_Y : %[こめかみ:["75,-174", "146,-76"], 口:["2,-93,0", "6,81,0"], 頭:["0,-282", "0,-298"], 額:["0,-205", "0,-145"], 顔:["0,-144", "0,-25"]], 
+	MRA_Z : %[こめかみ:["0,0", "0,0"], 口:["0,0,0", "0,0,0"], 頭:["0,0", "0,0"], 額:["", ""], 顔:["0,0", "0,0"]], 
+
+	CBS_X : %[こめかみ:["94,328", "136,-63"], 口:["49,412,0", "47,120,0"], 頭:["36,286", "25,-157"], 額:["42,309", "32,-96"], 顔:["46,344", "42,-32"]], 
+	CBS_Y : %[こめかみ:["0,0", "0,0"], 口:["0,0,0", "0,0,0"], 頭:["0,0", "0,0"], 額:["0,0", "0,0"], 顔:["0,0", "0,0"]], 
+	CBS_Z : %[こめかみ:["0,0", "0,0"], 口:["0,0,0", "0,0,0"], 頭:["0,0", "0,0"], 額:["0,0", "0,0"], 顔:["0,0", "0,0"]]
+];
+var BEP = BUSTUP_EMOTION_POS;
+
+//トーンテンプレ
+var BG_TONE = %[
+	/* 昼   */ daytime      : [[1.0, 0, 255], [1.0, 0, 255], [1.0, 0, 255], 0, 0], 
+	/* 昼雨 */ daytime_rain : [[1.0, 0, 210], [1.0, 0, 210], [1.0, 0, 220], 0, 0], 
+	/* 夕   */ evening      : [[1.2, 0, 255], [0.8, 0, 255], [0.8, 0, 255], 0, 0], 
+	/* 夕雨 */ evening_rain : [[1.0, 0, 255], [1.0, 0, 255], [1.0, 0, 255], 0, 0], 
+	/* 夜   */ night        : [[0.9, 0, 180], [0.9, 0, 180], [1.2, 0, 230], 0, 0], 
+	/* 夜   */ night_l      : [[0.9, 0, 220], [0.9, 0, 220], [1.0, 0, 250], 0, 0], 
+	/* 深夜 */ midnight     : [[1.0, 0, 150], [1.0, 0, 150], [1.0, 0, 180], 0, 0]
+];
+
+var CG_SETUP_INFO = %[
+//	BG09A : %[
+//		center : "960,1324", 
+//		tone:TONE_DIC.daytime
+//	], 
+
+	//---------------------------------------------------------------------
+	//背景
+	BG01A02 : %[tone:BG_TONE.daytime_rain], 	// 学園/校門前/昼/曇天
+	BG01B01 : %[tone:BG_TONE.evening], 	// 学園/校門前/夕
+	BG01C01 : %[tone:BG_TONE.night_l], 	// 学園/校門前/夜
+	BG02A02 : %[tone:BG_TONE.daytime], 	// 学園/文芸部部室/昼/雨
+	BG02B01 : %[tone:BG_TONE.evening], 	// 学園/文芸部部室/夕
+	BG02D01 : %[tone:BG_TONE.night], 	// 学園/文芸部部室/夜/消灯
+	BG03A02 : %[tone:BG_TONE.daytime], 	// 学園/演劇部部室/昼/雨
+	BG03B01 : %[tone:BG_TONE.evening], 	// 学園/演劇部部室/夕
+	BG03D01 : %[tone:BG_TONE.night], 	// 学園/演劇部部室/夜/消灯
+	BG04B01 : %[tone:BG_TONE.evening], 	// 学園/生徒会室/夕
+	BG04D01 : %[tone:BG_TONE.night], 	// 学園/生徒会室/夜/消灯
+	BG05A07 : %[tone:BG_TONE.daytime_rain], 	// 学園/体育館/昼/文化祭/暗幕/消灯
+	BG05B01 : %[tone:BG_TONE.evening], 	// 学園/体育館/夕
+	BG05B02 : %[tone:BG_TONE.evening], 	// 学園/体育館/夕/文化祭前
+	BG05B03 : %[tone:BG_TONE.evening], 	// 学園/体育館/夕/打ち上げパーティー
+	BG05D01 : %[tone:BG_TONE.night], 	// 学園/体育館/夜/消灯
+	BG06A07 : %[tone:BG_TONE.daytime_rain], 	// 学園/体育館の壇上/昼/文化祭/暗幕/消灯
+	BG06B01 : %[tone:BG_TONE.evening], 	// 学園/体育館の壇上/夕
+	BG06B02 : %[tone:BG_TONE.evening], 	// 学園/体育館の壇上/夕/文化祭前
+	BG06B03 : %[tone:BG_TONE.evening], 	// 学園/体育館の壇上/夕/文化祭
+	BG06B04 : %[tone:BG_TONE.evening], 	// 学園/体育館の壇上/夕/打ち上げパーティー
+	BG06D01 : %[tone:BG_TONE.night], 	// 学園/体育館の壇上/夜/消灯
+	BG07B01 : %[tone:BG_TONE.evening], 	// 学園/教室/夕
+	BG07B02 : %[tone:BG_TONE.evening], 	// 学園/教室/夕/文化祭前
+	BG07D01 : %[tone:BG_TONE.night], 	// 学園/教室/夜/消灯
+	BG08B01 : %[tone:BG_TONE.evening], 	// 学園/廊下/夕
+	BG08B02 : %[tone:BG_TONE.evening], 	// 学園/廊下/夕/文化祭前
+	BG08D01 : %[tone:BG_TONE.night], 	// 学園/廊下/夜/消灯
+	BG10B01 : %[tone:BG_TONE.evening], 	// 学園/下駄箱前/夕
+	BG10B02 : %[tone:BG_TONE.evening], 	// 学園/下駄箱前/夕/文化祭前
+	BG10D01 : %[tone:BG_TONE.night], 	// 学園/下駄箱前/夜/消灯
+	BG11A02 : %[tone:BG_TONE.daytime_rain], 	// 一悟の家＋真優の家/外観/昼/曇天
+	BG11B01 : %[tone:BG_TONE.evening], 	// 一悟の家＋真優の家/外観/夕
+	BG11C01 : %[tone:BG_TONE.night_l], 	// 一悟の家＋真優の家/外観/夜
+	BG12B01 : %[tone:BG_TONE.evening], 	// 一悟の家/リビング/夕
+	BG13B01 : %[tone:BG_TONE.evening], 	// 一悟の家/一悟の部屋/夕
+	BG13D01 : %[tone:BG_TONE.night], 	// 一悟の家/一悟の部屋/夜/消灯
+	BG14B01 : %[tone:BG_TONE.evening], 	// 真優の家/リビング/夕
+	BG15B01 : %[tone:BG_TONE.evening], 	// 真優の家/真優の部屋/夕
+	BG15D01 : %[tone:BG_TONE.night], 	// 真優の家/真優の部屋/夜/消灯
+	BG16A02 : %[tone:BG_TONE.daytime_rain], 	// 百花の家/外観/昼/曇天
+	BG16B01 : %[tone:BG_TONE.evening], 	// 百花の家/外観/夕
+	BG16C01 : %[tone:BG_TONE.night_l], 	// 百花の家/外観/夜
+	BG17B01 : %[tone:BG_TONE.evening], 	// 百花の家/廊下/夕
+	BG17C01 : %[tone:BG_TONE.night_l], 	// 百花の家/廊下/夜
+	BG18B01 : %[tone:BG_TONE.evening], 	// 百花の家/百花の部屋/夕
+	BG19B01 : %[tone:BG_TONE.evening], 	// 千奈の家/千奈の部屋/夕
+	BG20B01 : %[tone:BG_TONE.evening], 	// 繁華街/夕
+	BG20C01 : %[tone:BG_TONE.night_l], 	// 繁華街/夜
+	BG21A02 : %[tone:BG_TONE.daytime_rain], 	// 通学路＋コンビニ前/昼/曇天
+	BG21B01 : %[tone:BG_TONE.evening], 	// 通学路＋コンビニ前/夕
+	BG21C01 : %[tone:BG_TONE.night_l], 	// 通学路＋コンビニ前/夜
+	BG22B01 : %[tone:BG_TONE.evening], 	// コンビニ店内/夕
+	BG25A03 : %[tone:BG_TONE.night_l], 	// 劇場/舞台/昼/緞帳あり/暗幕/消灯
+	BG25A04 : %[tone:BG_TONE.night_l], 	// 劇場/舞台/昼/緞帳なし/暗幕
+	BG26A02 : %[tone:BG_TONE.daytime_rain], 	// 空/昼/曇天
+	BG26B01 : %[tone:BG_TONE.evening], 	// 空/夕
+	BG26C01 : %[tone:BG_TONE.night_l], 	// 空/夜
+
+	//---------------------------------------------------------------------
+	//イベント
+		EA02E : %[tone:BG_TONE.evening], 	// 
+		EA02F : %[tone:BG_TONE.evening], 	// 
+		EA02G : %[tone:BG_TONE.evening], 	// 
+		EA02H : %[tone:BG_TONE.evening], 	// 
+		EA02M : %[tone:BG_TONE.evening], 	// 
+		EA02N : %[tone:BG_TONE.evening], 	// 
+		EA02O : %[tone:BG_TONE.evening], 	// 
+		EA02P : %[tone:BG_TONE.evening], 	// 
+
+		EA06E : %[tone:BG_TONE.evening], 	// 
+		EA06F : %[tone:BG_TONE.evening], 	// 
+		EA06G : %[tone:BG_TONE.evening], 	// 
+		EA06H : %[tone:BG_TONE.evening], 	// 
+
+	EA08 : %[tone:BG_TONE.evening], 	// 
+
+	EA13 : %[tone:BG_TONE.daytime_rain], 	// 
+
+	EA14 : %[tone:BG_TONE.daytime_rain], 	// 
+
+	EB03 : %[tone:[[0.9,0,230],[0.9,0,230],[1.2,0,230],0,0]], 	// 
+
+	EB08 : %[tone:BG_TONE.evening], 	// 
+
+	EC02 : %[tone:BG_TONE.daytime_rain], 	// 
+
+	EC06 : %[tone:BG_TONE.evening], 	// 
+
+	ED04 : %[tone:BG_TONE.daytime_rain], 	// 
+
+	ED08 : %[tone:[[1.6,10,255],[1.3,0,255],[0.9,0,255],0,0]], 	// 
+
+	ED09 : %[tone:BG_TONE.night_l], 	// 
+
+	EZ01 : %[tone:BG_TONE.night_l], 	// 
+
+	//---------------------------------------------------------------------
+	//バストアップ
+	//エモーション用の基準位置を定義する。
+	CA01A		 : [BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Z], 
+	CA02A		 : [BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Z], 
+	CA03A		 : [BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Z], 
+	CA04A		 : [BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Z], 
+	CA05A		 : [BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Z], 
+	CA06A		 : [BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Z], 
+	CA07A		 : [BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Y, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_Z, BEP.MAY_X, BEP.MAY_Y, BEP.MAY_Z], 
+
+	CB01A		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB01B		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB02A		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB02B		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB03A		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB03B		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB04A		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB04B		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB05A		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB05B		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB06A		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+	CB06B		 : [BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_X, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Y, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z, BEP.SEN_Z], 
+
+	CC01A		 : [BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z], 
+	CC02A		 : [BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z], 
+	CC03A		 : [BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z], 
+	CC04A		 : [BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z], 
+	CC05A		 : [BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z], 
+	CC06A		 : [BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z], 
+	CC07A		 : [BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_X, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Y, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z, BEP.ALC_Z], 
+
+	CD01A		 : [BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z], 
+	CD02A		 : [BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z], 
+	CD03A		 : [BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z], 
+	CD04A		 : [BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z], 
+	CD05A		 : [BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z], 
+	CD06A		 : [BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z], 
+	CD07A		 : [BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_X, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Y, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z, BEP.MMK_Z], 
+
+	CE02A		 : [BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y], 
+	CE03A		 : [BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y], 
+	CE06A		 : [BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_X, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y, BEP.HKR_Y], 
+
+	CF01A		 : [BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y], 
+	CF03A		 : [BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y], 
+	CF04A		 : [BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y], 
+	CF05A		 : [BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_X, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y, BEP.CHS_Y], 
+
+	CG01A		 : [BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y], 
+	CG02A		 : [BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y], 
+	CG02B		 : [BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y], 
+	CG03A		 : [BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y], 
+	CG04A		 : [BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y], 
+	CG05A		 : [BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_X, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y, BEP.MRA_Y], 
+
+	CI01A		 : [BEP.CBS_X, BEP.CBS_X, BEP.CBS_X, BEP.CBS_X, BEP.CBS_X], 
+	CI05A		 : [BEP.CBS_X, BEP.CBS_X, BEP.CBS_X, BEP.CBS_X, BEP.CBS_X], 
+
+	DUMMY : %[]
+];
+
+delete BEP;

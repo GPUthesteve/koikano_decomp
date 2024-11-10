@@ -1,0 +1,520 @@
+%[
+	//スタッフクレジット
+	credit : [
+		%[indent1 : 0, file : "FRM_0511b"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - キャラクターデザイン・原画 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, italic : 1, color : "white", text : "
+				カントク
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - ＳＤ原画 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				MITAONSYA
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - シナリオ - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				双葉亮一/
+				夜村卓
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - グラフィック - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				Ｘ壱型改/
+				鶏野郎/
+				綾瀬/
+				悠哉/
+				NAMI/
+				HISOCA/
+				すいみゃ/
+				ぱん
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				伊武もいな/
+				わっちー/
+				柊舞斗/
+				CF-X/
+				唐草暦/
+				おかださとし
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - 美術背景 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				画房すずめ堂/
+				ニライカナイ
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - キャラクターボイス - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				　　　　　　　　　十川真優　白野みゆき　　　　　　/
+				　　　　　　　　　七瀬千奈　小早川みや　　　　　　/
+				　アリス・サード・メイシー　森谷実園　　　　　　　/
+				　　　　　　　　千代田百花　森野まりあ　　　　　　/
+				　　　　　　　小野坂ひかる　七坂真理　　　　　　　/
+				　　　　　　　　　榎本知紗　卯衣　　　　　　　　　/
+				　　　　　　　　九重真里亜　神辺ちせ　　　　　　　/
+				　　　　　　　　ケルベロス　大河アイ　　　　　　　
+			"], 
+
+		%[indent1 : 16, indent2 : 6, font : 21, color : "powderblue", text : "
+				 - エキストラ - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				六畳一間/
+				北板利亜/
+				白雪姫乃/
+				たかなし末莉/
+				さつま妹子/
+				北大路おかめ/
+				おけいはん。/
+				碓氷リョウ/
+				塔野すみれ/
+				七曲悠仔/
+				木原菫太/
+				雌見勃雄/
+				相原清作/
+				宮川みやこ
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 24, color : "powderblue", text : "
+			 - ＣＶ音声制作スタッフ - 
+		"], 
+		%[indent1 : 16, indent2 : 6, font : 21, color : "aquamarine", text : "
+			 - 収録ディレクター - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				吉戸正樹
+			"], 
+
+		%[indent1 : 32, indent2 : 6, font : 21, color : "aquamarine", text : "
+			 - 収録エンジニア - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				ワルのへりょうへい
+			"], 
+
+		%[indent1 : 32, indent2 : 6, font : 21, color : "aquamarine", text : "
+			 - 音声編集 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				はぐれコアラ仕事人/
+				TMKRRN/
+				やまなかけんじ/
+				矢文あずま/
+				ながいともきち/
+				稲生芽亜
+			"], 
+
+		%[indent1 : 32, indent2 : 6, font : 21, color : "aquamarine", text : "
+			 - 収録スタジオ - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				Brave Hearts
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - キャスティング - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				株式会社ビットプロモーション/
+				かたひと
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - 主題歌 - 
+		"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				『Dreamer』
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				　歌：Duca/
+				作詞：Duca/
+				作曲：ANZIE/
+				編曲：ANZIE
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				Guitar：東タカゴー/
+				Other instruments：ANZIE/
+				Recording Engineer：三原典子/
+				Mixing Engineer：土井潤一
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				Recorded at MB - ONE studio/
+				Mixed at MB - ONE studio
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				Director：三原典子/
+				Sound Producer：土井潤一
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - エンディングテーマ - 
+		"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				『叶えたい未来』
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				　歌：Duca/
+				作詞：Duca/
+				作曲：Nekusam/
+				編曲：Nekusam
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				All instruments：Nekusam/
+				Recording Engineer：三原典子/
+				Mixing Engineer：橘 優紀
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				Recorded at MB - ONE studio/
+				Mixed at MB - ONE studio
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				Director：三原典子/
+				Sound Producer：土井潤一
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - ＢＧＭ - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				Peak A Soul+
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				作曲:AKIYO TODA, ANZIE/
+				Recorded & Mixed by 三原典子/
+				Recorded&Mixed at MB - ONE studio
+			"], 
+			%[indent1 : 8, indent2 : 6, font : 27, color : "white", text : "
+				SoundProduced by 土井潤一
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - 効果音 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				株式会社アルカディア・プロジェクト
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - Movie制作 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				yo - yu
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - スクリプト - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				双葉亮一/
+				皆本あいる
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - 組み込み - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				ほりりん
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - デバック - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				CUFFS ALL STAFF
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - パッケージデザイン - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				やど
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - ＨＰ制作・マニュアルデザイン - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				みきかの
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - スペシャルサンクス - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				☆画野朗
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - 広報 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				かたひと
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - パブリシティー - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				株式会社テイジイエル企画
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - ディレクター - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				皆本あいる
+			"], 
+
+		%[indent1 : 256, indent2 : 6, font : 21, color : "powderblue", text : "
+			 - 制作 - 
+		"], 
+			%[indent1 : 4, indent2 : 6, font : 27, color : "white", text : "
+				有限会社ＣＵＦＦＳ
+			"], 
+
+		%[indent1 : 480, file : "FRM_0826"], 
+
+		%[indent1 : 300, indent2 : 6, font : 27, color : "white", text : ""]
+	], 
+
+	//ＣＧ表示
+	cg :
+	[
+		[
+			//char
+			%[label:"TimeKeeper", time: 0], 
+				%[label:"OpenFilterH", time: 0], 
+				%[label:"BgSlide", file:"BG07A01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CA02A001L", cx:300, cy:0, cmx:-600], 
+			%[label:"TimeKeeper", time: 5129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG14A01", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CA03A003L", cx:-100, cy:0, cmx:600, accel:2], 
+			%[label:"TimeKeeper", time: 6129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG15A01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CA04A010L", cx:100, cy:0, cmx:-600, accel:2], 
+			%[label:"TimeKeeper", time: 7251], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG25A02", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CA07A014L", cx:-100, cy:0, cmx:600, accel:2], 
+
+			//event
+			%[label:"TimeKeeper", time: 19000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EA02c", tone:"ltsepia_col", bx:-217, by:0, bmx:-300, life:13500], 
+			%[label:"TimeKeeper", time: 32500], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EA03a", tone:"ltsepia_col", bx:-270, by:0, bmx:300, life:13500], 
+			%[label:"TimeKeeper", time: 46000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EA05a", tone:"ltsepia_col", bx:0, by:-80, bmy:170, life:9000], 
+			%[label:"TimeKeeper", time: 55000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EA06a", tone:"ltsepia_col", bx:-220, by:0, bmx:-300, life:9000], 
+			%[label:"TimeKeeper", time: 64000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EA07a", tone:"ltsepia_col", bx:0, by:-84, bmy:170, life:14000], 
+			%[label:"TimeKeeper", time: 78000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EA08a", tone:"ltsepia_col", bx:-304, by:0, bmx:300, life:14000], 
+			%[label:"TimeKeeper", time: 92000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EA10a", tone:"ltsepia_col", bx:0, by:-77, bmy:170, life:14000], 
+
+			%[label:"Dummy"]
+		], [
+		//
+			%[label:"TimeKeeper", time: 0], 
+				%[label:"OpenFilterH", time: 0], 
+				%[label:"BgSlide", file:"BG02A01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CB02A001L", cx:300, cy:0, cmx:-600], 
+			%[label:"TimeKeeper", time: 5129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG22A01", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CB03A003L", cx:-100, cy:0, cmx:600, accel:2], 
+			%[label:"TimeKeeper", time: 6129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG19C01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CB04A008L", cx:100, cy:0, cmx:-600, accel:2], 
+			%[label:"TimeKeeper", time: 7251], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG09A01", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CB05A012L", cx:-100, cy:0, cmx:600, accel:2], 
+
+			//event
+			%[label:"TimeKeeper", time: 19000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EB01a", tone:"ltsepia_col", bx:-368, by:0, bmx:300, life:13500], 
+			%[label:"TimeKeeper", time: 32500], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EB03a", tone:"ltsepia_col", bx:-158, by:0, bmx:-300, life:13500], 
+			%[label:"TimeKeeper", time: 46000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EB04a", tone:"ltsepia_col", bx:0, by:-80, bmy:170, life:9000], 
+			%[label:"TimeKeeper", time: 55000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EB05a", tone:"ltsepia_col", bx:0, by:-87, bmy:170, life:9000], 
+			%[label:"TimeKeeper", time: 64000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EB06a", tone:"ltsepia_col", bx:-330, by:0, bmx:300, life:14000], 
+			%[label:"TimeKeeper", time: 78000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EB08a", tone:"ltsepia_col", bx:-368, by:0, bmx:300, life:14000], 
+			%[label:"TimeKeeper", time: 92000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EB09a", tone:"ltsepia_col", bx:0, by:-77, bmy:170, life:14000], 
+
+			%[label:"Dummy"]
+		], [
+		//
+			%[label:"TimeKeeper", time: 0], 
+				%[label:"OpenFilterH", time: 0], 
+				%[label:"BgSlide", file:"BG04A01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CC02A001L", cx:300, cy:0, cmx:-600], 
+			%[label:"TimeKeeper", time: 5129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG20A01", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CC03A003L", cx:-100, cy:0, cmx:600, accel:2], 
+			%[label:"TimeKeeper", time: 6129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG18C01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CC04A008L", cx:100, cy:0, cmx:-600, accel:2], 
+			%[label:"TimeKeeper", time: 7251], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG09A01", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CC05A012L", cx:-100, cy:0, cmx:600, accel:2], 
+
+			//event
+			%[label:"TimeKeeper", time: 19000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EC01a", tone:"ltsepia_col", bx:0, by:-80, bmy:170, life:13500], 
+			%[label:"TimeKeeper", time: 32500], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EC02a", tone:"ltsepia_col", bx:0, by:84, bmy:-170, life:13500], 
+			%[label:"TimeKeeper", time: 46000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EC03a", tone:"ltsepia_col", bx:-200, by:0, bmx:-300, life:9000], 
+			%[label:"TimeKeeper", time: 55000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EC04d", tone:"ltsepia_col", bx:0, by:-80, bmy:170, life:9000], 
+			%[label:"TimeKeeper", time: 64000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EC05a", tone:"ltsepia_col", bx:-220, by:0, bmx:-300, life:14000], 
+			%[label:"TimeKeeper", time: 78000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"EC08a", tone:"ltsepia_col", bx:-280, by:0, bmx:300, life:14000], 
+			%[label:"TimeKeeper", time: 92000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"EC09a", tone:"ltsepia_col", bx:0, by:90, bmy:-170, life:12000], 
+
+			%[label:"Dummy"]
+		], [
+		//
+			%[label:"TimeKeeper", time: 0], 
+				%[label:"OpenFilterH", time: 0], 
+				%[label:"BgSlide", file:"BG03A01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CD02A001L", cx:300, cy:0, cmx:-600], 
+			%[label:"TimeKeeper", time: 5129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG20A01", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CD03A003L", cx:-100, cy:0, cmx:600, accel:2], 
+			%[label:"TimeKeeper", time: 6129], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG18C01", tone:"ltsepia", bx:-100, by:0, bmx:200], 
+				%[label:"CharSlide", file:"CD04A008L", cx:100, cy:0, cmx:-600, accel:2], 
+			%[label:"TimeKeeper", time: 7251], 
+				%[label:"OpenFilterH", center:"char"], 
+				%[label:"BgSlide", file:"BG09A01", tone:"ltsepia", bx:100, by:0, bmx:-200], 
+				%[label:"CharSlide", file:"CD05A016L", cx:-100, cy:0, cmx:600, accel:2], 
+
+			//event
+			%[label:"TimeKeeper", time: 19000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"ED01a", tone:"ltsepia_col", bx:-141, by:0, bmx:-300, life:13500], 
+			%[label:"TimeKeeper", time: 32500], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"ED02a", tone:"ltsepia_col", bx:-300, by:0, bmx:-300, life:13500], 
+			%[label:"TimeKeeper", time: 46000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"ED03a", tone:"ltsepia_col", bx:0, by:-87, bmy:170, life:9000], 
+			%[label:"TimeKeeper", time: 55000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"ED04a", tone:"ltsepia_col", bx:0, by:-87, bmy:170, life:9000], 
+			%[label:"TimeKeeper", time: 64000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"ED07a", tone:"ltsepia_col", bx:-348, by:0, bmx:300, life:14000], 
+			%[label:"TimeKeeper", time: 78000], 
+				%[label:"OpenFilterH", center:360], 
+				%[label:"BgSlide", file:"ED08a", tone:"ltsepia_col", bx:0, by:-87, bmy:170, life:14000], 
+			%[label:"TimeKeeper", time: 92000], 
+				%[label:"OpenFilterV", center:360, width:280], 
+				%[label:"BgSlide", file:"ED09a", tone:"ltsepia_col", bx:-260, by:0, bmx:-300, life:12000], 
+
+			%[label:"Dummy"]
+		]
+	], 
+
+	//その他
+	process : [
+		%[label:"start"   , time: 0], 
+		%[label:"advHide" , time: 0], 
+//		%[label:"creditStart", time: 0, life:116000], 
+		%[label:"creditStart", time: 19000, life:116000-19000], 
+
+		//--------------------------------------------------------------------------------------------------------
+		//Title & Cutin
+		%[label:"TimeKeeper", time: 9724], 
+			%[label:"OpenFilterV", center:640, width:640], 
+			%[label:"CharHide"], 
+			%[label:"BgZoom", file:"FRM_0802", tone:"ltsepia_col", from:150, to:100, life:11000], 
+		%[label:"TimeKeeper", time: 14243], 
+			%[label:"Cutin", name:"Cutin1", image:"CA02A001M", pos:[490, 360], from:[128, 0], center:[224, 360], 
+				trim:[[108, 0], [328, 0], [328, 720], [108, 720]], zoom:[0,100,100,100]], 
+		%[label:"TimeKeeper", time: 15300], 
+			%[label:"Cutin", name:"Cutin2", image:"CB02A001M", pos:[790, 360], from:[-128, 0], center:[224, 360], 
+				trim:[[114, 0], [333, 0], [333, 720], [114, 720]], zoom:[0,100,100,100]], 
+		%[label:"TimeKeeper", time: 16200], 
+			%[label:"Cutin", name:"Cutin3", image:"CC02A001M", pos:[190, 360], from:[128, 0], center:[256, 360], 
+				trim:[[145, 0], [365, 0], [365, 720], [145, 720]], zoom:[0,100,100,100]], 
+		%[label:"TimeKeeper", time: 16800], 
+			%[label:"Cutin", name:"Cutin4", image:"CD02A001M", pos:[1090, 360], from:[-128, 0], center:[224, 360], 
+				trim:[[109, 0], [329, 0], [329, 720], [109, 720]], zoom:[0,100,100,100]], 
+
+		//CutinHide
+		%[label:"TimeKeeper", time: 18200], 
+			%[label:"CutinAction", name:"Cutin4", mx:100, trans:0, life:500, accel:-2], 
+		%[label:"TimeKeeper", time: 18300], 
+			%[label:"CutinAction", name:"Cutin3", mx:-100, trans:0, life:500, accel:-2], 
+		%[label:"TimeKeeper", time: 18400], 
+			%[label:"CutinAction", name:"Cutin2", mx:100, trans:0, life:500, accel:-2], 
+		%[label:"TimeKeeper", time: 18500], 
+			%[label:"CutinAction", name:"Cutin1", mx:-100, trans:0, life:500, accel:-2], 
+		%[label:"TimeKeeper", time: 19000], 
+			%[label:"CutinHide"], 
+		//--------------------------------------------------------------------------------------------------------
+
+
+		%[label:"歌開始"   , time:19000], 
+		%[label:"CreditMove", x:969, time:19000, life:0], 
+
+		%[label:"BgFade", fade:0, time:100500], 
+		%[label:"FilterFade", fade:0, time:101100], 
+		%[label:"CreditMove", x:640, time:101000], 
+		%[label:"end"     , time:120000]
+	]
+];

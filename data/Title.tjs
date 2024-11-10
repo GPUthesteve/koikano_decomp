@@ -1,0 +1,1447 @@
+/*
+	ロゴ・タイトル
+*/
+
+class Logo extends Sprite, SelectItemNotifyBase, SceneBase{
+//ベース表示
+//ロゴ表示
+//待機←キーフレーム
+//警告表示
+//待機←キーフレーム
+//消す
+	var _state = 0;
+	var _fCancel = false;
+	var _spr = %[];
+	var _attentionVoice;
+
+	var _movie;
+
+	var _te;
+
+	var POS = %[
+		center : [640, 360], 
+		t1 : [ 240, 275], 
+		t2 : [1040, 275], 
+		m1 : [ 120, 510], 
+		m2 : [ 360, 510], 
+		m3 : [ 640, 510], 
+		m4 : [ 900, 510], 
+		m5 : [1160, 510], 
+		b1 : [ 360, 690], 
+		b2 : [ 640, 690], 
+		b3 : [ 900, 690]
+	];
+	var SPR_LIST = [
+		%[id:"ATTENTION_MARK", file:"FRM_0504a", center:[150, 150], pos:[640, 360]], 
+		%[id:"ATTENTION1"    , file:"FRM_0591" , center:[131, 12], pos:[ 640, 196]], 
+		%[id:"ATTENTION2"    , file:"FRM_0592" , center:[301, 29], pos:[ 640, 273]], 
+		%[id:"ATTENTION3"    , file:"FRM_0593" , center:[315, 29], pos:[ 640, 376]], 
+		%[id:"ATTENTION4"    , file:"FRM_0594" , center:[154, 29], pos:[ 640, 470]], 
+		%[id:"MAYU"          , file:"FRM_0581" , center:[97, 268], pos:POS.m1], 
+		%[id:"SENA"          , file:"FRM_0582" , center:[97, 268], pos:POS.m5], 
+		%[id:"ALICE"         , file:"FRM_0583" , center:[97, 268], pos:POS.b1], 
+		%[id:"MOMOKA"        , file:"FRM_0584" , center:[97, 268], pos:POS.b3], 
+		%[id:"CHISA"         , file:"FRM_0586" , center:[97, 268], pos:POS.t1], 
+		%[id:"MARIA"         , file:"FRM_0587" , center:[97, 268], pos:POS.t2]  
+	];
+
+	var stLogo = 1;
+	var stAttentionPlay = 2;
+	var stAttentionEnd = 3;
+
+	function Logo(win, par){
+		Sprite(...);
+		hasImage = false;
+		hitType = htMask;
+		hitThreshold = 0;
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		fillRect(0, 0, width, height, 0x0);
+		absolute = LAYER_LOGO;
+
+		_spr["BASE"] = new global.Sprite(win, this);
+		with(_spr.BASE){
+			@if(__TRIAL__ == 0)
+				.loadImages("FRM_0503");
+			@endif
+			@if(__TRIAL__ != 0)
+				.loadImages("FRM_0503");
+			@endif
+			.setSizeToImageSize();
+			.setPos(WINDOW_CENTER_X-.width\2, WINDOW_CENTER_Y-.height\2);
+			.hitThreshold = 256;
+		}
+
+		for(var i=0;i<SPR_LIST.count;i++){
+			_spr[SPR_LIST[i].id] = new global.Sprite(window, _spr.BASE);
+			with(_spr[SPR_LIST[i].id]){
+				.loadImages(SPR_LIST[i].file);
+				.setSizeToImageSize();
+				.setAffineOffset(SPR_LIST[i].center[0], SPR_LIST[i].center[1]);
+				.setCenter(SPR_LIST[i].center[0], SPR_LIST[i].center[1]);
+				.setPos(SPR_LIST[i].pos[0], SPR_LIST[i].pos[1]);
+				.hitThreshold = 256;
+			}
+		}
+
+		CreateSprCover();
+		with(SPR_COVER){
+			.fillRect(0, 0, SPR_COVER.width, SPR_COVER.height, 0xffffffff);
+		}
+
+		_attentionVoice = new AttentionVoice(this);
+
+		visible = true;
+
+		_movie = new MovieLayer(win, this);
+		_movie.hitThreshold = 256;
+		_movie.start("cube", this);
+		_state = stLogo;
+
+		_te = new TimerEvent();
+
+		OnceCall(step01, 1500);
+
+		window.addInputNotify(this);
+	}
+	function finalize(){
+		window.removeInputNotify(this);
+
+		cancel();
+		close();
+
+		for(var i=0;i<SPR_LIST.count;i++){
+			invalidate _spr[SPR_LIST[i].id];
+		}
+		invalidate _spr["BASE"];
+
+		invalidate _attentionVoice;
+		invalidate _movie;
+
+		_te.stop();
+		invalidate _te;
+
+		global.Sprite.finalize();
+	}
+
+	//ロゴ：時間待ち
+	function step01(){
+		PlaySystemVoice("ブランドコール");
+	}
+	//ロゴ→警告文フェード
+	function step02(){
+		_state = stAttentionPlay;
+		if(CONFIG.muteSystem || CONFIG.muteMaster)
+			keyframe(stAttentionEnd);
+
+		with(_spr.BASE){
+			.setTransitionCompleteCall(step03);
+			.opacity = 0;
+			.setBlendingEnvelope(255);
+			.beginActivation(1000);
+			.visible = true;
+		}
+	}
+	//警告文：時間待ち
+	function step03(){
+		_spr.BASE.setTransitionCompleteCall();
+		if(CONFIG.muteSystem == 0 && CONFIG.muteMaster == 0)
+			_attentionVoice.start();
+		else
+			OnceCall(step04, 8000);
+	}
+	//警告文：フェードアウト
+	function step04(){
+		with(SPR_COVER){
+			.setTransitionCompleteCall(step05);
+			.opacity = 0;
+			.setBlendingEnvelope(255);
+			.beginActivation(1000);
+			.visible = true;
+		}
+	}
+	//次のシーンに移動する
+	function step05(){
+		with(SPR_COVER){
+			.setTransitionCompleteCall();
+		}
+		game.changeScene(SCENE_TITLE);
+		close();
+	}
+
+	function cancel(){
+		OnceCallCancel(step01);
+		OnceCallCancel(step03);
+		OnceCallCancel(step04);
+		OnceCallCancel(step05);
+		with(_spr.BASE){
+			.setTransitionCompleteCall();
+			.flushActivation();
+		}
+		with(SPR_COVER){
+			.setTransitionCompleteCall();
+			.flushActivation();
+		}
+	}
+
+	function close(){
+		cancel();
+
+		visible = false;
+		valid = false;
+	}
+
+	function onKeyDown(key, shift){
+		onAnyInput();
+	}
+	function onMouseDown(x, y, button, shift){
+		onAnyInput();
+	}
+
+	function onPlay(label){
+		_te.stop();
+		if(_fCancel) return;
+
+		var event = [];
+		switch(label){
+		case "MAY220046" : 
+			event = [
+				%[time : 0, label : label]
+			];
+			break;
+		case "SEN220043" : 
+			event = [
+				%[time : 0, label : label+"a"], 
+				%[time : 2308, label : label+"b"]
+			];
+			break;
+		case "ALC220043" : 
+			event = [
+				%[time : 0, label : label+"a"], 
+				%[time : 2539, label : label+"b"]
+			];
+			break;
+		case "MMK220043" : 
+			event = [
+				%[time : 0, label : label]
+			];
+			break;
+		case "SEN220044" : 
+			event = [
+				%[time : 0, label : label]
+			];
+			break;
+		case "CHS220043" : 
+			event = [
+				%[time : 0, label : label]
+			];
+			break;
+		case "MRA220043" : 
+			event = [
+				%[time : 0, label : label]
+			];
+			break;
+		case "MAY220047" : 
+			event = [
+				%[time : 0, label : label]
+			];
+			break;
+		}
+
+		_te.setEvent(event);
+		_te.init();
+		_te.start(onEvent);
+	}
+	function onEvent(label){
+		switch(label){
+		case "MAY220046" : 
+		//「本日は『恋する彼女の不器用な舞台』公演にご来場いただき、
+		//　誠にありがとうございます」
+			spriteAction(_spr.MAYU, 
+			[
+				POS.m3[0], POS.m3[1], -1, 0, 100, 100, 0, 
+				POS.m3[0], POS.m3[1]-16, -1, 128, 100, 100, 0, 
+				POS.m3[0], POS.m3[1], -1, 255, 100, 100, 0
+			], 2, 300);
+			break;
+		case "SEN220043a" : 
+		//「開演に先立ちまして、」
+			move(_spr.MAYU, POS.m3[0], POS.m3[1], POS.m2[0], POS.m2[1], 3, , 0, 800);
+			move(_spr.SENA, POS.m3[0], POS.m3[1], POS.m4[0], POS.m4[1], 3, , 0, 800);
+			break;
+		case "SEN220043b" : 
+		//「お客様にお願い申し上げます」
+			spriteAction(_spr.ATTENTION_MARK, 
+			[
+				POS.center[0], POS.center[1], -1, 0, 100, 100, 0, 
+				POS.center[0], POS.center[1], -1, 128, 120, 120, 0, 
+				POS.center[0], POS.center[1], -1, 255, 100, 100, 0
+			], 2, 500);
+			break;
+		case "ALC220043a" : 
+		//「『恋する彼女の不器用な舞台』に
+			spriteAction(_spr.ALICE, 
+			[
+				POS.b2[0], POS.b2[1], -1, 0, 100, 100, 0, 
+				POS.b2[0], POS.b2[1]-16, -1, 128, 100, 100, 0, 
+				POS.b2[0], POS.b2[1], -1, 255, 100, 100, 0
+			], 2, 300);
+			_spr.ATTENTION1.visible = true;
+			var x = _spr.ATTENTION1.left;
+			var y = _spr.ATTENTION1.top;
+			spriteAction(_spr.ATTENTION1, 
+			[
+				x, y+32, -1, 0, 100, 100, 0, 
+				x, y+16, -1, 128, 100, 100, 0, 
+				x, y, -1, 255, 100, 100, 0
+			], 2, 500);
+			break;
+		case "ALC220043b" : 
+		//「登場する人物、舞台、団体などは
+		//　全てフィクションだ。もしも見たことのある景色が
+		//　登場したとしても、フィクションだからね」
+			move(_spr.MAYU, POS.m2[0], POS.m2[1], POS.m1[0], POS.m1[1], 3, , 0, 800);
+			move(_spr.SENA, POS.m4[0], POS.m4[1], POS.m5[0], POS.m5[1], 3, , 0, 800);
+			var x = _spr.ATTENTION2.left;
+			var y = _spr.ATTENTION2.top;
+			spriteAction(_spr.ATTENTION2, 
+			[
+				x, y+32, -1, 0, 100, 100, 0, 
+				x, y+16, -1, 128, 100, 100, 0, 
+				x, y, -1, 255, 100, 100, 0
+			], 2, 500);
+			break;
+		case "MMK220043" : 
+		//「登場人物は、みんな、十八歳以上。だから、おさわり
+		//　おーけー。もんだいない。ごじゆうにどうぞ」
+			move(_spr.ALICE, POS.b2[0], POS.b2[1], POS.b1[0], POS.b1[1], 3, , 0, 800);
+			spriteAction(_spr.MOMOKA, 
+			[
+				POS.b2[0], POS.b2[1], -1, 0, 100, 100, 0, 
+				POS.b2[0], POS.b2[1]-16, -1, 128, 100, 100, 0, 
+				POS.b2[0], POS.b2[1], -1, 255, 100, 100, 0
+			], 2, 500);
+			var x = _spr.ATTENTION3.left;
+			var y = _spr.ATTENTION3.top;
+			spriteAction(_spr.ATTENTION3, 
+			[
+				x, y+32, -1, 0, 100, 100, 0, 
+				x, y+16, -1, 128, 100, 100, 0, 
+				x, y, -1, 255, 100, 100, 0
+			], 2, 500);
+			break;
+		case "SEN220044" : 
+		//「お、おさわりは自由じゃないですっ！　特定の相手を
+		//　選んですることですからね！？」
+			move(_spr.SENA, POS.m5[0], POS.m5[1], POS.m5[0], POS.m5[1], 2, 8, 0, 500);
+			move(_spr.MOMOKA, POS.b2[0], POS.b2[1], POS.b3[0], POS.b3[1], 3, , 0, 800);
+			break;
+		case "CHS220043" : 
+		//「上演中に席を離れる時は、セーブとロードを
+		//　忘れずにね！　適度な休憩も大切よっ！」
+			spriteAction(_spr.CHISA, 
+			[
+				POS.t1[0], POS.t1[1], -1, 0, 100, 100, 0, 
+				POS.t1[0], POS.t1[1]-16, -1, 128, 100, 100, 0, 
+				POS.t1[0], POS.t1[1], -1, 255, 100, 100, 0
+			], 2, 500);
+			var x = _spr.ATTENTION4.left;
+			var y = _spr.ATTENTION4.top;
+			spriteAction(_spr.ATTENTION4, 
+			[
+				x, y+32, -1, 0, 100, 100, 0, 
+				x, y+16, -1, 128, 100, 100, 0, 
+				x, y, -1, 255, 100, 100, 0
+			], 2, 500);
+			break;
+		case "MRA220043" : 
+		//「まもなく開演のお時間です。最後までごゆっくり、
+		//　お楽しみくださいませ」
+			spriteAction(_spr.MARIA, 
+			[
+				POS.t2[0], POS.t2[1], -1, 0, 100, 100, 0, 
+				POS.t2[0], POS.t2[1]-16, -1, 128, 100, 100, 0, 
+				POS.t2[0], POS.t2[1], -1, 255, 100, 100, 0
+			], 2, 500);
+			break;
+		case "MAY220047" : 
+		//「……一番側で、わたしのことを見ててね」
+			var x = _spr.MAYU.left;
+			var y = _spr.MAYU.top;
+			spriteAction(_spr.MAYU, 
+			[
+				x, y, -1, 255, 100, 100, 0, 
+				x+8, y, -1, 255, 100, 100, 0, 
+				x, y, -1, 255, 100, 100, 0, 
+				x-8, y, -1, 255, 100, 100, 0, 
+				x, y, -1, 255, 100, 100, 0
+			], 2, 1000);
+			break;
+		}
+	}
+
+	function move(obj, sx, sy, dx, dy, jumpCount=0, jumpHeight=16, accel=0, time=1000){
+		var w = dx - sx;
+		var h = dy - sy;
+
+		var points = jumpCount <= 0 ? 1 : jumpCount * 2 - 1;
+
+		var path = [];
+		path.adds(sx, sy, -1, 255, 100, 100, 0);
+
+		if(jumpCount == 0){
+			var t = 0.5;
+			path.adds(sx+w*t, sy+h*t   , -1, 255, 100, 100, 0);
+		}else{
+			for(var i=0;i<points;i++){
+				var t = (i+1) / (points+1);
+				if(i%2)	path.adds(sx+w*t, sy+h*t   , -1, 255, 100, 100, 0);
+				else	path.adds(sx+w*t, sy+h*t-jumpHeight, -1, 255, 100, 100, 0);
+			}
+		}
+
+		path.adds(dx, dy, -1, 255, 100, 100, 0);
+
+		spriteAction(obj, path, accel, time);
+	}
+
+	function onEndAttentionVoice(){
+		_state = stAttentionEnd;
+		OnceCall(step04, 1000);
+	}
+
+	function keyframe(state){
+		switch(state){
+		case stAttentionEnd : 
+			for(var i=0;i<SPR_LIST.count;i++){
+				with(_spr[SPR_LIST[i].id]){
+					.stopActivation();
+					.setPos(SPR_LIST[i].pos[0], SPR_LIST[i].pos[1]);
+					.visible = true;
+				}
+			}
+			break;
+		}
+	}
+
+	function spriteAction(spr, path=[], accel=0, time=0, show=true){
+		spr.stopActivation();
+
+		if(!show){
+			spr.visible = false;
+			return;
+		}
+
+		for(var i=0;i<path.count;i+=7){
+			if(path[i+2] == -1) path[i+2] = spr.absolute;
+		}
+
+		spr.setMovingSplineEnvelope2(path, accel);
+		spr.beginActivation(time);
+		spr.visible = true;
+	}
+
+	function onAnyInput(){
+		if(!valid) return;
+
+		cancel();
+
+		_te.stop();
+		_attentionVoice.stop();
+
+		switch(_state){
+		case stLogo : 
+			_movie.stop();
+			break;
+		case stAttentionPlay : 
+			_fCancel = true;
+			keyframe(stAttentionEnd);
+			_state = stAttentionEnd;
+			OnceCall(step04, 4000);
+			break;
+		case stAttentionEnd : 
+		default : 
+			_fCancel = true;
+			step05(); 
+			break;
+		}
+	}
+
+	function debugJump(str, label=""){
+		StopBgm();
+		close();
+		game.changeScene(SCENE_ADV, true, %[debug:str, label:label]);
+	}
+
+	function action(ev){
+		if(ev.type == "Movie.onStatusChanged" && ev.status == "stop"){
+			_movie.visible = false;
+			OnceCall(step02, 100);
+		}
+	}
+}
+
+class AttentionVoice{
+	var _index = 0;
+	var _list = [
+		[
+			["MAY220046", "MAY220046"], 
+			["SEN220043", "SEN220043"], 
+			["ALC220043", "ALC220043"], 
+			["MMK220043", "MMK220043"], 
+			["SEN220044", "SEN220044"], 
+			["CHS220043", "CHS220043"], 
+			["MRA220043", "MRA220043"], 
+			["MAY220047", "MAY220047"]
+		],[
+			["MAY220048", ""], 
+			["SEN220045", ""], 
+			["ALC220044", ""], 
+			["MMK220044", ""], 
+			["CHS220044", ""], 
+			["MRA220044", ""]
+		]
+	];
+	var _tgtList;
+
+	var _owner = null;
+	var _snd;
+	var _fStop = false;
+	var _preStatus = "";
+
+	function AttentionVoice(owner){
+		_owner = owner;
+		_snd = new WaveSoundBuffer(this);
+		_preStatus = _snd.status;
+	}
+	function finalize(){
+		OnceCallCancel(onEndCall);
+		invalidate _snd;
+	}
+
+	function start(type=-1){
+		@if(__TRIAL__ != 0)
+			_tgtList = _list[1];
+		@endif
+		@if(__TRIAL__ == 0)
+			_tgtList = _list[0];
+		@endif
+
+		_index = 0;
+		play(_tgtList[_index][0], _tgtList[_index][1]);
+	}
+
+	function play(file, label){
+		with(_snd){
+			try{
+				.open(file + ".ogg");
+			}catch{
+			}
+			.volume2 = CONFIG.volSystem * 100000;
+			.volume = CONFIG.volMaster * 100000;
+
+			.play();
+			_owner.onPlay(label);
+		}
+	}
+
+	function stop(){
+		_fStop = true;
+		_snd.stop();
+		_fStop = false;
+	}
+
+	function action(ev){
+		if(_fStop) return;
+		if(_preStatus == "unload"){
+			_preStatus = ev.status;
+			 return;
+		}
+		_preStatus = ev.status;
+
+		if(ev.type == "onStatusChanged" && ev.status == "stop"){
+			if(_tgtList.count <= _index+1){
+				if(_owner != null) onEndCall();
+				 return;
+			}
+			_index++;
+			if(_tgtList[_index][0] != "") play(_tgtList[_index][0], _tgtList[_index][1]);
+		}
+	}
+
+	function onEndCall(){
+		_owner.onEndAttentionVoice();
+	}
+}
+
+class MovieScene extends Layer, SceneBase{
+	function MovieScene(win, par){
+		Layer(...);
+		hasImage = false;
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+		if(SPR_COVER != null){
+			with(SPR_COVER){
+				.setTransitionCompleteCall();
+				.opacity = 0;
+				.visible = false;
+			}
+		}
+
+		PlayMovie("cube", this);
+		visible = true;
+		win.addInputNotify(this);
+	}
+	function finalize(){
+		win.removeInputNotify(this);
+		global.Layer.finalize();
+	}
+
+	function who(){return "MovieScene";}
+
+	function close(){
+		StopMovie();
+		visible = false;
+		valid = false;
+		game.changeScene(SCENE_TITLE);
+	}
+
+	function action(ev){
+		if(ev.status == "stop") close();
+	}
+
+	function debugJump(str, label=""){
+		StopBgm();
+		close();
+		game.changeScene(SCENE_ADV, true, %[debug:str, label:label]);
+	}
+
+	function onKeyDown(key, shift){
+		if(key == VK_ESCAPE) StopMovie();
+	}
+	function onMouseDown(x, y, button, shift){
+		if(button == mbRight) StopMovie();
+	}
+}
+
+class Title extends Sprite, SelectItemNotifyBase, SceneBase, ChainItemBase{
+	var _sprLogo;
+
+	var _spr = [];
+	var _bgInfo = [
+		%[file:"FRM_0521", pos:%[x:0, y:0]           , cop:1.00], 
+		%[file:"FRM_0525", pos:%[x:16+970, y:16+281] , cop:0.92], 
+		%[file:"FRM_0524", pos:%[x:16+645, y:16+230] , cop:0.94], 
+		%[file:"FRM_0523", pos:%[x:16+833, y:16+250] , cop:0.96], 
+		%[file:"FRM_0522", pos:%[x:16-18, y:38]      , cop:0.98]
+	];
+	var _bgMove = %[
+		//restart : %[x:0, y:0, z:100, r:0], 
+		start    : %[x:0, y:0, z:100, r:0], 
+		load     : %[x:-120, y:-40, z:100, r:0], 
+		config   : %[x:-240, y:-80, z:100, r:0], 
+		bonus    : %[x:-320, y:-80, z:100, r:0], 
+		end      : %[x:-320, y:-160, z:100, r:0]
+	];
+	var BIRTHDAY = [
+		%[month: 3, date: 3, file:"FRM_0571", voice:MAYU], 
+		%[month: 8, date: 9, file:"FRM_0572", voice:SENA], 
+		%[month:11, date:10, file:"FRM_0573", voice:ALICE], 
+		%[month: 2, date:12, file:"FRM_0574", voice:MOMOKA], 
+		%[month: 6, date: 1, file:"FRM_0575", voice:HIKARU], 
+		%[month: 7, date:14, file:"FRM_0576", voice:CHISA], 
+		%[month: 4, date:21, file:"FRM_0577", voice:MARIA], 
+		%[month: 1, date:23, file:"FRM_0578", voice:CERBERUS], 
+		%[month:12, date:28, file:"FRM_0579", voice:8]
+	];
+
+	var _fMoving = false;
+	var _ptMoveXYZ, _ptMoveR;
+	var _startMove;
+	var _moveTime;
+
+	var _btnBase;
+	var _ptGrp = [];
+	var _grpBtn, _grpBtnBonus;
+
+	var _birthdayTimer;
+
+	var _logo;
+	var _version;
+
+	var _sprASaveInfo;
+
+	var _enterBonus = false;
+
+	var btnW = 210;
+	var btnWT = 146;
+	var btnH = 48;
+	var btnH2 = 32;
+	var BTN_LIST = [
+		%[id:"btnContinue", file:"FRM_0553", ptn:2, type:0, pos1:[btnW*2, btnH*0], pos2:[btnW*2, btnH*0], pos3:[btnW*2, btnH*1]], 
+		%[id:"btnStart"   , file:"FRM_0551", ptn:2, type:0, pos1:[btnW*1, btnH*1], pos2:[btnW*1, btnH*1], pos3:[btnW*1, btnH*1]], 
+
+		@if(__TRIAL__ != 0)
+			%[id:"btnMayu"  , file:"FRM_0571", ptn:2, type:0, pos1:[0, 0], pos2:[btnW*0, btnH*2], pos3:[btnWT*0, btnH*2]], 
+			%[id:"btnSena"  , file:"FRM_0572", ptn:2, type:0, pos1:[0, 0], pos2:[btnW*0, btnH*2], pos3:[btnWT*1, btnH*2]], 
+			%[id:"btnAlice" , file:"FRM_0573", ptn:2, type:0, pos1:[0, 0], pos2:[btnW*0, btnH*2], pos3:[btnWT*2, btnH*2]], 
+			%[id:"btnMomoka", file:"FRM_0574", ptn:2, type:0, pos1:[0, 0], pos2:[btnW*0, btnH*2], pos3:[btnWT*3, btnH*2]], 
+		@endif
+
+		%[id:"btnLoad"    , file:"FRM_0552", ptn:2, type:0, pos1:[btnW*2, btnH*1], pos2:[btnW*2, btnH*1], pos3:[btnW*0, btnH*3]], 
+		%[id:"btnConfig"  , file:"FRM_0554", ptn:2, type:0, pos1:[btnW*0, btnH*2], pos2:[btnW*0, btnH*2], pos3:[btnW*1, btnH*3]], 
+		%[id:"btnBonus"   , file:"FRM_0555", ptn:2, type:0, pos1:[btnW*1, btnH*2], pos2:[btnW*1, btnH*2], pos3:[btnW*2, btnH*3]], 
+		%[id:"btnEnd"     , file:"FRM_0556", ptn:2, type:0, pos1:[btnW*1, btnH*2], pos2:[btnW*2, btnH*2], pos3:[btnW*2, btnH*3]], 
+
+		%[id:"btnBirthday", ptn:2, type:0, pos1:[315, 138], pos2:[315, 138], pos3:[btnW*1, btnH*3]], 
+
+		@if(__DEBUGMODE__)
+			%[id:"btnMAY"   , file:"FRM_0571", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*0, btnH2*0], pos3:[btnW*0, btnH2*0]], 
+			%[id:"btnSEN"   , file:"FRM_0572", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*1, btnH2*0], pos3:[btnW*0, btnH2*0]], 
+			%[id:"btnALC"   , file:"FRM_0573", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*2, btnH2*0], pos3:[btnW*0, btnH2*0]], 
+			%[id:"btnMMK"   , file:"FRM_0574", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*0, btnH2*1], pos3:[btnW*0, btnH2*1]], 
+			%[id:"btnHKR"   , file:"FRM_0575", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*1, btnH2*1], pos3:[btnW*0, btnH2*1]], 
+			%[id:"btnCHS"   , file:"FRM_0576", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*2, btnH2*1], pos3:[btnW*0, btnH2*1]], 
+			%[id:"btnMRA"   , file:"FRM_0577", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*0, btnH2*2], pos3:[btnW*0, btnH2*2]], 
+			%[id:"btnCBS"   , file:"FRM_0578", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*1, btnH2*2], pos3:[btnW*0, btnH2*2]], 
+			%[id:"btnICG"   , file:"FRM_0579", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*2, btnH2*2], pos3:[btnW*0, btnH2*2]], 
+		@endif
+
+		%[id:"btnAlbum"   , file:"FRM_0561", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*0, btnH*2], pos3:[btnW*0, btnH*2]], 
+		%[id:"btnMusic"   , file:"FRM_0562", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*1, btnH*2], pos3:[btnW*1, btnH*2]], 
+		%[id:"btnMemories", file:"FRM_0563", ptn:2, type:1, pos1:[0, 0], pos2:[btnW*2, btnH*2], pos3:[btnW*2, btnH*2]]
+	];
+
+	function Title(win, par, fBonus=false){
+		Sprite(...);
+		hasImage = false;
+		hitThreshold = 0;
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		absolute = LAYER_TITLE;
+
+		_sprLogo = new global.Sprite(win, this);
+		with(_sprLogo){
+			@if(__TRIAL__ == 0)
+				.loadImages("FRM_0561");
+			@endif
+			@if(__TRIAL__ != 0)
+				.loadImages("FRM_0561");
+			@endif
+			.setSizeToImageSize();
+			.setPos(127, 120);
+			//.visible = true;
+		}
+
+		for(var i=0;i<_bgInfo.count;i++){
+			_spr[i] = new global.Sprite(win, this);
+			with(_spr[i]){
+				.loadImages(_bgInfo[i].file);
+				.setSizeToImageSize();
+				.setPos(_bgInfo[i].pos.x, _bgInfo[i].pos.y);
+				.setAffineOffset(.width\2, .height\2);
+				.hitThreshold = 256;
+				.visible = true;
+			}
+		}
+
+		_btnBase = new global.Layer(win, this);
+		with(_btnBase){
+			@if(__TRIAL__ != 0)
+				.setSize(700, 230);
+			@endif
+			@if(__TRIAL__ == 0)
+				.setSize(640, 200);
+			@endif
+
+			.setPos(WINDOW_WIDTH-.width, WINDOW_HEIGHT-.height);
+			var app = new GdiPlus.Appearance();
+			app.addBrush(RGBA(0, 0, 0, 128), 0, 0, 0);
+			.drawArc(app, 0, 0, .width*2, .height*2, -90, -180);
+			invalidate app;
+
+			.visible = true;
+		}
+
+		_version = new global.Layer(win, this);
+		with(_version){
+			var text = "version "+GAME_VERSION;
+			.font.height = 21;
+			.font.bold = true;
+			var w = .font.getTextWidth(text) + 8;
+			.setSize(w, .font.height+4);
+			.setPos(_btnBase.left, _btnBase.top);
+			.setPos(.left+_btnBase.width-.width, .top+_btnBase.height-.height);
+			.drawText(4, 0, text, 0xffffff, 255, true, 1024*3, GetDefineColor("black"), 3, 0, 0);
+			.visible = true;
+		}
+
+		var num = 4;
+		@if(__TRIAL__ != 0)
+			num += 5;
+		@endif
+
+		if(ChkAutoSave()) num++;
+		@if(__TRIAL__ == 0)
+			if(ChkGlobalFlag(1)) num++;
+		@endif
+		var bit = 16;
+		var h = 43;
+		var pitch = h + bit;
+		_grpBtn = new SelectItemGroupSprite(win, this);
+		with(_grpBtn){
+			.setSize(_btnBase.width, _btnBase.height);
+			.setPos(_btnBase.left, _btnBase.top);
+		}
+		_grpBtnBonus = new SelectItemGroupSprite(win, this);
+		with(_grpBtnBonus){
+			.setSize(_btnBase.width, _btnBase.height);
+			.setPos(_btnBase.left, _btnBase.top);
+			.opacity = 0;
+			.visible = true;
+		}
+
+		_ptGrp[0] = new Point(_grpBtn.left, _grpBtn.top);
+		_ptGrp[1] = new Point(_grpBtnBonus.left, _grpBtnBonus.top);
+
+		for(var i=0;i<BTN_LIST.count;i++){
+			switch(BTN_LIST[i].type){
+			case 0 :
+				this[BTN_LIST[i].id] = new Button(win, _grpBtn);
+				break;
+			case 1 :
+				this[BTN_LIST[i].id] = new Button(win, _grpBtnBonus);
+				break;
+			}
+			if(BTN_LIST[i].file !== void)
+				this[BTN_LIST[i].id].create(BTN_LIST[i].file, BTN_LIST[i].ptn);
+
+			@if(__TRIAL__ == 0)
+				if(ChkGlobalFlag(1))	this[BTN_LIST[i].id].setPos(BTN_LIST[i].pos2[0]+40, BTN_LIST[i].pos2[1]+30);
+				else					this[BTN_LIST[i].id].setPos(BTN_LIST[i].pos1[0]+40, BTN_LIST[i].pos1[1]+30);
+			@endif
+			@if(__TRIAL__ != 0)
+				this[BTN_LIST[i].id].setPos(BTN_LIST[i].pos3[0]+96, BTN_LIST[i].pos3[1]+16);
+			@endif
+		}
+
+		_birthdayTimer = new Timer(onBirthdayCheck, "");
+		_birthdayTimer.interval = 1000;
+		_birthdayTimer.enabled = true;
+		onBirthdayCheck();
+
+		if(!ChkAutoSave()) btnContinue.visible = false;
+
+		@if(__TRIAL__ == 0)
+			if(!ChkGlobalFlag(1))	btnBonus.visible = false;
+		@endif
+		@if(__TRIAL__ != 0)
+			btnBonus.visible = false;
+		@endif
+
+		btnStart.hitThreshold = 0;
+		btnLoad.hitThreshold = 0;
+		btnContinue.hitThreshold = 0;
+		btnConfig.hitThreshold = 0;
+		btnBonus.hitThreshold = 0;
+		btnEnd.hitThreshold = 0;
+		btnAlbum.hitThreshold = 256;
+		btnMusic.hitThreshold = 256;
+		btnMemories.hitThreshold = 256;
+		@if(__DEBUGMODE__)
+			btnMAY.hitThreshold = 256;
+			btnSEN.hitThreshold = 256;
+			btnALC.hitThreshold = 256;
+			btnMMK.hitThreshold = 256;
+			btnHKR.hitThreshold = 256;
+			btnCHS.hitThreshold = 256;
+			btnMRA.hitThreshold = 256;
+			btnCBS.hitThreshold = 256;
+			btnICG.hitThreshold = 256;
+		@endif
+
+		addChainItem(btnContinue);
+		addChainItem(btnStart);
+		@if(__TRIAL__ != 0)
+			addChainItem(btnMayu);
+			addChainItem(btnSena);
+			addChainItem(btnAlice);
+			addChainItem(btnMomoka);
+		@endif
+		addChainItem(btnLoad);
+		addChainItem(btnConfig);
+		if(btnBonus.visible) addChainItem(btnBonus);
+		addChainItem(btnEnd);
+		addChainItem(btnBirthday);
+
+		_logo = new AnimationSequence(win, this);
+		with(_logo){
+			@if(__TRIAL__ != 0)
+				.load("タイトルロゴTR");
+			@endif
+			@if(__TRIAL__ == 0)
+				.load("タイトルロゴ");
+			@endif
+
+			.setup(%[parent:this, baseX:64, baseY:480, baseScl:100, baseAbs:10000]);
+			.start();
+			PlaySystemVoice("タイトルコール");
+		}
+
+		if(SPR_COVER == null){
+			CreateSprCover();
+			SPR_COVER.fillRect(0, 0, SPR_COVER.width, SPR_COVER.height, 0xffffffff);
+		}
+		with(SPR_COVER){
+			.opacity = 255;
+			.setBlendingEnvelope(0);
+			.type = ltAdditive;
+			.beginActivation(1000);
+			.visible = true;
+		}
+
+		PlayBgm("BGM01");
+
+		_sprASaveInfo = new SavedataHeader(win, this, IMG_SAVEDATA_BASE, IMG_SAVEDATA_NUM, IMG_SAVEDATA_ALPHA, IMG_SAVEDATA_BTN);
+
+		fadeEnd();
+		visible = true;
+
+		_ptMoveXYZ = new D3Linear();
+		_ptMoveR = new D3Linear();
+
+		move(-300, -150, 140, 0, 0);
+		startMovingBg(%[x:-300, y:-60, z:100, r:0], 1000);
+
+		if(fBonus) enterBonus(0);
+
+		window.addInputNotify(this);
+	}
+	function finalize(){
+		window.removeInputNotify(this);
+		System.removeContinuousHandler(onMovingBg);
+
+		_birthdayTimer.enabled = false;
+		invalidate _birthdayTimer;
+
+		InvalidateArray(_spr);
+		invalidate _spr;
+		invalidate _sprLogo;
+		for(var i=0;i<BTN_LIST.count;i++) invalidate this[BTN_LIST[i].id];
+		invalidate _btnBase;
+		invalidate _grpBtn;
+		invalidate _grpBtnBonus;
+		invalidate _ptMoveXYZ;
+		InvalidateArray(_ptGrp);
+
+		invalidate _logo;
+		invalidate _version;
+		invalidate _sprASaveInfo;
+
+		global.Sprite.finalize();
+	}
+
+	function close(){
+		visible = false;
+		valid = false;
+	}
+
+	function fadeEnd(){
+		setTransitionCompleteCall();
+		with(_grpBtn){
+			.opacity = 0;
+			.setBlendingEnvelope(255);
+			.beginActivation(500);
+			.visible = true;
+		}
+	}
+
+	function onBirthdayCheck(){
+		var birthdayID = -1;
+		var today = new Date();
+		for(var i=0;i<BIRTHDAY.count;i++){
+			if(	today.getMonth() != BIRTHDAY[i].month - 1 ||
+				today.getDate() != BIRTHDAY[i].date){
+				continue;
+			}
+			birthdayID = i;
+			break;
+		}
+		invalidate today;
+
+		if(birthdayID == -1 && btnBirthday.visible){
+			with(btnBirthday){
+				.valid = .visible = false;
+			}
+			return;
+		}
+
+		if(birthdayID != -1 && !btnBirthday.visible){
+			with(btnBirthday){
+				.create(BIRTHDAY[birthdayID].file, 2);
+				.voice = BIRTHDAY[birthdayID].voice;
+				.valid = .visible = true;
+			}
+		}
+	}
+
+	function debugJump(str, label=""){
+		StopBgm();
+		close();
+		game.changeScene(SCENE_ADV, true, %[debug:str, label:label]);
+	}
+
+	function onButtonDownL(target){
+		switch(target){
+		case btnStart :
+			hitThresholdSelectItems(256);
+			@if(__TRIAL__ == 0)
+				game.changeScene(SCENE_ADV, true, %[scenario:"00_01"]);
+			@endif
+			@if(__TRIAL__ != 0)
+				game.changeScene(SCENE_ADV, true, %[scenario:"00_01"]);
+			@endif
+
+			PlaySystemVoice("タイトル：初めから");
+
+			StopBgm(5000);
+
+			var mv = [[0, 0], [64, 0], [-64, 0], [128, 0], [-128, 0]];
+			for(var i=0;i<_spr.count;i++){
+				with(_spr[i]){
+					if(i==0){
+						.setZoomingEnvelope(.zoomx, 120);
+						.beginActivation(5000);
+					}else{
+						.setBlendingEnvelope(0);
+						.setMovingEnvelope(.left, .top, .left+mv[i][0], .top+mv[i][1], 2);
+						.beginActivation(1000);
+					}
+				}
+			}
+
+			setTransitionCompleteCall(close);
+			setBlendingEnvelope(0);
+			beginActivation(3000);
+
+			break;
+		case btnLoad :
+			PlaySystemVoice("タイトル：ロード");
+
+			CallLoadSave();
+			break;
+		case btnContinue :
+			game.changeScene(SCENE_ADV, true, %[file:"asave.bmp"]);
+
+			setTransitionCompleteCall(close);
+			setBlendingEnvelope(0);
+			beginActivation(300);
+
+			break;
+		case btnConfig :
+			PlaySystemVoice("タイトル：コンフィグ");
+
+			CallConfig();
+			break;
+		case btnBonus :
+			PlaySystemVoice("タイトル：鑑賞");
+			enterBonus();
+			break;
+		case btnAlbum :
+
+			hitThresholdSelectItems(256);
+
+			game.changeScene(SCENE_ALBUM);
+
+			//StopBgm(5000);
+
+			setBlendingEnvelope(0);
+			beginActivation(500);
+			setTransitionCompleteCall(close);
+			break;
+		case btnMusic :
+			hitThresholdSelectItems(256);
+
+			game.changeScene(SCENE_MUSIC);
+
+			StopBgm(5000);
+
+			setBlendingEnvelope(0);
+			beginActivation(500);
+			setTransitionCompleteCall(close);
+			break;
+		case btnMemories :
+			hitThresholdSelectItems(256);
+
+			game.changeScene(SCENE_MEMORIES);
+
+			//StopBgm(5000);
+
+			setBlendingEnvelope(0);
+			beginActivation(500);
+			setTransitionCompleteCall(close);
+			break;
+		case btnEnd :
+			PlaySystemVoice("ゲーム終了：確認");
+			CallConfirm("ゲームを終了しますか？", SystemRegister.CONFIRM_END, game.exitGame, endCancel, true);
+			break;
+
+		case btnBirthday : 
+			PlaySystemVoiceIndex("誕生日", btnBirthday.voice);
+			break;
+
+		@if(__DEBUGMODE__)
+			case btnMAY : PlaySystemVoiceIndex("誕生日", 0); break;
+			case btnSEN : PlaySystemVoiceIndex("誕生日", 1); break;
+			case btnALC : PlaySystemVoiceIndex("誕生日", 2); break;
+			case btnMMK : PlaySystemVoiceIndex("誕生日", 3); break;
+			case btnHKR : PlaySystemVoiceIndex("誕生日", 4); break;
+			case btnCHS : PlaySystemVoiceIndex("誕生日", 5); break;
+			case btnMRA : PlaySystemVoiceIndex("誕生日", 6); break;
+			case btnCBS : PlaySystemVoiceIndex("誕生日", 7); break;
+			case btnICG : PlaySystemVoiceIndex("誕生日", 8); break;
+		@endif
+
+		@if(__TRIAL__ != 0)
+			case btnMayu :
+				game.changeScene(SCENE_ADV, true, %[scenario:"A10_02TRIAL"]);
+				StopBgm(5000);
+				setTransitionCompleteCall(close);
+				setBlendingEnvelope(0);
+				beginActivation(1000);
+
+				break;
+			case btnSena :
+				game.changeScene(SCENE_ADV, true, %[scenario:"B06_02TRIAL"]);
+				StopBgm(5000);
+				setTransitionCompleteCall(close);
+				setBlendingEnvelope(0);
+				beginActivation(1000);
+				break;
+			case btnAlice :
+				game.changeScene(SCENE_ADV, true, %[scenario:"C04_02TRIAL"]);
+				StopBgm(5000);
+				setTransitionCompleteCall(close);
+				setBlendingEnvelope(0);
+				beginActivation(1000);
+				break;
+			case btnMomoka :
+				game.changeScene(SCENE_ADV, true, %[scenario:"D11_02TRIAL"]);
+				StopBgm(5000);
+				setTransitionCompleteCall(close);
+				setBlendingEnvelope(0);
+				beginActivation(1000);
+				break;
+		@endif
+		}
+	}
+	function onButtonDownR(target){
+		onMouseDown(0, 0, mbRight, 0);
+	}
+
+	function onButtonEnter(target){
+		switch(target){
+		case btnStart :
+			startMovingBg(_bgMove.start);
+			break;
+		case btnLoad :
+			startMovingBg(_bgMove.load);
+			break;
+		case btnContinue :
+//			startMovingBg(_bgMove.restart);
+			if(target == btnContinue){
+				var ref = saveMan.atASave();
+				if(!ref.valid) return;
+				with(_sprASaveInfo){
+					var x = btnContinue.parent.left + btnContinue.left + btnContinue.width - .width;
+					var y = btnContinue.parent.top +btnContinue.top - .height - 4;
+
+					.set(0, -1, ref.realDate, ref.gameDate, ref.comment, "asave", ref.root, ref.comment_edit);
+					.setupInfo();
+					.setupThumb();
+
+					.opacity = 0;
+					.setBlendingEnvelope(255);
+					.setMovingEnvelope(x, y-16, x, y, 2);
+					.beginActivation(300);
+
+					.onButtonEnter();
+					.visible = true;
+				}
+			}
+			break;
+		case btnConfig :
+			startMovingBg(_bgMove.config);
+			break;
+		case btnBonus :
+			startMovingBg(_bgMove.bonus);
+			break;
+		case btnEnd :
+			startMovingBg(_bgMove.end);
+			break;
+
+		default :
+			break;
+		}
+	}
+	function onButtonLeave(target){
+		if(target == btnContinue){
+			_sprASaveInfo.visible = false;
+			_sprASaveInfo.onButtonLeave();
+		}
+	}
+
+	function onMouseDown(x, y, button, shift){
+		if(button == mbRight && _enterBonus){
+			leaveBonus();
+		}
+	}
+	function onKeyDown(key, shift){
+		if(key == VK_ESCAPE && _enterBonus){
+			leaveBonus();
+		}else{
+			global.ChainItemBase.onKeyDown(key, shift);
+		}
+	}
+
+	function enterBonus(time=300){
+		_enterBonus = true;
+
+		btnStart.hitThreshold = 256;
+		btnContinue.hitThreshold = 256;
+		btnLoad.hitThreshold = 256;
+		btnConfig.hitThreshold = 256;
+		btnBonus.hitThreshold = 256;
+		btnEnd.hitThreshold = 256;
+		btnBirthday.hitThreshold = 256;
+		btnAlbum.hitThreshold = 0;
+		btnMusic.hitThreshold = 0;
+		btnMemories.hitThreshold = 0;
+		@if(__DEBUGMODE__)
+			btnMAY.hitThreshold = 0;
+			btnSEN.hitThreshold = 0;
+			btnALC.hitThreshold = 0;
+			btnMMK.hitThreshold = 0;
+			btnHKR.hitThreshold = 0;
+			btnCHS.hitThreshold = 0;
+			btnMRA.hitThreshold = 0;
+			btnCBS.hitThreshold = 0;
+			btnICG.hitThreshold = 0;
+		@endif
+
+		removeChainItemAll();
+		addChainItem(btnAlbum);
+		addChainItem(btnMusic);
+		addChainItem(btnMemories);
+
+		_grpBtn.flushActivation();
+		_grpBtnBonus.flushActivation();
+
+		_grpBtn.setMovingEnvelope(_ptGrp[0].x, _ptGrp[0].y, _ptGrp[0].x, _ptGrp[0].y+32, 2);
+		_grpBtn.setBlendingEnvelope(0);
+		_grpBtn.beginActivation(time);
+		_grpBtnBonus.opacity = 0;
+		_grpBtnBonus.setMovingEnvelope(_ptGrp[1].x, _ptGrp[1].y+32, _ptGrp[1].x, _ptGrp[1].y, 2);
+		_grpBtnBonus.setBlendingEnvelope(255);
+		_grpBtnBonus.beginActivation(time);
+	}
+	function leaveBonus(){
+		_enterBonus = false;
+
+		btnStart.hitThreshold = 0;
+		btnContinue.hitThreshold = 0;
+		btnLoad.hitThreshold = 0;
+		btnConfig.hitThreshold = 0;
+		btnBonus.hitThreshold = 0;
+		btnEnd.hitThreshold = 0;
+		btnBirthday.hitThreshold = 0;
+		btnAlbum.hitThreshold = 256;
+		btnMusic.hitThreshold = 256;
+		btnMemories.hitThreshold = 256;
+		@if(__DEBUGMODE__)
+			btnMAY.hitThreshold = 256;
+			btnSEN.hitThreshold = 256;
+			btnALC.hitThreshold = 256;
+			btnMMK.hitThreshold = 256;
+			btnHKR.hitThreshold = 256;
+			btnCHS.hitThreshold = 256;
+			btnMRA.hitThreshold = 256;
+			btnCBS.hitThreshold = 256;
+			btnICG.hitThreshold = 256;
+		@endif
+
+		removeChainItemAll();
+		addChainItem(btnContinue);
+		addChainItem(btnStart);
+		@if(__TRIAL__ != 0)
+			addChainItem(btnMayu);
+			addChainItem(btnSena);
+			addChainItem(btnAlice);
+			addChainItem(btnMomoka);
+		@endif
+		addChainItem(btnLoad);
+		addChainItem(btnConfig);
+		if(btnBonus.visible) addChainItem(btnBonus);
+		addChainItem(btnEnd);
+		addChainItem(btnBirthday);
+
+		_grpBtn.flushActivation();
+		_grpBtnBonus.flushActivation();
+
+		_grpBtn.opacity = 0;
+		_grpBtn.setMovingEnvelope(_ptGrp[0].x, _ptGrp[0].y+32, _ptGrp[0].x, _ptGrp[0].y, 2);
+		_grpBtn.setBlendingEnvelope(255);
+		_grpBtn.beginActivation(300);
+		_grpBtnBonus.setMovingEnvelope(_ptGrp[1].x, _ptGrp[1].y, _ptGrp[1].x, _ptGrp[1].y+32, 2);
+		_grpBtnBonus.setBlendingEnvelope(0);
+		_grpBtnBonus.beginActivation(300);
+	}
+
+	function endCancel(){
+		//startMovingBg(0, 0, 500);
+	}
+
+	function startMovingBg(pos, time=500){
+		if(_fMoving){
+			System.removeContinuousHandler(onMovingBg);
+			_fMoving = false;
+		}
+
+		_ptMoveXYZ.set(new Point(_spr[0].left, _spr[0].top, _spr[0].zoomx), new Point(pos.x, pos.y, pos.z), 2);
+		_ptMoveR.set(new Point(_spr[0].rotate, 0, 0), new Point(pos.r, 0, 0), 2);
+		_startMove = System.getTickCount();
+		_moveTime = time;
+
+		System.addContinuousHandler(onMovingBg);
+		_fMoving = true;
+	}
+
+	function onMovingBg(){
+		var t = real(System.getTickCount() - _startMove) / _moveTime;
+		if(t >= 1.0){
+			t = 1.0;
+			System.removeContinuousHandler(onMovingBg);
+			_fMoving = false;
+		}
+
+		var pt1 = _ptMoveXYZ.pt(t);
+		var pt2 = _ptMoveR.pt(t);
+		move(pt1.x, pt1.y, pt1.z, pt2.x);
+	}
+
+	function move(mx, my, mz, mr){
+		for(var i=0;i<_spr.count;i++){
+			var pt = _bgInfo[i].pos;
+			var cop = _bgInfo[i].cop;
+			var x = pt.x + (mx * cop);
+			var y = pt.y + (my * cop);
+			_spr[i].setPos(x, y);
+			_spr[i].zoom = mz;
+			_spr[i].rotate = mr;
+		}
+	}
+
+	function hitThresholdSelectItems(threshold){
+		for(var i=0;i<BTN_LIST.count;i++)
+			this[BTN_LIST[i].id].hitThreshold = threshold;
+	}
+}
+
+class EndScene extends Sprite, SceneBase{
+	var _logo;
+	var _timer;
+	var _voice;
+	var _fPlay;
+
+	function EndScene(win, par){
+		Sprite(...);
+		absolute = LAYER_END;
+
+		loadImages("FRM_0501");
+		setSizeToImageSize();
+
+		_logo = new AnimationSequence(win, this);
+		with(_logo){
+			.load("タイトルロゴS");
+			.setup(%[parent:this, baseX:720, baseY:480, baseScl:100, baseAbs:10000]);
+			.start();
+		}
+
+		opacity = 0;
+		setBlendingEnvelope(255);
+		beginActivation(300);
+		visible = true;
+
+		_timer = new Timer(callback, "");
+
+		StopVoice(2000);
+		StopEnvSe(, 2000);
+		StopBgm(2000);
+		StopSystemSound();
+
+		var file = "";
+		if(!CONFIG.muteSystem)
+			file = PlaySystemVoice("ゲーム終了", false);
+
+		_fPlay = false;
+		if(file != ""){
+			var head = file.substring(0, 3);
+			_voice = new WaveSoundBuffer(this);
+			_voice.open(file + ".ogg");
+			with(_voice){
+				var personalVol = CONFIG.voiceDetails[VCID_TO_INDEX[head]].volumeSyv;
+				.volume2 = CONFIG.volSystem * personalVol * 100000;
+				.volume = CONFIG.volMaster * 100000;
+			}
+			_voice.play();
+			_fPlay = true;
+		}else{
+			_timer.interval = 3000;
+			_timer.enabled = true;
+		}
+
+		setMode();
+
+		win.addInputNotify(this);
+	}
+	function finalize(){
+		_timer.enabled = false;
+		invalidate _timer;
+		invalidate _voice;
+		invalidate _logo;
+
+		win.removeInputNotify(this);
+		global.Sprite.finalize();
+	}
+
+	function callback(){
+		_timer.enabled = false;
+
+		if(!valid) return;
+
+		game.shutdown();
+	}
+
+	function action(ev){
+		if(_fPlay && ev.target == _voice){
+			_timer.interval = 2000;
+			_timer.enabled = true;
+		}
+	}
+
+	function onKeyDown(){
+		close();
+	}
+	function onMouseDown(){
+		close();
+	}
+
+	function close(){
+		if(!valid) return;
+
+		_logo.stop();
+
+		stopActivation();
+		_timer.enabled = false;
+		game.shutdown();
+		valid = false;
+	}
+}

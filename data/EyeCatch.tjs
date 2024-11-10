@@ -1,0 +1,529 @@
+
+class EyeCatchBase extends Sprite, InputNotifyBase{
+	var _adv = null;
+	var _fPlay = false;
+	var _fOnEnd = false;
+	var _fClose = false;
+	var _fFadeOut = false;
+	var _enableCancel = false;
+
+	var _param = %[];
+
+	var _start;
+
+	var _jingle;
+	var _muteJingle = false;
+
+	var SPR_LIST = [];
+	var JINGLE = "";
+
+	function EyeCatchBase(win, par, adv=null, param=%[]){
+		Sprite(...);
+		(Dictionary.assignStruct incontextof _param)(param);
+
+		_adv = adv;
+
+		hasImage = false;
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+		hitThreshold = 0;
+		absolute = LAYER_EYECATCH;
+		visible = true;
+
+		_bg = GetElm(param.type, "");
+		_char = GetElm(param.char, "");
+		JINGLE = GetElm(param.jingle, JINGLE);
+
+		for(var i=0;i<SPR_LIST.count;i++){
+			switch(SPR_LIST[i].type){
+			case "custom" : break;
+			case "spr" : 
+				this[SPR_LIST[i].id] = new EyeCatchSprite(win, SPR_LIST[i].parent===void?this:this[SPR_LIST[i].parent]);
+				this[SPR_LIST[i].id].absolute = i * 1000;
+				break;
+			case "anime" : 
+				this[SPR_LIST[i].id] = new AnimationSequence(win, SPR_LIST[i].parent===void?this:this[SPR_LIST[i].parent]);
+				break;
+			case "layer" : 
+			default : 
+				this[SPR_LIST[i].id] = new EyeCatchLayer(win, SPR_LIST[i].parent===void?this:this[SPR_LIST[i].parent]);
+				this[SPR_LIST[i].id].absolute = i * 1000;
+				break;
+			}
+			with(this[SPR_LIST[i].id]){
+				if(SPR_LIST[i].size !== void){
+					.hasImage = false;
+					.setSize(SPR_LIST[i].size[0], SPR_LIST[i].size[1]);
+				}
+				if(SPR_LIST[i].file !== void){
+					.loadImages(SPR_LIST[i].file);
+					.setSizeToImageSize();
+				}
+			}
+		}
+
+		_muteJingle = GetElm(param.mute, true, false);
+
+		_jingle = new WaveSoundBuffer(win);
+		if(!CONFIG.muteBgm){
+			with(_jingle){
+				.open(JINGLE + ".ogg");
+				.volume = 100000 * CONFIG.volMaster;
+				.volume2 = 100000 * CONFIG.volBgm;
+				.paused = true;
+				if(!_muteJingle) .play();
+			}
+		}
+
+		_start = new Timer(start, "");
+		_start.interval = 100;
+		_start.enabled = true;
+
+		window.addInputNotify(this);
+	}
+	function finalize(){
+		window.removeInputNotify(this);
+
+		invalidate _jingle;
+
+		invalidate _start;
+		for(var i=0;i<SPR_LIST.count;i++){
+			invalidate this[SPR_LIST[i].id];
+		}
+
+		global.Sprite.finalize();
+	}
+
+	//画面のぼやかし開始
+	function start(){
+		OnceCall(onEnd, 1000);
+	}
+
+	//終了
+	function onEnd(time=2000){
+		if(_fOnEnd) return;
+		_fOnEnd = true;
+
+		if(_adv != null && isvalid _adv){
+			_adv.hide(0, true);
+			_adv.addOrderList(%[tagname:"cg", file:"BLACK"]);
+			_adv.requestUpdateCg();
+			_adv.update(%[time:0]);
+			_adv.visible = true;
+
+			setTransitionCompleteCall(_adv.eyeCatchDelete, true);
+		}
+
+		setBlendingEnvelope(0);
+		beginActivation(time);
+	}
+
+	function cancel(){
+		if(_fOnEnd){
+			flushActivation();
+			return;
+		}
+		if(_enableCancel == false) return;
+
+		onEnd();
+	}
+
+	function onKeyDown(key, shift){
+		if(key == VK_RETURN || key == VK_ESCAPE)
+			cancel();
+	}
+	function onMouseDown(){
+		cancel();
+	}
+
+	class EyeCatchSprite extends Sprite{
+		function EyeCatchSprite(win, par){
+			Sprite(win, par);
+			hitThreshold = 256;
+		}
+	}
+	class EyeCatchLayer extends Layer{
+		function EyeCatchLayer(win, par){
+			Layer(win, par);
+			hitThreshold = 256;
+		}
+	}
+}
+
+class EyeCatchS extends EyeCatchBase{
+	var _step = 0;
+	var _bg = "";
+	var _char = "";
+	var _pos = "";
+
+	var SPR_LIST = [
+		%[id:"IMG_BASE", type:"layer", file:"FRM_0501"], 
+		%[id:"BG_IMAGE", type:"spr"], 
+		%[id:"BG_LEFT", parent:"BG_IMAGE", type:"spr"], 
+		%[id:"BG_RIGHT", parent:"BG_IMAGE", type:"spr"], 
+		%[id:"CHAR", type:"spr"], 
+		%[id:"LOGO_BASE", type:"spr", size:[640, 300]], 
+		%[id:"LOGO", parent:"LOGO_BASE", type:"anime"]
+	];
+	var JINGLE = "SE207";
+
+	function EyeCatchS(win, par, adv=null, param=%[]){
+		EyeCatchBase(...);
+
+		_bg = GetElm(_param.bg, "BG01A01");
+		_char = GetElm(_param.char, "CA02A001L");
+		_pos = GetElm(_param.pos, "LEFT");
+
+		with(BG_IMAGE){
+			.loadImages(_bg);
+			.setSizeToImageSize();
+			.setCenter(.width\2, .height\2);
+			.setPos(WINDOW_CENTER_X, WINDOW_CENTER_Y);
+		}
+		with(BG_LEFT){
+			.assignImages(IMG_BASE);
+			.setSizeToImageSize();
+			.setCenter(.width, .height\2);
+			.setPos(BG_IMAGE.width\2, BG_IMAGE.height\2);
+		}
+		with(BG_RIGHT){
+			.assignImages(IMG_BASE);
+			.setSizeToImageSize();
+			.setCenter(0, .height\2);
+			.setPos(BG_IMAGE.width\2, BG_IMAGE.height\2);
+		}
+		with(CHAR){
+			var info = AdvObjLoadImagesToLayer(._image, _char);
+			.setSizeToImageSize();
+			.setCenter(info.guidex, info.guidey);
+		}
+		with(LOGO_BASE){
+			.setCenter(.width\2, .height\2);
+		}
+		with(LOGO){
+			.load("タイトルロゴS");
+			.setup(%[parent:LOGO_BASE, baseX:32, baseY:32, baseScl:100, baseAbs:10000]);
+		}
+	}
+	function finalize(){
+		OnceCallCancel(start);
+		OnceCallCancel(onEnd);
+
+		super.finalize();
+	}
+
+	function start(){
+		_step = 0;
+		_start.enabled = false;
+
+		_jingle.paused = false;
+
+		var time = 1500;
+
+		with(BG_IMAGE){
+			switch(_pos){
+			case "LEFT" : 
+				.setPos(880, .top);
+				break;
+			case "RIGHT" : 
+				.setPos(400, .top);
+				break;
+			}
+			.visible = true;
+		}
+		with(BG_LEFT){
+			.setMovingEnvelope(.left, .top, .left-210, .top, 2);
+			.beginActivation(time);
+			.visible = true;
+		}
+		with(BG_RIGHT){
+			.setMovingEnvelope(.left, .top, .left+210, .top, 2);
+			.beginActivation(time);
+			.visible = true;
+		}
+		with(CHAR){
+			.opacity = 0;
+			.setBlendingEnvelope(255);
+			switch(_pos){
+			case "LEFT" : 
+				.setMovingEnvelope(640, WINDOW_CENTER_Y, 340, WINDOW_CENTER_Y, 2);
+				break;
+			case "RIGHT" : 
+				.setMovingEnvelope(640, WINDOW_CENTER_Y, 960, WINDOW_CENTER_Y, 2);
+				break;
+			}
+			.beginActivation(time);
+			.visible = true;
+		}
+		with(LOGO_BASE){
+			switch(_pos){
+			case "LEFT" : 
+				.setMovingEnvelope(640, 600, WINDOW_WIDTH-280, 600, 2);
+				break;
+			case "RIGHT" : 
+				.setMovingEnvelope(640, 600, 320, 600, 2);
+				break;
+			}
+			.beginActivation(time);
+			.visible = true;
+		}
+		with(LOGO){
+			.start();
+			.visible = true;
+		}
+		_adv.visible = false;
+
+		_fPlay = true;
+		_enableCancel = true;
+
+		OnceCall(onEnd, 4000);
+	}
+
+	function cancel(){
+		if(_fOnEnd){
+			flushActivation();
+			return;
+		}
+		if(_enableCancel == false) return;
+
+		OnceCallCancel(onEnd);
+
+		onEnd();
+	}
+}
+
+class EyeCatchA extends EyeCatchBase{
+	var _bg = "";
+	var _char = "";
+	var _sd= "";
+	var _voice= "";
+
+	var _te;
+
+	var SPR_LIST = [
+		%[id:"BG", type:"spr"], 
+		%[id:"BASE_IMAGE", type:"layer", file:"FRM_0501"], 
+		%[id:"BASE1", type:"spr"], 
+		%[id:"BASE2", type:"spr"], 
+		%[id:"ADV_SCREEN", type:"spr"], 
+		%[id:"SD", type:"spr", file:"FRM_0183"], 
+		%[id:"CHAR", type:"spr"], 
+		%[id:"LOGO_BASE", type:"spr", size:[640, 300]], 
+		%[id:"LOGO", parent:"LOGO_BASE", type:"anime"]
+	];
+	var JINGLE = "BGM27";
+
+	function EyeCatchA(win, par, adv=null, param=%[]){
+		EyeCatchBase(...);
+
+		_bg = GetElm(_param.bg, "BG01A01");
+		_char = GetElm(_param.char, "CA02A001L");
+		_sd = GetElm(_param.sd, "真優");
+		_voice = GetElm(_param.voice, "");
+
+		with(ADV_SCREEN){
+			_adv.screenShot(._image);
+			.setSizeToImageSize();
+			.setCenter(.width\2, .height\2);
+			.setPos(WINDOW_CENTER_X, WINDOW_CENTER_Y);
+		}
+		with(BG){
+			.loadImages(_bg);
+			.setSizeToImageSize();
+			.setCenter(.width\2, .height\2);
+			.setPos(WINDOW_CENTER_X, WINDOW_CENTER_Y);
+		}
+		with(BASE1){
+			.setSize(BASE_IMAGE.width, BASE_IMAGE.height\2);
+			.copyRect(0, 0, BASE_IMAGE, 0, 0, BASE_IMAGE.width, BASE_IMAGE.height\2);
+			.setPos(0, 0);
+		}
+		with(BASE2){
+			.setSize(BASE_IMAGE.width, BASE_IMAGE.height\2);
+			.copyRect(0, 0, BASE_IMAGE, 0, .height, BASE_IMAGE.width, BASE_IMAGE.height\2);
+			.setPos(0, .height);
+		}
+		with(SD){
+			.setSize(.width\8, .height);
+			.setCenter(.width\2, .height\2);
+			.setAffineOffset(.width\2, .height\2);
+			.setImagePos(-NAME_TO_INDEX[_sd] * .width, 0);
+		}
+		with(CHAR){
+			var info = AdvObjLoadImagesToLayer(._image, _char);
+			.setSizeToImageSize();
+			.setCenter(info.guidex, info.guidey);
+			.setPos(WINDOW_CENTER_X, WINDOW_CENTER_Y);
+		}
+		with(LOGO_BASE){
+			.setCenter(.width\2, .height\2);
+		}
+		with(LOGO){
+			.load("タイトルロゴT");
+			.setup(%[parent:LOGO_BASE, baseX:32, baseY:32, baseScl:100, baseAbs:10000]);
+		}
+
+		var seq;
+		switch(_param.type){
+		case "LONG_A" : 
+			seq = [
+				%[label:"AdvHide", time: 130], 
+				%[label:"BgShow", time: 530], 
+				%[label:"CharShow", time:2002], 
+				%[label:"TitleCall", time:3352], 
+				%[label:"logo", time:3352], 
+
+				%[label:"step10", time: 130], 
+				%[label:"step20", time: 456], 
+				%[label:"step30", time:1485], 
+				%[label:"step40", time:2002], 
+				%[label:"step50", time:3016], 
+				%[label:"step60", time:3352], 
+				%[label:"step70", time:5269], 
+
+				%[label:"end", time:8544]
+			];
+			break;
+		case "LONG_B" : 
+			seq = [
+				%[label:"AdvHide", time: 130], 
+				%[label:"BgShow", time: 530], 
+				%[label:"CharShow", time:2890], 
+				%[label:"TitleCall", time:2890], 
+				%[label:"logo", time:2890], 
+
+				%[label:"step10", time: 130], 
+				%[label:"step20", time: 456], 
+				%[label:"step30", time:1485], 
+				%[label:"step40", time:2002], 
+				%[label:"step50", time:3016], 
+				%[label:"step60", time:3352], 
+				%[label:"step70", time:5269], 
+
+				%[label:"end", time:8544]
+			];
+			break;
+		}
+		_te = new TimerEvent(seq);
+	}
+	function finalize(){
+		invalidate _te;
+
+		super.finalize();
+	}
+
+	function start(){
+		_start.enabled = false;
+
+		_jingle.paused = false;
+
+		_te.start(onEvent);
+
+		_fPlay = true;
+		_enableCancel = true;
+	}
+
+	function onEvent(label, id, delay, elm){
+		switch(label){
+		case "AdvHide" :
+			with(ADV_SCREEN){
+				.setMovingSplineEnvelope2([
+					.left, .top, .absolute, 255, 100, 100, 0, 
+					.left, .top, .absolute, 128,  50,  50, 30, 
+					.left, .top, .absolute,   0,   0,   0, 60
+				], 2);
+				.beginActivation(500);
+				.visible = true;
+			}
+			_adv.visible = false;
+
+			BASE1.visible = BASE2.visible = true;
+			break;
+		case "BgShow" :
+			BG.visible = true;
+			var mx = 128;
+			with(BG){
+				.setMovingEnvelope(.left-mx, .top, .left+mx, .top);
+				.beginActivation(10000);
+			}
+			var my = 160;
+			with(BASE1){
+				.setMovingEnvelope(.left, .top, .left, .top-my, 2);
+				.beginActivation(500);
+			}
+			with(BASE2){
+				.setMovingEnvelope(.left, .top, .left, .top+my, 2);
+				.beginActivation(500);
+			}
+			break;
+		case "CharShow" :
+			with(CHAR){
+				.opacity = 0;
+				.setBlendingEnvelope(255);
+				.setMovingEnvelope(.left, .top, 360, .top, 2);
+				.beginActivation(1000);
+				.visible = true;
+			}
+			break;
+		case "SdPop" :
+			with(SD){
+				.opacity = 0;
+				.setPos(WINDOW_CENTER_X, WINDOW_CENTER_Y);
+				.setMovingSplineEnvelope2([
+					.left   , .top   , .absolute,   0, 100, 100, 0, 
+					.left-32, .top-16, .absolute, 128, 100, 100, 0, 
+					.left-64, .top   , .absolute, 255, 100, 100, 0, 
+					.left-96, .top-16, .absolute, 255, 100, 100, 0, 
+					.left-128, .top   , .absolute, 255, 100, 100, 0
+				], 2);
+				.beginActivation(600);
+				.visible = true;
+			}
+			break;
+		case "SdHide" :
+			with(SD){
+				.stopActivation();
+				.setMovingSplineEnvelope2([
+					.left, .top, .absolute, 255, 100, 100, 0, 
+					.left-16, .top, .absolute, 255,  50, 100, 0, 
+					.left-32, .top, .absolute, 255,   0, 100, 0
+				], 2);
+				.beginActivation(300);
+			}
+			break;
+		case "logo" : 
+			with(LOGO_BASE){
+				.setPos(WINDOW_WIDTH-280, 400);
+				.visible = true;
+			}
+			with(LOGO){
+				.start();
+				.visible = true;
+			}
+			break;
+		case "TitleCall" :
+			if(!_muteJingle)
+				if(_voice != "")	PlaySystemVoiceIndex("タイトルコール", NAME_TO_INDEX[_voice]);
+				else				PlaySystemVoice("タイトルコール");
+			break;
+		case "end" :
+			onEnd();
+			break;
+		case "hoge" :
+			break;
+		default : break;
+		}
+	}
+
+	function cancel(){
+		if(_fOnEnd){
+			flushActivation();
+			return;
+		}
+		if(_enableCancel == false) return;
+
+		_jingle.stop();
+
+		onEnd(0);
+	}
+}

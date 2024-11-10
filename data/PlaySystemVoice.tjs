@@ -1,0 +1,106 @@
+
+	var SYSTEM_VOICE_LIST = %[
+	ブランドコール				:	["MAY220001", "SEN220001", "ALC220001", "MMK220001", "HKR220001", "CHS220001", "MRA220001"],
+	タイトルコール				:	["MAY220002", "SEN220002", "ALC220002", "MMK220002", "HKR220002", "CHS220002", "MRA220002"],
+	タイトル：初めから			:	["MAY220003", "SEN220003", "ALC220003", "MMK220003", "HKR220003", "CHS220003", "MRA220003"],
+	タイトル：ロード			:	["MAY220004", "SEN220004", "ALC220004", "MMK220004", "HKR220004", "CHS220004", "MRA220004"],
+	タイトル：コンフィグ		:	["MAY220005", "SEN220005", "ALC220005", "MMK220005", "HKR220005", "CHS220005", "MRA220005"],
+	タイトル：鑑賞				:	["MAY220006", "SEN220006", "ALC220006", "MMK220006", "HKR220006", "CHS220006", "MRA220006"],
+	ＣＧモード					:	["MAY220007", "SEN220007", "ALC220007", "MMK220007", "HKR220007", "CHS220007", "MRA220007"],
+	音楽モード					:	["MAY220008", "SEN220008", "ALC220008", "MMK220008", "HKR220008", "CHS220008", "MRA220008"],
+	回想モード					:	["MAY220009", "SEN220009", "ALC220009", "MMK220009", "HKR220009", "CHS220009", "MRA220009"],
+	回想から戻る				:	["MAY220010", "SEN220010", "ALC220010", "MMK220010", "HKR220010", "CHS220010", "MRA220010"],
+	ゲーム終了：確認			:	["MAY220011", "SEN220011", "ALC220011", "MMK220011", "HKR220011", "CHS220011", "MRA220011"],
+	ゲーム終了					:	["MAY220012", "SEN220012", "ALC220012", "MMK220012", "HKR220012", "CHS220012", "MRA220012"],
+	セーブ						:	["MAY220013", "SEN220013", "ALC220013", "MMK220013", "HKR220013", "CHS220013", "MRA220013"],	//未使用
+	セーブ：上書き				:	["MAY220014", "SEN220014", "ALC220014", "MMK220014", "HKR220014", "CHS220014", "MRA220014"],
+	セーブ：実行				:	["MAY220015", "SEN220015", "ALC220015", "MMK220015", "HKR220015", "CHS220015", "MRA220015"],
+	ロード：確認				:	["MAY220016", "SEN220016", "ALC220016", "MMK220016", "HKR220016", "CHS220016", "MRA220016"],
+	ロード：実行				:	["MAY220017", "SEN220017", "ALC220017", "MMK220017", "HKR220017", "CHS220017", "MRA220017"],
+	Ｑセーブ：実行				:	["MAY220018", "SEN220018", "ALC220018", "MMK220018", "HKR220018", "CHS220018", "MRA220018"],
+	Ｑロード：確認				:	["MAY220019", "SEN220019", "ALC220019", "MMK220019", "HKR220019", "CHS220019", "MRA220019"],
+	Ｑロード：実行				:	["MAY220020", "SEN220020", "ALC220020", "MMK220020", "HKR220020", "CHS220020", "MRA220020"],
+	コメント編集				:	["MAY220021", "SEN220021", "ALC220021", "MMK220021", "HKR220021", "CHS220021", "MRA220021"],
+	データコピー				:	["MAY220022", "SEN220022", "ALC220022", "MMK220022", "HKR220022", "CHS220022", "MRA220022"],
+	データコピー：確認			:	["MAY220023", "SEN220023", "ALC220023", "MMK220023", "HKR220023", "CHS220023", "MRA220023"],
+	データ移動：開始			:	["MAY220024", "SEN220024", "ALC220024", "MMK220024", "HKR220024", "CHS220024", "MRA220024"],
+	データ移動：確認			:	["MAY220025", "SEN220025", "ALC220025", "MMK220025", "HKR220025", "CHS220025", "MRA220025"],
+	データ削除：確認			:	["MAY220026", "SEN220026", "ALC220026", "MMK220026", "HKR220026", "CHS220026", "MRA220026"],
+	初期設定に戻す				:	["MAY220027", "SEN220027", "ALC220027", "MMK220027", "HKR220027", "CHS220027", "MRA220027"],
+	タイトルに戻る				:	["MAY220028", "SEN220028", "ALC220028", "MMK220028", "HKR220028", "CHS220028", "MRA220028"],
+	システム音声：ＯＮ			:	["MAY220029", "SEN220029", "ALC220029", "MMK220029", "HKR220029", "CHS220029", "MRA220029"],
+	システム音声：ＯＦＦ		:	["MAY220030", "SEN220030", "ALC220030", "MMK220030", "HKR220030", "CHS220030", "MRA220030"],
+	システム音声：ボリューム	:	["MAY220031", "SEN220031", "ALC220031", "MMK220031", "HKR220031", "CHS220031", "MRA220031"],
+	個別音声：ＯＮ				:	["MAY220032", "SEN220032", "ALC220032", "MMK220032", "HKR220032", "CHS220032", "MRA220032", "CBS000076", "MAY220033"],
+	個別音声：ＯＦＦ			:	["MAY220034", "SEN220033", "ALC220033", "MMK220033", "HKR220033", "CHS220033", "MRA220033", "CBS000053", "MAY220035"],
+	音声マスター：ボリューム	:	["MAY220036", "SEN220034", "ALC220034", "MMK220034", "HKR220034", "CHS220034", "MRA220034", ""         , ""],
+	個別音声：ボリューム		:	["MAY220037", "SEN220035", "ALC220035", "MMK220035", "HKR220035", "CHS220035", "MRA220035", "CBS000126", "MAY220038"],
+	ＢＧＶ：ＯＮ				:	["MAY220039", "SEN220036", "ALC220036", "MMK220036", ""         , "CHS220036", "MRA220036"],
+	ＢＧＶ：ＯＦＦ				:	["MAY220040", "SEN220037", "ALC220037", "MMK220037", ""         , "CHS220037", "MRA220037"],
+	ＢＧＶ：ボリューム			:	["MAY220041", "SEN220038", "ALC220038", "MMK220038", ""         , "CHS220038", "MRA220038"],
+	ウェブサイト				:	["MAY220042", "SEN220039", "ALC220039", "MMK220039", "HKR220036", "CHS220039", "MRA220039"],
+	既読情報の初期化			:	["MAY220043", "SEN220040", "ALC220040", "MMK220040", "HKR220037", "CHS220040", "MRA220040"],
+	次の選択肢へ				:	["MAY220044", "SEN220041", "ALC220041", "MMK220041", "HKR220038", "CHS220041", "MRA220041"],
+	前の選択肢へ				:	["MAY220045", "SEN220042", "ALC220042", "MMK220042", "HKR220039", "CHS220042", "MRA220042"],
+	バックログジャンプ：確認	:	["MAY220049", "SEN220046", "ALC220045", "MMK220045", "HKR220040", "CHS220045", "MRA220045"],
+	バックログジャンプ：実行	:	["MAY220050", "SEN220047", "ALC220046", "MMK220046", "HKR220041", "CHS220046", "MRA220046"],
+	誕生日						:	["MAY220051", "SEN220048", "ALC220047", "MMK220047", "HKR220042", "CHS220047", "MRA220047", "CBS220001", "MAY220052"],
+
+	ダミー							:	[]
+	];
+
+
+//ランダム再生
+function PlaySystemVoice(type, fPlay=true, fConfig=true, fCheckFlag=true){
+	if(SYSTEM_VOICE_LIST[type] === void) return;
+
+	var list = [];
+	list.assign(SYSTEM_VOICE_LIST[type]);
+	for(var i=list.count-1;i>=0;i--){
+		if(list[i].length == 0) list.erase(i);
+	}
+	if(fCheckFlag){
+		for(var i=list.count-1;i>=0;i--){
+			if(!CheckPlaySystemVoice(list[i].substring(0, 3)))
+				list.erase(i);
+		}
+	}
+	if(list.count == 0) return;
+
+	var num = list.count;
+	var index = random(num - 1);
+	var file = list[index];
+	var id = VCID_TO_INDEX[file.substring(0, 3)];
+	var vol = CONFIG.volSystem;
+
+	if(!Storages.isExistentStorage(file + ".ogg")) return;
+
+	if(fConfig) fPlay &= !CONFIG.muteSystem;
+
+	if(fPlay){
+		StopSystemSound();
+		PlaySystemSound(file, vol, fConfig);
+	}
+	return file;
+}
+
+//キャラ指定
+function PlaySystemVoiceIndex(type, index, fPlay=true, fConfig=true){
+	if(SYSTEM_VOICE_LIST[type] === void) return;
+
+	var file = SYSTEM_VOICE_LIST[type][index];
+	if(file.length == 0) return;
+
+	var id = VCID_TO_INDEX[file.substring(0, 3)];
+	var vol = CONFIG.volSystem;
+
+	if(!Storages.isExistentStorage(file + ".ogg")) return;
+
+	if(fConfig) fPlay &= !CONFIG.muteSystem;
+
+	if(fPlay){
+		StopSystemSound();
+		PlaySystemSound(file, vol, fConfig);
+	}
+	return file;
+}

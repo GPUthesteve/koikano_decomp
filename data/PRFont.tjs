@@ -1,0 +1,31 @@
+[
+	%[face:"スーラ12"			, file:"スーラ12"			, height:12, ratio: 0, ruby:"スーラ12"], 
+	%[face:"スーラ21"			, file:"スーラ21"			, height:21, ratio: 9, ruby:"スーラ12"], 
+	%[face:"スーラ30"			, file:"スーラ30"			, height:30, ratio:17, ruby:"スーラ12"], 
+	%[face:"スーラ39"			, file:"スーラ39"			, height:39, ratio:26, ruby:"スーラ12"], 
+
+	%[face:"ニューシネマ12"		, file:"ニューシネマ12"		, height:12, ratio: 0, ruby:"ニューシネマ12"], 
+	%[face:"ニューシネマ21"		, file:"ニューシネマ21"		, height:21, ratio: 9, ruby:"ニューシネマ12"], 
+	%[face:"ニューシネマ30"		, file:"ニューシネマ30"		, height:30, ratio:17, ruby:"ニューシネマ12"], 
+	%[face:"ニューシネマ39"		, file:"ニューシネマ39"		, height:39, ratio:26, ruby:"ニューシネマ12"], 
+
+	%[face:"ハミング12"			, file:"ハミング12"			, height:12, ratio:-1, ruby:"ハミング12"], 
+	%[face:"ハミング21"			, file:"ハミング21"			, height:21, ratio: 9, ruby:"ハミング12"], 
+	%[face:"ハミング30"			, file:"ハミング30"			, height:30, ratio:17, ruby:"ハミング12"], 
+	%[face:"ハミング39"			, file:"ハミング39"			, height:39, ratio:26, ruby:"ハミング12"], 
+
+	%[face:"ロダンカトレア12"	, file:"ロダンカトレア12"	, height:12, ratio:-1, ruby:"ロダンカトレア12"], 
+	%[face:"ロダンカトレア21"	, file:"ロダンカトレア21"	, height:21, ratio: 9, ruby:"ロダンカトレア12"], 
+	%[face:"ロダンカトレア30"	, file:"ロダンカトレア30"	, height:30, ratio:17, ruby:"ロダンカトレア12"], 
+	%[face:"ロダンカトレア39"	, file:"ロダンカトレア39"	, height:39, ratio:26, ruby:"ロダンカトレア12"], 
+
+	%[face:"ロダンハッピー12"	, file:"ロダンハッピー12"	, height:12, ratio:-1, ruby:"ロダンハッピー12"], 
+	%[face:"ロダンハッピー21"	, file:"ロダンハッピー21"	, height:21, ratio: 9, ruby:"ロダンハッピー12"], 
+	%[face:"ロダンハッピー30"	, file:"ロダンハッピー30"	, height:30, ratio:17, ruby:"ロダンハッピー12"], 
+	%[face:"ロダンハッピー39"	, file:"ロダンハッピー39"	, height:39, ratio:26, ruby:"ロダンハッピー12"], 
+
+	%[face:"筑紫明朝12"			, file:"筑紫明朝12"			, height:12, ratio:-1, ruby:"筑紫明朝12"], 
+	%[face:"筑紫明朝21"			, file:"筑紫明朝21"			, height:21, ratio: 9, ruby:"筑紫明朝12"], 
+	%[face:"筑紫明朝30"			, file:"筑紫明朝30"			, height:30, ratio:17, ruby:"筑紫明朝12"], 
+	%[face:"筑紫明朝39"			, file:"筑紫明朝39"			, height:39, ratio:26, ruby:"筑紫明朝12"]
+];
