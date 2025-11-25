@@ -7,44 +7,40 @@
 @空スクロール bg=BG26a01	
 
 @Talk name=心の声
-太陽が昇りはじめたばかりの空は、絵のキャンバスの
-ように白かった。
+The sun had just begun to rise, and the sky was as white as the canvas of a painting.
 @Hitret id=47
 
 @Talk name=心の声
-何度か瞬きをして視線を落とせば、すがすがしい光に
-照らされた家々が見える。
+If you blink a few times and look down, you'll see houses illuminated by refreshing light.
 @Hitret id=48
 
 @Talk name=心の声
-物心ついた時から住んでいる、マンション八階からの
-景色。
+That's the view from the 8th floor of the condominium where I had lived long, long ago, as far as my memory recall.
 @Hitret id=49
 
 @Talk name=心の声
-変わらないようでいて、道路の幅や家々の並びは、
-少しずつ変化している。
+Although it seems that nothing has changed, the width of the roads and the rows of houses are changing little by little.
 @Hitret id=50
 
 @Talk name=心の声
-そんな景色を眺めつつ、俺は隣の家のドアを開ける。
+While looking at the scenery, I open the door to the room next to mine.
 @Hitret id=51
 
 @playSe file=SE081	
 @ステイバック出し bg=BG14a01	
 @font face=21
 
-@Talk name=一悟
-「お邪魔します」
+@Talk name=Ichigo
+"Pardon my intrusion."
 @Hitret id=52
 
 @Talk name=心の声
-探る程度の小声が、静かなリビングに響く。
+探る程度の小声が、静かなリビングに響く。? 
+A low, searching voice echoed in the quiet living room.
 @Hitret id=53
 
 @Talk name=心の声
-家中がこんなにも静かなのは、たった一人の家主が
-惰眠を貪っているからだ。
+The reason why the whole house is so quiet is, because the only owner of the house is now slumbering.
 @Hitret id=54
 
 @stopSe fade=1000
@@ -54,61 +50,61 @@
 @playSe file=SE080	
 @Ruby mess=真優 read=まゆう
 
-@Talk name=一悟
-「真優、入るぞ」
+@Talk name=Ichigo
+"Mayu, I'm coming in-"
 @Hitret id=55
 
 @Talk name=心の声
-毎朝のこととはいえ、一応ノックと呼びかけをしてから
-ドアを開ける。
+Even though it happens every morning, I knock and call before opening the door.
 @Hitret id=56
 
 @stopSe fade=1000
 @playSe file=SE081	
 @場面転換１ bg=BG15a01	
 
-@Talk name=一悟
+@Talk name=Ichigo
 「相変わらず雑然としてるな……」
+"It's still a mess..."
 @Hitret id=57
 
 @Talk name=心の声
-かろうじて見えている床を踏みつつ、ベッドへと近付く。
+Stepping on the barely visible floor, I approached the bed.
 @Hitret id=58
 
 @右視点移動＋位置固定 bg=BG15a01	
 
-@Talk name=一悟
-「真優、朝だぞ。おはよう」
+@Talk name=Ichigo
+ "Mayu, it's morning now so please get up."
 @Hitret id=59
 
 @stopSe fade=1000
 @playSe file=SE046	
 @face file=CA04A009	
 
-@Talk name=真優 voice=MAY000003
+@Talk name=Mayu voice=MAY000003
 「んぅ……んん……」
 @Hitret id=60
 
 @Talk name=心の声
-もぞもぞと身じろぎしている幼なじみ。
+There lies my childhood friend who is fidgeting.
 @Hitret id=61
 
 @Talk name=心の声
-顔をしかめていてすら可愛らしい寝顔を見ていると、
-寝かせておいてあげたくもあるのだが……
+To be honest, when I look at her cute sleeping face, 
+even when she's frowning, I want to let her continue her sleep...
 @Hitret id=62
 
 @stopSe fade=1000
 @メッセージ揺らし大
 @font face=39
 
-@Talk name=一悟
-「朝だぞ、起きろ！」
+@Talk name=Ichigo
+“It’s morning, wake up!”
 @Hitret id=63
 
 @face file=CA04A016	
 
-@Talk name=真優 voice=MAY000004
+@Talk name=Mayu voice=MAY000004
 「んんーっ……」
 @Hitret id=64
 
@@ -116,7 +112,7 @@
 @カメラ揺らし大
 
 @Talk name=心の声
-腕を引っ張って、上半身を起こさせた。
+She pulled her arm and raised her upper body.
 @Hitret id=65
 
 
@@ -126,174 +122,194 @@
 @char file=CA04A009M
 @居眠り横 id=真優
 
-@Talk name=真優 voice=MAY000005
+@Talk name=Mayu voice=MAY000005
 「うぅ……う……？」
 @Hitret id=66
 
 @Talk name=心の声
-寝ぼけ眼で上半身をぐらぐらと揺らしている幼なじみ。
+Now, my childhood friend is shaking her upper body with sleepy eyes.
 @Hitret id=67
 
-@Talk name=一悟
-「おはよう真優。学園へ行く支度をしてくれ」
+@Talk name=Ichigo
+一悟「おはよう真優。学園へ行く支度をしてくれ」? 
+"Good morning, Mayu. Get ready to go to school."
 @Hitret id=68
 
 @char file=CA04A002M
 
-@Talk name=真優 voice=MAY000006
+@Talk name=Mayu voice=MAY000006
 「えー……学園、行くの……？」
+“Eh...are you going to school...?”
 @Hitret id=69
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ。今日も元気に頑張ろうな」
+“Correct. Let’s do our best today as well.”
 @Hitret id=70
 
 @char file=CA04A016L
 
-@Talk name=真優 voice=MAY000007
+@Talk name=Mayu voice=MAY000007
 「んー……今日はのんびりごろごろしないー？」
+“Hmm… Can't I just relax today.”
 @Hitret id=71
 
 @抱きつき char=CA04A013L
 @Ruby mess=十川真優 read=とがわまゆう
 
 @Talk name=心の声
-ふわついた声音で言ってしなだれかかってくる幼なじみ、
-十川真優。
+My childhood friend, Togawa Mayuu, calls me in a soft voice.
 @Hitret id=72
 
 @居眠り横 id=真優
 
-@Talk name=一悟
+@Talk name=Ichigo
 「かつての天才子役も、見る影ないな……」
+“Where's a trace of that genius child actor she once was…”
 @Hitret id=73
 
 @char file=CA04A015L
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000008
+@Talk name=Mayu voice=MAY000008
 「あー、それっ、それだよ！」
+“Ah, that’s it, that’s it!”
 @Hitret id=74
 
 @stopSe fade=1000
 
-@Talk name=一悟
+@Talk name=Ichigo
 「え？」
+"Eh?"
 @Hitret id=75
 
 @Talk name=心の声
-ぐりぐりと頭を押しつけてきていた真優が、
-がばっと顔を上げた。
+ぐりぐりと頭を押しつけてきていた真優が、 がばっと顔を上げた。
+Mayu, who had been pressing her head tightly, suddenly looked up.
 @Hitret id=76
 
 @char file=CA04A002L
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000009
+@Talk name=Mayu voice=MAY000009
 「今朝、昔の夢見たの。だから外、出たくない」
+“This morning, I had a dream about my past. That’s why I don’t want to go outside.”
 @Hitret id=77
 
 @char file=CA04A009L
 
 @Talk name=心の声
 そう言って、俺の目をじいっと見つめてくる。
+Saying that, she looks me in the eyes.
 @Hitret id=78
 
 @Talk name=心の声
 瞳が潤んで揺れていて、ほだされてしまいそうになる。
+Her eyes are moist and shaking, and feels like she's going to burst out.
 @Hitret id=79
 
 @char file=CA04A014L
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000010
+@Talk name=Mayu voice=MAY000010
 「ね、一悟？　一緒にごろごろしてようよ」
+"Hey, Ichigo? Let's hang out together."
 @Hitret id=80
 
-@Talk name=一悟
+@Talk name=Ichigo
 「駄目だ」
+"Nope."
 @Hitret id=81
 
 @char file=CA04A004L
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000011
+@Talk name=Mayu voice=MAY000011
 「あう」
+"Aww."
 @Hitret id=82
 
 @なでなで id=真優
 
 @Talk name=心の声
 真優の頭をぐりぐりと乱暴に撫でて、身体を離す。
+I roughly strokes Mayu's head and pulls away.
 @Hitret id=83
 
 @clearChar id=-1
 
-@Talk name=一悟
-「今日もおぶっていってやるから、一緒に学園へ行こう。
-　な？」
+@Talk name=Ichigo
+「今日もおぶっていってやるから、一緒に学園へ行こう。 な？」
+"I'll give you piggyback ride today too, so let's go to school together, Alright?"
 @Hitret id=84
 
 @char file=CA04A014M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000012
+@Talk name=Mayu voice=MAY000012
 「本当？」
+"For real?"
 @Hitret id=85
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ」
 @Hitret id=86
 
 @char file=CA04A012M
 @おじぎ id=真優 count=2
 
-@Talk name=真優 voice=MAY000013
-「えへへ……おんぶしてくれるなら、行くしかないね。
-　仕方ないなぁ」
+@Talk name=Mayu voice=MAY000013
+「えへへ……おんぶしてくれるなら、行くしかないね。 仕方ないなぁ」
+"Hehe...That can't be helped, if you give me piggyback ride then I have no choice but to go."
 @Hitret id=87
 
 @playSe file=SE056	
 @char file=CA01A001M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000014
+@Talk name=Mayu voice=MAY000014
 「よいしょ、っと」
 @Hitret id=88
 
 @font face=39
 @メッセージ揺らし大
 
-@Talk name=一悟
+@Talk name=Ichigo
 「うわあ！？」
+"Uwah!?"
 @Hitret id=89
 
 @stopSe fade=1000
 
 @Talk name=心の声
 真優はいきなりパジャマを脱いでしまった。
+Mayu suddenly took off her pajamas.
 @Hitret id=90
 
 
-@Talk name=一悟
+@Talk name=Ichigo
 「リ、リビングにいるから、用意が終わったら来てくれ」
+"I.. I'll be waiting in the living room, so come when you're ready."
 @Hitret id=91
 
 @char file=CA01A008M
 
-@Talk name=真優 voice=MAY000015
+@Talk name=Mayu voice=MAY000015
 「えー？　ここにいてもいいんだよ？」
+“Eh? Is it okay if you stay here?”
 @Hitret id=92
 
 @font face=39
 @メッセージ揺らし
 
-@Talk name=一悟
+@Talk name=Ichigo
 「俺がよくないんだ！！」
+"I am not. So, no, thanks."
 @Hitret id=93
 
 @Talk name=心の声
 くすくす笑っている真優に背を向け、部屋を後にする。
+I turn my back on Mayu, who's now giggling, and leaves the room.
 @Hitret id=94
 
 @playSe file=SE082	
@@ -301,6 +317,7 @@
 
 @Talk name=心の声
 まったく、幼なじみだからって気を許しすぎだ。
+Really, It's too easy to tolerate her just because she's my childhood friend.
 @Hitret id=95
 
 @stopSe fade=1000
@@ -315,23 +332,25 @@
 @update transition=universal rule=WIP_RL time=250
 @waitUpdate
 
-@Talk name=真優 voice=MAY000016
+@Talk name=Mayu voice=MAY000016
 「本当に、いいのに……」
+"I am okay with that, y'know."
 @Hitret id=96
 
 @char file=CA01A009L
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000017
+@Talk name=Mayu voice=MAY000017
 「……柔らかさが足りないからじゃないよね？」
+"...Isn't it because it's not 'enough', right?"
 @Hitret id=97
 
 @char file=CA01A016L
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000018
-「……うん、大丈夫なはず。最適サイズはＣカップだって
-　聞いたことあるし……」
+@Talk name=Mayu voice=MAY000018
+「……うん、大丈夫なはず。最適サイズはＣカップだって聞いたことあるし……」
+"...Yeah, it should be fine. I've heard that the optimal size is a C cup..."
 @Hitret id=98
 
 @時間経過３ bg=BG14a01 pos=320,0,0 	
@@ -339,62 +358,64 @@
 @movecamera pos=-320,0,0 time=50000
 
 @Talk name=心の声
-真優の着替えを待っている間に、リビングを少し
-片付けることにした。
+While I was waiting for Mayu to get changed, I decided to clean up the living room a bit.
 @Hitret id=99
 
 @Talk name=心の声
-真優の両親も俺の両親も仕事が忙しくて不在がちだ。
+Both Mayu's parents and my parents are busy with work and tend to be away.
 @Hitret id=100
 
 @Talk name=心の声
-とはいえ、俺の両親は終電で帰ってきたりするくらいで、
-日を空けるようなことはない。
+とはいえ、俺の両親は終電で帰ってきたりするくらいで、 日を空けるようなことはない。
+However, my parents will eventually come home on the last train, so they don't spend the whole day being away from home.
 @Hitret id=101
 
 @Talk name=心の声
-一方、真優の両親は専門職に就いていて、数週間、数ヶ月
-泊まり込みということがざらだった。
+一方、真優の両親は専門職に就いていて、数週間、数ヶ月泊まり込みということがざらだった。
+On the other hand, Mayu's parents were employed in professional jobs, and they often stayed overnight for weeks or months at a time.
 @Hitret id=102
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そして、真優の部屋もリビングも荒れる……と」
+"And now Mayu's room and living room were ruined..."
 @Hitret id=103
 
 @Talk name=心の声
-俺は掃除が好きだから、そこまで汚れるようなことも
-ないけれど。
+俺は掃除が好きだから、そこまで汚れるようなこともないけれど。
+I like cleaning, so it doesn't get too dirty.
 @Hitret id=104
 
 @playSe file=SE090	
 @時間経過３ bg=BG11a01	
 
 @Talk name=心の声
-支度が済んだ真優と共に、マンションの玄関まで
-やってきた。
+支度が済んだ真優と共に、マンションの玄関までやってきた。
+After getting ready, Mayu came to the entrance of the apartment.
 @Hitret id=105
 
 @char file=CA02A014M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000019
+@Talk name=Mayu voice=MAY000019
 「はい、おんぶ」
+"Piggyback, please."
 @Hitret id=106
 
 @stopSe fade=1000
 
 @Talk name=心の声
-真優は自動ドアが反応しないギリギリの位置で立ち止まり、
-俺を見上げる。
+真優は自動ドアが反応しないギリギリの位置で立ち止まり、俺を見上げる。
+Mayu stops just before the automated door can respond and looks up at me.
 @Hitret id=107
 
 @Talk name=心の声
-無邪気に甘えてくる態度は可愛いのだが、年相応とは
-言えない幼さだ。
+無邪気に甘えてくる態度は可愛いのだが、年相応とは言えない幼さだ。
+Her innocent and sweet demeanor is cute, but she's too young for her age.
 @Hitret id=108
 
-@Talk name=一悟
+@Talk name=Ichigo
 「……分かってるよ。約束だもんな」
+"...I know. I promise it after all."
 @Hitret id=109
 
 @clearChar id=-1
@@ -403,6 +424,7 @@
 
 @Talk name=心の声
 真優に背を向けて、地面にひざまずく。
+I turn my back to Mayu and kneel on the ground. 
 @Hitret id=110
 
 @playSe file=SE055	
@@ -410,104 +432,116 @@
 @おじぎ id=真優
 @カメラ揺らし
 
-@Talk name=真優 voice=MAY000020
+@Talk name=Mayu voice=MAY000020
 「……よいしょ」
 @Hitret id=111
 
 @Talk name=心の声
 真優の重みを感じつつ、立ち上がる。
+I stand up, feeling Mayu's weight.
 @Hitret id=112
 
 @stopSe fade=1000
 @ターン出し bg=EA02A		
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あれ……また軽くなったか？」
+“Hmm...have you become lighter again?”
 @Hitret id=113
 
 @face file=CA02A009	
 
-@Talk name=真優 voice=MAY000021
-「そんなことないと思うけど……もしかして、
-　前より柔らかくないってこと？」
+@Talk name=Mayu voice=MAY000021
+「そんなことないと思うけど……もしかして、 前より柔らかくないってこと？」
+"I don't think so...but maybe it's not as soft as before?"
 @Hitret id=114
 
-@Talk name=一悟
+@Talk name=Ichigo
 「柔らかさがどう関係あるんだ？」
+“What does softness have to do with it?”
 @Hitret id=115
 
 @cg file=EA02BL		
 @face file=CA02A012	
 
-@Talk name=真優 voice=MAY000022
+@Talk name=Mayu voice=MAY000022
 「ここのボリューム的な意味で」
+“In terms of 'volume'.”
 @Hitret id=116
 
 @おっぱい
 
 @Talk name=心の声
 背中でみじろぎして、ぐりぐりと胸を押しつけてくる。
+She leans on my back and presses her chest tightly against me.
 @Hitret id=117
 
-@Talk name=一悟
+@Talk name=Ichigo
 「……行くぞ」
+"...Let's just go."
 @Hitret id=118
 
 @stopSe fade=1000
 @face file=CA02A015	
 @メッセージ揺らし
 
-@Talk name=真優 voice=MAY000023
+@Talk name=Mayu voice=MAY000023
 「ノーコメントなんだ！　やっぱり減ってるんだ！？」
+“No comment! It is smaller after all!?”
 @Hitret id=119
 
-@Talk name=一悟
-「そういう意味じゃない！　変な話題を振るなって
-　ことだ」
+@Talk name=Ichigo
+「そういう意味じゃない！　変な話題を振るなってことだ」
+ "That's not what I meant! I mean, don't bring up strange topics."
 @Hitret id=120
 
 @cg file=EA02B		
 @face file=CA02A006	
 
-@Talk name=真優 voice=MAY000024
+@Talk name=Mayu voice=MAY000024
 「一悟にとってもこれは重要な話題だよ、将来的に！」
+“This is an important topic for Ichigo too, in the future!”
 @Hitret id=121
 
-@Talk name=一悟
+@Talk name=Ichigo
 「どんな将来を思い描いてるんだよ！？」
+“What kind of future are you envisioning!?”
 @Hitret id=122
 
 @face file=CA02A003	
 
-@Talk name=真優 voice=MAY000025
+@Talk name=Mayu voice=MAY000025
 「そんなの当然結――」
+ “Of course that’s...”
 @HitWait id=123
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ちょっと待て真優、コンビニに着いたから」
+Wait a minute, Mayu, We've already arrived at the convenience store.
 @Hitret id=124
 
 @cg file=EA02BL pos=80,-120,0		
 @face file=CA02A016	
 
-@Talk name=真優 voice=MAY000026
+@Talk name=Mayu voice=MAY000026
 「むうぅぅぅ……っ」
 @Hitret id=125
 
-@Talk name=一悟
-「いくら早朝だからって、人通りはあるんだから。
-　大声出したら注目されるぞ」
+@Talk name=Ichigo
+「いくら早朝だからって、人通りはあるんだから。 大声出したら注目されるぞ」
+"No matter how early in the morning, there's always people walking by. If we're being like this, we'll get noticed."
 @Hitret id=126
 
 @Talk name=心の声
 不機嫌になった真優をなだめつつ、背中から下りてもらう。
+While calming Mayu, who was in a bad mood, I asked her to get off my back.
 @Hitret id=127
 
 @場面転換１ bg=BG21a01	
 @char file=CA02A010L
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000027
+@Talk name=Mayu voice=MAY000027
 「ううう……」
 @Hitret id=128
 
@@ -516,178 +550,200 @@
 @否定 id=真優
 
 @Talk name=心の声
-真優は周りをきょろきょろと見回しつつ、俺の服の裾を
-そっと掴んだ。
+真優は周りをきょろきょろと見回しつつ、俺の服の裾をそっと掴んだ。
+Mayu looked around and gently grabbed the hem of my clothes.
 @Hitret id=129
 
-@Talk name=一悟
-「ほら、コンビニに入ろう。栄養つけるためにも
-　今日は朝ごはん多めに買って行こうな」
+@Talk name=Ichigo
+「ほら、コンビニに入ろう。栄養つけるためにも今日は朝ごはん多めに買って行こうな」
+"Come on, let's go to the convenience store. Let's buy a big breakfast today to fed ourselves."
 @Hitret id=130
 
 @char file=CA02A005L
 
-@Talk name=真優 voice=MAY000028
+@Talk name=Mayu voice=MAY000028
 「……ポテチ多めっていう意味で？」
+“…Do you mean a lot of potato chips?”
 @Hitret id=131
 
 @stopSe fade=1000
 
-@Talk name=一悟
+@Talk name=Ichigo
 「『ごはん』って言っただろう。せめてサラダとか」
+"At least, be it a 'rice' or even a salad."
 @Hitret id=132
 
 @char file=CA02A016L
 @おじぎ id=真優
 @font face=21
 
-@Talk name=真優 voice=MAY000029
-「もしかして一悟は、Ｃじゃ物足りない……つまり
-　巨乳派……？」
+@Talk name=Mayu voice=MAY000029
+「もしかして一悟は、Ｃじゃ物足りない……つまり巨乳派……？」
+“Maybe C is not enough for Ichigo… In other words, he likes 'big-breasted'…?”
 @Hitret id=133
 
-@Talk name=一悟
+@Talk name=Ichigo
 「なにをぶつぶつ言ってるんだ、真優？」
+“What are you muttering about, Mayu?”
 @Hitret id=134
 
 @clearChar id=-1
 
 @Talk name=心の声
-神妙な顔をしながら胸に手を当てている真優を促して、
-店内へと入った。
+神妙な顔をしながら胸に手を当てている真優を促して、 店内へと入った。
+I urged Mayu, who was putting her hand on her chest with a mysterious look on her face, into the store.
 @Hitret id=135
 
 @時間経過１ bg=EA02A		
 
 @Talk name=心の声
-コンビニから出て真優をおぶりなおし、学園を目指して
-歩き出す。
+コンビニから出て真優をおぶりなおし、学園を目指して歩き出す。
+I get out of the convenience store, put Mayu on my back, and start walking toward the school.
 @Hitret id=136
 
 @face file=CA02A011	
 
-@Talk name=真優 voice=MAY000030
+@Talk name=Mayu voice=MAY000030
 「ねえ一悟、重くない？」
+“Hey, Ichigo, am I heavy?”
 @Hitret id=137
 
-@Talk name=一悟
+@Talk name=Ichigo
 「さっき軽いから心配だって言ったばかりだぞ？」
+“I just said I was worried because you're light, right?”
 @Hitret id=138
 
 @face file=CA02A002	
 
-@Talk name=真優 voice=MAY000031
-「そういう意味じゃなくて、朝ごはん多めに買ったから。
-　その分、重くなったでしょ」
+@Talk name=Mayu voice=MAY000031
+「そういう意味じゃなくて、朝ごはん多めに買ったから。その分、重くなったでしょ」
+"I don't mean that, it's because ywe bought a lot of breakfast. That's why it got heavier."
 @Hitret id=139
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ポテチが二、三袋増えたくらいじゃ変わらないって」
+“To be fair, just two or three more bags of potato chips won’t make a difference.”
 @Hitret id=140
 
-@Talk name=一悟
-「むしろもっと重くなっても大丈夫だから、遠慮せず
-　しっかり食べてしっかり育ってくれ」
+@Talk name=Ichigo
+「むしろもっと重くなっても大丈夫だから、遠慮せずしっかり食べてしっかり育ってくれ」
+"In fact, it's okay even if you get heavier, so don't be afraid to eat well and grow properly."
 @Hitret id=141
 
 @face file=CA02A015	
 
-@Talk name=真優 voice=MAY000032
+@Talk name=Mayu voice=MAY000032
 「そ、育つって、やっぱり……」
+“Well, it's about growing up, after all...”
 @Hitret id=142
 
-@Talk name=一悟
+@Talk name=Ichigo
 「……その話、いつまで続くんだ？」
+"...How long will that topic last?"
 @Hitret id=143
 
 @cg file=EA02B		
 @face file=CA02A005	
 
-@Talk name=真優 voice=MAY000033
+@Talk name=Mayu voice=MAY000033
 「だって、女の子に体重の話題振るんだもん」
+“Because you talk about weight to girls.”
 @Hitret id=144
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あ、ああ……そっか。それは悪かった」
+“Ah, ah… I see. My bad.”
 @Hitret id=145
 
 @face file=CA02A008	
 
-@Talk name=真優 voice=MAY000034
-「ううん。一悟がわたしの心配してくれてるのは、
-　分かってるから」
+@Talk name=Mayu voice=MAY000034
+「ううん。一悟がわたしの心配してくれてるのは、 分かってるから」
+"No, Ichigo is worried about me, I know that well."
 @Hitret id=146
 
 @cg file=EA02C		
 @face file=CA02A007	
 
-@Talk name=真優 voice=MAY000035
+@Talk name=Mayu voice=MAY000035
 「一悟は優しい。ありがとう」
+“Ichigo's being kind. Thank you.”
 @Hitret id=147
 
 @Talk name=心の声
-魚や野菜のお総菜を意識して買いつつ、結局真優の
-リクエスト通り、ポテチも多めに買ってしまった。
+魚や野菜のお総菜を意識して買いつつ、結局真優のリクエスト通り、ポテチも多めに買ってしまった。
+At first, I was thinking of buying fish and vegetable side dishes, but ended up buying a lot of potato chips as Mayu had requested.
 @Hitret id=148
 
 @Talk name=心の声
 でも、そのおかげか真優の機嫌も少しは回復したようだ。
+Thanks to that, Mayu's mood seems to have improved a little.
 @Hitret id=149
 
 @cg file=EA02CL pos=80,-120,0		
 @face file=CA02A008	
 
-@Talk name=真優 voice=MAY000036
+@Talk name=Mayu voice=MAY000036
 「一悟、頭の後ろに寝癖ついてる」
+“Ichigo, there’s a morning hair on the back of your head.”
 @Hitret id=150
 
 @Talk name=心の声
 不意に真優がそう言って、後頭部に息を吹きかけてくる。
+Mayu says that and begins blowing into the back of my head.
 @Hitret id=151
 
-@Talk name=一悟
+@Talk name=Ichigo
 「くすぐったいな、バランス崩したら危ないだろう」
+"It's ticklish, it would be dangerous if I lost my balance."
 @Hitret id=152
 
 @face file=CA02A014	
 
-@Talk name=真優 voice=MAY000037
+@Talk name=Mayu voice=MAY000037
 「ふーっ、ふーっ。直してあげてるんだよ」
+"Phew Phew, I'm fixing it for you, y'know."
 @Hitret id=153
 
 @Talk name=心の声
 真優がしきりに後頭部を吹いてくる。
+Mayu continues her blowing on the back of my head.
 @Hitret id=154
 
 @cg file=EA02AL pos=80,-120,0		
 @face file=CA02A010	
 
-@Talk name=真優 voice=MAY000038
+@Talk name=Mayu voice=MAY000038
 「……ねえ、早起きするの、大変？」
+“Hey, is it hard to get up early?”
 @Hitret id=155
 
-@Talk name=一悟
+@Talk name=Ichigo
 「もう二年目だからな。慣れたよ」
+"It's already my second year so I'm used to it."
 @Hitret id=156
 
 @Talk name=心の声
-そう、今の学園に入学してからは、普通の時間より、
-ずっと早く登校するようになった。
+そう、今の学園に入学してからは、普通の時間より、ずっと早く登校するようになった。
+Well yess, since I enrolled in my current school, I have started getting up much earlier than usual.
 @Hitret id=157
 
 @回想背景のみ bg=BG25a04	
 
 @Talk name=心の声
 真優が役者を引退したのは三年前。
+Mayu had retired from stage acting three years ago.
 @Hitret id=158
 
 @Talk name=心の声
 理由は『進学のため』だった。
+Her reason was 'to enroll in higher degree'. Finishing high school to be accurate.
 @Hitret id=159
 
 
-@Talk name=真優 voice=MAY000039
+@Talk name=Mayu voice=MAY000039
 「一悟と一緒の学園に行きたい」
+“I want to go to the same school as Ichigo.”
 @Hitret id=160
 
 @hide
@@ -696,8 +752,8 @@
 @waitUpdate
 
 @Talk name=心の声
-真優は頑なにそう言い続け、引退後の一年間全てを
-勉強に費やした。
+真優は頑なにそう言い続け、引退後の一年間全てを勉強に費やした。
+Mayu stubbornly saying so, and spent the entire year after her retirement studying.
 @Hitret id=161
 
 @hide
@@ -707,38 +763,41 @@
 
 @Talk name=心の声
 そして、俺と同じ学園に合格し、晴れて入学したのが去年。
+Then, it was last year that she was accepted into the same school as me and happily enrolled.
 @Hitret id=162
 
 @Talk name=心の声
-合格後は役者に復帰するのかと、世間の誰もが期待して
-いた。
+合格後は役者に復帰するのかと、世間の誰もが期待していた。
+Everyone in was looking forward to her return to acting after passing the exam.
 @Hitret id=163
 
 @簡易暗転
 
 @Talk name=心の声
-でも真優は、事務所のオファーも、他のプロダクション
-からの声掛けも全てを断って、普通の生活を望んだ。
+でも真優は、事務所のオファーも、他のプロダクションからの声掛けも全てを断って、普通の生活を望んだ。
+However, Mayu turned down all offers from agencies and other production companies, aiming for a normal life.
 @Hitret id=164
 
 @char file=CA03A008L tone=sepia
 
 
-@Talk name=真優 voice=MAY000040
+@Talk name=Mayu voice=MAY000040
 「わたしは、一悟と一緒にいられればそれでいいから」
+“For me, as long as I can be with Ichigo, that’s fine.”
 @Hitret id=165
 
 @Talk name=心の声
-その一言で、周りの人間全ての意見を一蹴してしまった
-のだ。
+その一言で、周りの人間全ての意見を一蹴してしまったのだ。
+With that one sentence, she dismissed every single said offers to her.
 @Hitret id=166
 
 @Talk name=心の声
-その言葉は、本心から言ってくれた言葉なんだろうと思う。
+I think, those words were said from the heart.
 @Hitret id=167
 
 @Talk name=心の声
 けれど、それが真優にとって本当に良いことなのか――
+However, is that really a good thing for Mayu?
 @Hitret id=168
 
 @hide
@@ -747,109 +806,116 @@
 @waitUpdate
 
 @Talk name=心の声
-あれほど才能がある真優の、役者を辞める理由になるもの
-なのか――
+あれほど才能がある真優の、役者を辞める理由になるものなのか――
+Is this a reason for Mayu, who is very talented, to quit acting?
 @Hitret id=169
 
 @Talk name=心の声
 俺は未だに、納得できないでいる。
+I'm still not convinced by that thought.
 @Hitret id=170
 
 @空スクロール bg=BG26a01	
 
 @Talk name=心の声
-ともあれ、そうして真優の学園生活は始まった……の
-だけれど。
+ともあれ、そうして真優の学園生活は始まった……のだけれど。
+In any case, that's how Mayu's high school life began... though.
 @Hitret id=171
 
 @Talk name=心の声
-真優の知名度は一年かそこらでなくなる程度のものでは
-なかった。
+真優の知名度は一年かそこらでなくなる程度のものではなかった。
+Mayu's popularity was not something that would disappear in a year or so.
 @Hitret id=172
 
 @Talk name=心の声
-学園中のみんなが真優を好奇の目で見たり、通学路に
-芸能関係の記者が張り込んでいたりした。
+学園中のみんなが真優を好奇の目で見たり、通学路に芸能関係の記者が張り込んでいたりした。
+Everyone at the school looked at Mayu with curiosity, and reporters from the entertainment industry staked out on the route to school.
 @Hitret id=173
 
 @Talk name=心の声
-そのせいで一時期不登校になった真優を学園へ連れて
-くるため、俺の出した引換条件が『おんぶ登校』だった。
+そのせいで一時期不登校になった真優を学園へ連れてくるため、俺の出した引換条件が『おんぶ登校』だった。
+In order to bring Mayu, who had stopped attending school for a while due to this, to the school, the exchange condition she gave was 'gives her piggyback ride'.
 @Hitret id=174
 
 @Talk name=心の声
-さらに人目を避けるため、運動部の朝練よりも早い時間に
-登校するという対策も取っている。
+さらに人目を避けるため、運動部の朝練よりも早い時間に登校するという対策も取っている。
+Furthermore, to avoid being seen by others, she also takes measures such as arriving at school earlier than the morning practice of the athletic club.
 @Hitret id=175
 
 @クラウド出し背景のみ bg=BG02a01	
 
 @Talk name=心の声
-そして真優は、俺が部長を務めている文芸部の部室で
-一日を過ごす。
+そして真優は、俺が部長を務めている文芸部の部室で一日を過ごす。
+And Mayu spends the day in the literature club room where I am the head of the club.
 @Hitret id=176
 
 @Talk name=心の声
 保健室登校ならぬ、文芸部室登校をしているのだ。
+Instead of loitering around in nurse's office, she's doing it in literature club room.
 @Hitret id=177
 
 @Talk name=心の声
 そんな生活が、早二年目に突入した。
+This kind of loop has now entered its second year.
 @Hitret id=178
 
 @フェード出し bg=EA02A		
 @face file=CA02A004	
 
-@Talk name=真優 voice=MAY000041
+@Talk name=Mayu voice=MAY000041
 「あのね、一悟。もしも朝起きるの大変だったら……」
+"You know, Ichigo. If it's hard to wake up in the morning..."
 @Hitret id=179
 
-@Talk name=一悟
+@Talk name=Ichigo
 「サボるっていうのはなしだぞ」
+“There’s no such thing as slacking off in my dictionary.”
 @Hitret id=180
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それに、俺が休んだらナタリーが困るだろう？」
+“Besides, Natalie will be in trouble if I take a day off, right?”
 @Hitret id=181
 
 @cg file=EA02BL pos=80,-120,0		
 @face file=CA02A006	
 @メッセージ揺らし
 
-@Talk name=真優 voice=MAY000042
+@Talk name=Mayu voice=MAY000042
 「ぅにゃっ！？」
 @Hitret id=182
 
 @playSe file=SE041	
 @カメラ揺らし大
 
-@Talk name=一悟
+@Talk name=Ichigo
 「って、痛てててっ！？」
+“It, it hurts!”
 @Hitret id=183
 
 @Talk name=心の声
-真優に頬をつねられて、危うくバランスを崩しそうに
-なる。
+真優に頬をつねられて、危うくバランスを崩しそうになる。
+Mayu pinches my cheek and I almost loses my balance.
 @Hitret id=184
 
 @cg file=EA02B		
 @face file=CA02A016	
 @Ruby mess=千奈 read=せな
 
-@Talk name=真優 voice=MAY000043
-「別に、千奈は困らないでしょ。文芸部は個人活動が
-　メインなんだから」
+@Talk name=Mayu voice=MAY000043
+「別に、千奈は困らないでしょ。文芸部は個人活動がメインなんだから」
+"I dont'care, I don't think China will have any trouble. The literary club's main focus is on individual activities."
 @Hitret id=185
 
 @stopSe fade=1000
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それでも一応、部長の俺がいた方がいいだろう」
 @Hitret id=186
 
 @face file=CA02A004	
 
-@Talk name=真優 voice=MAY000044
+@Talk name=Mayu voice=MAY000044
 「部長じゃなくても、一悟がいれば嬉しいに決まってる
 　でしょ……」
 @Hitret id=187
@@ -860,18 +926,18 @@
 真優が猫の匂い付けのように後頭部へ頭を擦りつけてくる。
 @Hitret id=188
 
-@Talk name=一悟
+@Talk name=Ichigo
 「背中で暴れるなってば。注目浴びるし、バランス
 　崩れるから」
 @Hitret id=189
 
 @face file=CA02A002	
 
-@Talk name=真優 voice=MAY000045
+@Talk name=Mayu voice=MAY000045
 「だって、他の女の子の話するんだもん」
 @Hitret id=190
 
-@Talk name=一悟
+@Talk name=Ichigo
 「他の女の子って……同じ部の部員だろうに」
 @Hitret id=191
 
@@ -913,23 +979,23 @@
 @cg file=EA02A		
 @face file=CA02A001	
 
-@Talk name=真優 voice=MAY000046
+@Talk name=Mayu voice=MAY000046
 「一悟、どうしたの？」
 @Hitret id=199
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あ……悪い。ぼーっとしてた」
 @Hitret id=200
 
 @cg file=EA02D		
 @face file=CA02A014	
 
-@Talk name=真優 voice=MAY000047
+@Talk name=Mayu voice=MAY000047
 「引き返してもいいんだよ？　秋になって、おふとんで
 　ごろごろするのが幸せな気温だし」
 @Hitret id=201
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ここまで来たら、家に戻るより部室に行く方が
 　近いだろう」
 @Hitret id=202
@@ -991,11 +1057,11 @@
 @face file=CA02A001	
 @font face=21
 
-@Talk name=真優 voice=MAY000048
+@Talk name=Mayu voice=MAY000048
 「あ、パンツ……」
 @Hitret id=212
 
-@Talk name=一悟
+@Talk name=Ichigo
 「え？」
 @Hitret id=213
 
@@ -1006,7 +1072,7 @@
 @face file=CA02A013	
 @font face=21
 
-@Talk name=真優 voice=MAY000049
+@Talk name=Mayu voice=MAY000049
 「会長、可愛いの履いてるんだ」
 @Hitret id=215
 
@@ -1022,7 +1088,7 @@
 @メッセージ揺らし
 @font face=39
 
-@Talk name=一悟
+@Talk name=Ichigo
 「っ！？」
 @Hitret id=217
 
@@ -1053,7 +1119,7 @@
 @Hitret id=221
 
 
-@Talk name=一悟
+@Talk name=Ichigo
 「えっ！？」
 @Hitret id=222
 
@@ -1091,13 +1157,13 @@
 @メッセージ揺らし
 @font face=39
 
-@Talk name=真優 voice=MAY000050
+@Talk name=Mayu voice=MAY000050
 「いっ、一悟は見ちゃ駄目！」
 @Hitret id=226
 
 @メッセージ揺らし
 
-@Talk name=一悟
+@Talk name=Ichigo
 「うわっ……！？」
 @Hitret id=227
 
@@ -1107,7 +1173,7 @@
 真優の手のひらが目を覆ってきた。
 @Hitret id=228
 
-@Talk name=一悟
+@Talk name=Ichigo
 「まっ、真優、危ないだろう。おんぶしてるのに」
 @Hitret id=229
 
@@ -1133,7 +1199,7 @@
 
 @face file=CA02A006	
 
-@Talk name=真優 voice=MAY000051
+@Talk name=Mayu voice=MAY000051
 「会長、それ隠して」
 @Hitret id=234
 
@@ -1145,7 +1211,7 @@
 「あはは、すまない。サービスが過ぎたかな？」
 @Hitret id=235
 
-@Talk name=一悟
+@Talk name=Ichigo
 「さ、サービスって……」
 @Hitret id=236
 
@@ -1162,7 +1228,7 @@
 　面白がらせたくなってしまうんだよ」
 @Hitret id=238
 
-@Talk name=一悟
+@Talk name=Ichigo
 「面白がらせるっていうより、からかって
 　楽しんでるように見えるんですが？」
 @Hitret id=239
@@ -1170,7 +1236,7 @@
 @char file=CA02A006M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000052
+@Talk name=Mayu voice=MAY000052
 「エンターテイメントのためなら誰にでも見せるとか、
 　良くない」
 @Hitret id=240
@@ -1203,7 +1269,7 @@
 
 @抱きつき char=CA02A006L
 
-@Talk name=真優 voice=MAY000053
+@Talk name=Mayu voice=MAY000053
 「朝から一悟を誘惑していいのは、わたしだけなの！」
 @Hitret id=245
 
@@ -1217,7 +1283,7 @@
 
 @stopSe fade=1000
 
-@Talk name=一悟
+@Talk name=Ichigo
 「おっと、すっかり挨拶を忘れてました。
 　アリス会長、おはようございます」
 @Hitret id=248
@@ -1225,7 +1291,7 @@
 @char file=CA02A010M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000054
+@Talk name=Mayu voice=MAY000054
 「おはよう、ございます……」
 @Hitret id=249
 
@@ -1241,7 +1307,7 @@
 「うん、おはよう。文芸部は随分と早起きなんだね？」
 @Hitret id=251
 
-@Talk name=一悟
+@Talk name=Ichigo
 「会長だって早いじゃないですか」
 @Hitret id=252
 
@@ -1255,7 +1321,7 @@
 「今日は急ぎの仕事があったんだよ。文化祭の関連でね」
 @Hitret id=254
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ、もう準備も進んできてますもんね。こんなに
 　朝早くから仕事なんて、大変ですね」
 @Hitret id=255
@@ -1267,7 +1333,7 @@
 　君たちも文化祭のために、早起きをしたのかい？」
 @Hitret id=256
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いえ、俺と真優は、大抵この時間に登校してるんですよ」
 @Hitret id=257
 
@@ -1288,7 +1354,7 @@
 @char file=CA02A005M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000055
+@Talk name=Mayu voice=MAY000055
 「……別に、好きだから早く来てるわけじゃない」
 @Hitret id=260
 
@@ -1299,7 +1365,7 @@
 「おや、それならどうして？」
 @Hitret id=261
 
-@Talk name=一悟
+@Talk name=Ichigo
 「この時間なら、人通りが少ないんですよ」
 @Hitret id=262
 
@@ -1323,11 +1389,11 @@
 @char file=CA02A008M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000056
+@Talk name=Mayu voice=MAY000056
 「……うん！」
 @Hitret id=266
 
-@Talk name=一悟
+@Talk name=Ichigo
 「なんで素直に頷いてるんだよ。からかわれてるんだから
 　否定してくれ」
 @Hitret id=267
@@ -1335,11 +1401,11 @@
 @char file=CA02A014M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000057
+@Talk name=Mayu voice=MAY000057
 「将来を誓った仲だから、恋人以上の関係です」
 @Hitret id=268
 
-@Talk name=一悟
+@Talk name=Ichigo
 「幼なじみだろう、さらに誤解を招くようなこと言うな」
 @Hitret id=269
 
@@ -1354,17 +1420,17 @@
 混じりっけのない笑顔を向けられて、恥ずかしくなる。
 @Hitret id=271
 
-@Talk name=一悟
+@Talk name=Ichigo
 「会長だって、いつも相棒と一緒じゃないですか……」
 @Hitret id=272
 
-@Talk name=一悟
+@Talk name=Ichigo
 「……って、あれ？」
 @Hitret id=273
 
 @char file=CA02A001M
 
-@Talk name=真優 voice=MAY000058
+@Talk name=Mayu voice=MAY000058
 「ケルベロスは？」
 @Hitret id=274
 
@@ -1399,7 +1465,7 @@
 なってしまうからだろう。
 @Hitret id=279
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それなら、ケルベロスを見かけたら生徒会室まで
 　連れて行きますよ」
 @Hitret id=280
@@ -1414,11 +1480,11 @@
 @char file=CA02A016M
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000059
+@Talk name=Mayu voice=MAY000059
 「うー……一悟、みんなに優しいんだから……」
 @Hitret id=282
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ケルベロスがお腹を空かせたままだと可哀想だろう？」
 @Hitret id=283
 
@@ -1431,7 +1497,7 @@
 　伝えてくれるだけで大丈夫だよ」
 @Hitret id=284
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうなんですか？」
 @Hitret id=285
 
@@ -1446,7 +1512,7 @@
 　あちらからやって来てくれるんだ」
 @Hitret id=287
 
-@Talk name=一悟
+@Talk name=Ichigo
 「分かりました。それじゃあ見つけたら、会長が
 　探していたと伝えておきますよ」
 @Hitret id=288
@@ -1460,15 +1526,15 @@
 
 @char file=CA02A001M
 
-@Talk name=真優 voice=MAY000060
+@Talk name=Mayu voice=MAY000060
 「……一悟、わたしたちも朝ごはん」
 @Hitret id=290
 
-@Talk name=一悟
+@Talk name=Ichigo
 「うん？　ああ、そうだな」
 @Hitret id=291
 
-@Talk name=一悟
+@Talk name=Ichigo
 「これから部室で食べるんですが、アリス会長も
 　どうですか？」
 @Hitret id=292
@@ -1506,7 +1572,7 @@
 「それじゃあ、私は相棒捜しに戻ることにするよ」
 @Hitret id=297
 
-@Talk name=一悟
+@Talk name=Ichigo
 「はい。俺たちも、微力ながら気を付けて見てみます」
 @Hitret id=298
 
@@ -1535,21 +1601,21 @@
 @playBgm file=BGM19	
 @char file=CA02A012M
 
-@Talk name=真優 voice=MAY000061
+@Talk name=Mayu voice=MAY000061
 「パンツが見たいなら、わたしがいつでも見せてあげる」
 @Hitret id=302
 
-@Talk name=一悟
+@Talk name=Ichigo
 「見たいなんて誰も言ってないだろう……」
 @Hitret id=303
 
-@Talk name=一悟
+@Talk name=Ichigo
 「まったく……今朝はだいぶ飛ばしてるな」
 @Hitret id=304
 
 @char file=CA02A004M
 
-@Talk name=真優 voice=MAY000062
+@Talk name=Mayu voice=MAY000062
 「昔の夢、見たからかも」
 @Hitret id=305
 
@@ -1557,14 +1623,14 @@
 わずかにトーンの落ちた声音に、少し胸が締め付けられる。
 @Hitret id=306
 
-@Talk name=一悟
+@Talk name=Ichigo
 「お腹がいっぱいになれば、気分も変わるだろう」
 @Hitret id=307
 
 @char file=CA02A011M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000063
+@Talk name=Mayu voice=MAY000063
 「うん。ありがと……」
 @Hitret id=308
 
@@ -1599,11 +1665,11 @@
 @char file=CA02A008M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000064
+@Talk name=Mayu voice=MAY000064
 「おんぶありがと、一悟」
 @Hitret id=314
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真優を登校させるためだからな」
 @Hitret id=315
 
@@ -1615,17 +1681,17 @@
 
 @右視点移動＋位置固定 bg=BG08a01	
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あれ……開いてる？」
 @Hitret id=317
 
 @char file=CA02A001M
 
-@Talk name=真優 voice=MAY000065
+@Talk name=Mayu voice=MAY000065
 「昨日の帰りはちゃんとカギかけてたよ」
 @Hitret id=318
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真優が覚えてるなら、間違いないな」
 @Hitret id=319
 
@@ -1636,7 +1702,7 @@
 
 @clearChar id=-1
 
-@Talk name=一悟
+@Talk name=Ichigo
 「でも、それなら……」
 @Hitret id=321
 
@@ -1656,17 +1722,17 @@
 @メッセージ揺らし
 @font face=39
 
-@Talk name=一悟
+@Talk name=Ichigo
 「！？」
 @Hitret id=323
 
 @char file=CA02A006M
 
-@Talk name=真優 voice=MAY000066
+@Talk name=Mayu voice=MAY000066
 「……千奈の声？」
 @Hitret id=324
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうみたいだな」
 @Hitret id=325
 
@@ -1679,15 +1745,15 @@
 @スクロール出し左 bg=BG02a01	
 @font face=39
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ナタリー、大丈夫か！？」
 @Hitret id=327
 
-@Talk name=一悟
+@Talk name=Ichigo
 「って…………」
 @Hitret id=328
 
-@Talk name=一悟
+@Talk name=Ichigo
 「…………？」
 @Hitret id=329
 
@@ -1724,11 +1790,11 @@
 
 @face file=CA02A005	
 
-@Talk name=真優 voice=MAY000067
+@Talk name=Mayu voice=MAY000067
 「どういう状況？」
 @Hitret id=335
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そ、そうだな……想像するに……」
 @Hitret id=336
 
@@ -1784,7 +1850,7 @@
 「ふふっ、あっ、んんっ……！　ふふふ、あははっ」
 @Hitret id=344
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ナタリー、大丈夫か？」
 @Hitret id=345
 
@@ -1809,7 +1875,7 @@
 「みゃ、みゃー先輩に十川先輩！？」
 @Hitret id=348
 
-@Talk name=一悟
+@Talk name=Ichigo
 「おはよう」
 @Hitret id=349
 
@@ -1827,7 +1893,7 @@
 　いたんですか！？」
 @Hitret id=351
 
-@Talk name=一悟
+@Talk name=Ichigo
 「今さっきだ。だから、この状況がなんなのかも
 　よく分からないんだけど……」
 @Hitret id=352
@@ -1841,7 +1907,7 @@
 
 @face file=CA02A012	
 
-@Talk name=真優 voice=MAY000068
+@Talk name=Mayu voice=MAY000068
 「おはよう、千奈。いい格好だね」
 @Hitret id=354
 
@@ -1850,7 +1916,7 @@
 俺の横で、真優はにやにや笑いを浮かべている。
 @Hitret id=355
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あ……」
 @Hitret id=356
 
@@ -1906,7 +1972,7 @@
 
 @face file=CA02A006	
 
-@Talk name=真優 voice=MAY000069
+@Talk name=Mayu voice=MAY000069
 「ハレンチなのは、床に寝転がったままでパンツ見せて
 　きてる千奈の方だよ」
 @Hitret id=364
@@ -1921,7 +1987,7 @@
 
 @face file=CA02A012	
 
-@Talk name=真優 voice=MAY000070
+@Talk name=Mayu voice=MAY000070
 「でも残念だったね、千奈。一悟はさっき会長のパンツを
 　見てきたばっかりなんだよ」
 @Hitret id=366
@@ -1934,20 +2000,20 @@
 　朝からなにしてるんですか！？」
 @Hitret id=367
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ご、誤解だ誤解。あれは偶然というか、事故というか」
 @Hitret id=368
 
 @face file=CA02A008	
 
-@Talk name=真優 voice=MAY000071
+@Talk name=Mayu voice=MAY000071
 「でも、見たのは事実でしょ。だから千奈の
 　『パンツで一悟誘惑計画』は失敗ってことで」
 @Hitret id=369
 
 @face file=CA02A013	
 
-@Talk name=真優 voice=MAY000072
+@Talk name=Mayu voice=MAY000072
 「あだ名の通り、あと一歩足りないナタリーちゃん……
 　ドンマイだよ」
 @Hitret id=370
@@ -1958,7 +2024,7 @@
 「誘惑計画なんて立ててませんし、これも事故ですっ！」
 @Hitret id=371
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ケルベロスが落っこちると危ないから、身動き
 　できなかったんだよな？」
 @Hitret id=372
@@ -1996,7 +2062,7 @@
 「あ……ありがとうございます……」
 @Hitret id=376
 
-@Talk name=一悟
+@Talk name=Ichigo
 「別に、これくらい構わないけど。大変だったな」
 @Hitret id=377
 
@@ -2022,7 +2088,7 @@
 
 @clearChar id=-1
 
-@Talk name=一悟
+@Talk name=Ichigo
 「女の子を困らせたら駄目だろ、ケルベロス」
 @Hitret id=381
 
@@ -2059,7 +2125,7 @@
 ナタリーは、手に持っていた袋を目の前に差し出してきた。
 @Hitret id=387
 
-@Talk name=一悟
+@Talk name=Ichigo
 「犬用ビーフジャーキーの袋？」
 @Hitret id=388
 
@@ -2087,7 +2153,7 @@
 　なくなったあともおねだりされて、もみくちゃに……」
 @Hitret id=392
 
-@Talk name=一悟
+@Talk name=Ichigo
 「な、なるほど」
 @Hitret id=393
 
@@ -2099,7 +2165,7 @@
 @char file=CA02A016M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000073
+@Talk name=Mayu voice=MAY000073
 「飼い主を差し置いて、餌付けしたら駄目でしょ」
 @Hitret id=395
 
@@ -2110,7 +2176,7 @@
 「それはその……つい……ごめんなさい」
 @Hitret id=396
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真優だって時々おやつをあげてるじゃないか。
 　な、ケルベロス？」
 @Hitret id=397
@@ -2128,7 +2194,7 @@
 @char file=CA02A004M
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000074
+@Talk name=Mayu voice=MAY000074
 「うう……だって、なんか構いたくなるオーラが
 　あるから……」
 @Hitret id=400
@@ -2155,7 +2221,7 @@
 @char file=CA02A005M
 @おじぎ id=真優 count=2
 
-@Talk name=真優 voice=MAY000075
+@Talk name=Mayu voice=MAY000075
 「まあ……それは認める」
 @Hitret id=404
 
@@ -2166,7 +2232,7 @@
 
 @clearChar id=-1
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうだ、ケルベロス。アリス会長がお前のことを
 　探してたぞ。朝ごはんをくれるそうだ」
 @Hitret id=406
@@ -2193,13 +2259,13 @@
 駆けていった。
 @Hitret id=409
 
-@Talk name=一悟
+@Talk name=Ichigo
 「……アリス会長の言ってた通り、優秀なんだな」
 @Hitret id=410
 
 @char file=CA02A011M
 
-@Talk name=真優 voice=MAY000076
+@Talk name=Mayu voice=MAY000076
 「やんちゃすぎる時もあるけど」
 @Hitret id=411
 
@@ -2218,11 +2284,11 @@
 
 @char file=CA02A001M
 
-@Talk name=真優 voice=MAY000077
+@Talk name=Mayu voice=MAY000077
 「え？　なんのこと？」
 @Hitret id=414
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あ……ほら、さっき『あだ名の通り一歩足りない』って
 　言ってただろう。ハレンチうんぬんの話題の時に……」
 @Hitret id=415
@@ -2267,7 +2333,7 @@
 @クラウド出し bg=BG02a01 char=CB02A016M
 @face show
 
-@Talk name=一悟
+@Talk name=Ichigo
 「合ってますよ。俺は文芸部部長の宮国一悟です」
 @Hitret id=422
 
@@ -2278,7 +2344,7 @@
 「あ……！　あなたが……宮国、一悟さん……」
 @Hitret id=423
 
-@Talk name=一悟
+@Talk name=Ichigo
 「はい。ええと、どこかで……？」
 @Hitret id=424
 
@@ -2298,7 +2364,7 @@
 受け取って、部長の欄にサインをした。
 @Hitret id=426
 
-@Talk name=一悟
+@Talk name=Ichigo
 「入部してくれてありがとう。これからよろしく、
 　七瀬さん」
 @Hitret id=427
@@ -2314,7 +2380,7 @@
 @face file=CA02A009	
 @font face=21
 
-@Talk name=真優 voice=MAY000078
+@Talk name=Mayu voice=MAY000078
 「一悟と二人きりの部活動……だった……
 　はずなのに……っ」
 @Hitret id=429
@@ -2331,7 +2397,7 @@
 つい気がついたことを言ってしまったのだ。
 @Hitret id=431
 
-@Talk name=一悟
+@Talk name=Ichigo
 「七瀬千奈って、七瀬の『な』の位置が一個ずれると
 　回文になる名前なんだな」
 @Hitret id=432
@@ -2343,7 +2409,7 @@
 「へ……回文？」
 @Hitret id=433
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ほら『ななせ　せな』の『な』の位置を変えると
 　『なせなせな』って……名前っぽくはなくなるけど」
 @Hitret id=434
@@ -2353,7 +2419,7 @@
 ことを言ってしまったと気付く。
 @Hitret id=435
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あ……それじゃあこれはどうだろう。『せ』の位置を
 　移動させて、『せなななせ』も回文の名前だよな」
 @Hitret id=436
@@ -2390,12 +2456,12 @@
 @char file=CA02A012M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000079
+@Talk name=Mayu voice=MAY000079
 「じゃあ、回文するにはあと一歩足りない名前ってことで、
 　『ナタリー』っていうのはどう？」
 @Hitret id=442
 
-@Talk name=一悟
+@Talk name=Ichigo
 「え？」
 @Hitret id=443
 
@@ -2407,7 +2473,7 @@
 
 @メッセージ揺らし
 
-@Talk name=一悟
+@Talk name=Ichigo
 「こ、こら、真優！」
 @Hitret id=445
 
@@ -2427,22 +2493,22 @@
 　言うんですか、あなたは……」
 @Hitret id=447
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あー、その、ほら、なんだ……」
 @Hitret id=448
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうだ、あだ名！　由来はどうあれ、あだ名で
 　呼び合うのは打ち解けやすくていいよな！？」
 @Hitret id=449
 
 @char file=CA02A006M
 
-@Talk name=真優 voice=MAY000080
+@Talk name=Mayu voice=MAY000080
 「別に打ち解けるために付けたわけじゃないけど……」
 @Hitret id=450
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いいから。ほら、七瀬さんも俺にあだ名を付けてくれ。
 　今日から部活仲間だし、それで呼び合おう」
 @Hitret id=451
@@ -2453,7 +2519,7 @@
 「それって、私がナタリーなのは決定ってことですか？」
 @Hitret id=452
 
-@Talk name=一悟
+@Talk name=Ichigo
 「別なあだ名の方がいいか？　まあ、由来はあれだけど、
 　ナタリーは可愛いと思うけど」
 @Hitret id=453
@@ -2468,7 +2534,7 @@
 @update time=0
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000081
+@Talk name=Mayu voice=MAY000081
 「一悟っ！　いきなりなに言ってるの！？」
 @Hitret id=455
 
@@ -2480,14 +2546,14 @@
 真優がぎゅうっと服の裾を引っ張ってくる。
 @Hitret id=456
 
-@Talk name=一悟
+@Talk name=Ichigo
 「だって、もともとは真優が付けたんだろう」
 @Hitret id=457
 
 @char file=CA02A005M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000082
+@Talk name=Mayu voice=MAY000082
 「だから、それは『な』の位置に工夫が足りない
 　残念さって意味で……」
 @Hitret id=458
@@ -2507,7 +2573,7 @@
 　『みゃー先輩』です」
 @Hitret id=460
 
-@Talk name=一悟
+@Talk name=Ichigo
 「みゃー？」
 @Hitret id=461
 
@@ -2517,7 +2583,7 @@
 「『みやくに』の『みや』だけ取って、『みゃー』です」
 @Hitret id=462
 
-@Talk name=一悟
+@Talk name=Ichigo
 「男のあだ名にしては、可愛いすぎるような……」
 @Hitret id=463
 
@@ -2543,12 +2609,12 @@
 @ううっ id=真優 count=-1
 @font face=21
 
-@Talk name=真優 voice=MAY000083
+@Talk name=Mayu voice=MAY000083
 「二人きりの部活のはずだったのに、ラブラブな放課後の
 　はずだったのに、いきなり三人目と仲良くなってる」
 @Hitret id=467
 
-@Talk name=一悟
+@Talk name=Ichigo
 「じゃあ、真優にもなにかあだ名を……」
 @Hitret id=468
 
@@ -2556,18 +2622,18 @@
 @update time=0
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000084
+@Talk name=Mayu voice=MAY000084
 「わたしは呼ばない！」
 @Hitret id=469
 
-@Talk name=一悟
+@Talk name=Ichigo
 「え？　でも、最初に付けたのは真優で……」
 @Hitret id=470
 
 @char file=CA02A016M
 @ジャンプ id=真優 count=2
 
-@Talk name=真優 voice=MAY000085
+@Talk name=Mayu voice=MAY000085
 「いいったらいいの！　わたしは一悟と名前で
 　呼び合うのが好きなの！」
 @Hitret id=471
@@ -2575,17 +2641,17 @@
 @char file=CA02A006M
 @ジャンプ id=真優 count=2
 
-@Talk name=真優 voice=MAY000086
+@Talk name=Mayu voice=MAY000086
 「ずーっと前から、ずーっとそうしてきたんだから！」
 @Hitret id=472
 
 @抱きつき char=CA02A012L
 
-@Talk name=一悟
+@Talk name=Ichigo
 「うわっ！？」
 @Hitret id=473
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いきなり抱きついてくるな、真優」
 @Hitret id=474
 
@@ -2594,7 +2660,7 @@
 @ジャンプ id=真優 count=2
 @font face=39
 
-@Talk name=真優 voice=MAY000087
+@Talk name=Mayu voice=MAY000087
 「やだ、離さないーっ」
 @Hitret id=475
 
@@ -2616,7 +2682,7 @@
 
 @回想復帰 bg=BG02a01 char=CA02A016M
 
-@Talk name=真優 voice=MAY000088
+@Talk name=Mayu voice=MAY000088
 「そんな話題出したの、忘れてたのに……わざわざ
 　言うなんて、千奈はマゾなの？」
 @Hitret id=478
@@ -2638,7 +2704,7 @@
 　ないですよ！？　ハレンチな想像しないでくださいね！」
 @Hitret id=480
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いや、それは誰も想像しないと思うけど……」
 @Hitret id=481
 
@@ -2663,7 +2729,7 @@
 
 @cg file=BG02a01	
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それよりもナタリー、ケガはないか？」
 @Hitret id=485
 
@@ -2675,11 +2741,11 @@
 　だけですから」
 @Hitret id=486
 
-@Talk name=一悟
+@Talk name=Ichigo
 「良かった、安心したよ」
 @Hitret id=487
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そういえば、朝にナタリーがいるなんて珍しいな」
 @Hitret id=488
 
@@ -2687,17 +2753,17 @@
 @char file=CA02A016M
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000089
+@Talk name=Mayu voice=MAY000089
 「むぅぅ……一悟に会いたくて来たんでしょ」
 @Hitret id=489
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いきなり言いがかりをつけるなよ、真優」
 @Hitret id=490
 
 @char file=CA02A012M
 
-@Talk name=真優 voice=MAY000090
+@Talk name=Mayu voice=MAY000090
 「わたしの家のリビングと一悟の部屋、バルコニーで
 　行き来できるくらいの幼なじみレベルなんだよ？」
 @Hitret id=491
@@ -2705,7 +2771,7 @@
 @char file=CA02A015M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000091
+@Talk name=Mayu voice=MAY000091
 「そのわたしを差し置いて、朝から一悟の好感度を
 　上げようって魂胆でしょ！　そうはいかないよ！」
 @Hitret id=492
@@ -2732,7 +2798,7 @@
 
 @clearChar id=真優
 
-@Talk name=一悟
+@Talk name=Ichigo
 「徹夜明けって、体調は大丈夫なのか？」
 @Hitret id=496
 
@@ -2747,7 +2813,7 @@
 ナタリーはこともなげに頷いてみせる。
 @Hitret id=498
 
-@Talk name=一悟
+@Talk name=Ichigo
 「仕事と学業の両立は大変だと思うけど、ちゃんと
 　身体には気を遣った方がいいぞ」
 @Hitret id=499
@@ -2770,7 +2836,7 @@
 
 @char file=CA02A008M
 
-@Talk name=真優 voice=MAY000092
+@Talk name=Mayu voice=MAY000092
 「締め切りギリギリまでひっぱる千奈が悪い」
 @Hitret id=502
 
@@ -2785,7 +2851,7 @@
 表情を引きつらせてしまった。
 @Hitret id=504
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そう言うなよ真優、仕事として書くって大変な
 　ことなんだろうし」
 @Hitret id=505
@@ -2816,14 +2882,14 @@
 「先輩たちはいつもこの時間に登校してるんですよね？」
 @Hitret id=509
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ」
 @Hitret id=510
 
 @char file=CA02A006M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000093
+@Talk name=Mayu voice=MAY000093
 「聞いてどうするの？　明日からもこの時間に
 　待ってるつもり？　一悟に会うために！？」
 @Hitret id=511
@@ -2835,7 +2901,7 @@
 「違います！」
 @Hitret id=512
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真優、そういちいちつっかかるなよ」
 @Hitret id=513
 
@@ -2850,7 +2916,7 @@
 @update time=0
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000094
+@Talk name=Mayu voice=MAY000094
 「にゃうぅ……うう、だって千奈から、通い妻狙いな
 　匂いを感じるんだもん……」
 @Hitret id=515
@@ -2866,7 +2932,7 @@
 @char file=CA02A015M
 @ジャンプ id=真優 count=2
 
-@Talk name=真優 voice=MAY000095
+@Talk name=Mayu voice=MAY000095
 「あー！　その反応、やっぱり怪しい！　一悟の妻は、
 　家も通いも現地も全部わたしなんだからね！」
 @Hitret id=517
@@ -2874,7 +2940,7 @@
 @stopSe fade=1000
 @clearChar id=千奈
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真優、なにカリカリしてるんだ。
 　お腹が空いてるからか？」
 @Hitret id=518
@@ -2882,7 +2948,7 @@
 @char file=CA02A002M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000096
+@Talk name=Mayu voice=MAY000096
 「そういうわけじゃ……」
 @Hitret id=519
 
@@ -2895,7 +2961,7 @@
 @char file=CA02A008M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000097
+@Talk name=Mayu voice=MAY000097
 「やっぱり、お腹空いてるからかも。早く食べよう、一悟」
 @Hitret id=521
 
@@ -2906,7 +2972,7 @@
 出す真優。
 @Hitret id=522
 
-@Talk name=一悟
+@Talk name=Ichigo
 「分かった……って、うわっ」
 @Hitret id=523
 
@@ -2916,7 +2982,7 @@
 不意に真優が抱きついてくる。
 @Hitret id=524
 
-@Talk name=一悟
+@Talk name=Ichigo
 「全く、仕方ないな……」
 @Hitret id=525
 
@@ -2929,7 +2995,7 @@
 
 @clearChar id=真優
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうだ、ナタリーも一緒に食べないか？　どうせ
 　朝ごはん、ビーフジャーキー以外もケルベロスに
 　食べられたんだろう？」
@@ -2943,24 +3009,24 @@
 「えっ、で、でも……お二人の分なんでしょう？」
 @Hitret id=528
 
-@Talk name=一悟
+@Talk name=Ichigo
 「今日はたまたま多めに買ったんだよ。な、真優？」
 @Hitret id=529
 
 @char file=CA02A012M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000098
+@Talk name=Mayu voice=MAY000098
 「一悟がわたしをないすばでぃーにするためにね」
 @Hitret id=530
 
-@Talk name=一悟
+@Talk name=Ichigo
 「健康的になってもらうためだって！」
 @Hitret id=531
 
 @char file=CA02A008M
 
-@Talk name=真優 voice=MAY000099
+@Talk name=Mayu voice=MAY000099
 「でも、わたしのためなのは事実でしょ」
 @Hitret id=532
 
@@ -2975,24 +3041,24 @@
 独占欲が強すぎる。
 @Hitret id=534
 
-@Talk name=一悟
+@Talk name=Ichigo
 「昼休み、また多めに買ってくるよ」
 @Hitret id=535
 
 @char file=CA02A001M
 
-@Talk name=真優 voice=MAY000100
+@Talk name=Mayu voice=MAY000100
 「……ポテチを？」
 @Hitret id=536
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それで真優が納得するなら」
 @Hitret id=537
 
 @char file=CA02A003M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000101
+@Talk name=Mayu voice=MAY000101
 「うん、分かった。それならいいよ」
 @Hitret id=538
 
@@ -3003,7 +3069,7 @@
 
 @clearChar id=-1
 
-@Talk name=一悟
+@Talk name=Ichigo
 「まあ……その、そういうわけだから、ナタリー……」
 @Hitret id=540
 
@@ -3021,7 +3087,7 @@
 
 @playSe file=SE058	
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ほらほら、二人とも席に着いて。早く食べないと
 　予鈴が鳴るぞ」
 @Hitret id=543
@@ -3030,7 +3096,7 @@
 @char file=CB02A006M
 @face hideOnce
 
-@Talk name=真優＆千奈 voice=MAY000102/SEN000060
+@Talk name=Mayu＆千奈 voice=MAY000102/SEN000060
 「はーい」
 「はい……」
 @Hitret id=544
@@ -3045,7 +3111,7 @@
 @playBgm file=BGM02 fade=3000	
 @時間経過１ bg=BG02a01	
 
-@Talk name=一悟
+@Talk name=Ichigo
 「お、予鈴が鳴ったな」
 @Hitret id=546
 
@@ -3054,7 +3120,7 @@
 ほぼ同時に鳴った。
 @Hitret id=547
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そろそろ行こうか、ナタリー」
 @Hitret id=548
 
@@ -3069,11 +3135,11 @@
 @char file=CA02A009M
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000103
+@Talk name=Mayu voice=MAY000103
 「えぇ、もう行っちゃうの？」
 @Hitret id=550
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そんな、子犬みたいな顔されてもな……」
 @Hitret id=551
 
@@ -3090,24 +3156,24 @@
 それを出席と授業参加の代わりにしているというわけだ。
 @Hitret id=553
 
-@Talk name=一悟
+@Talk name=Ichigo
 「今日も一日頑張ろうな、真優。また昼休みに来るから」
 @Hitret id=554
 
 @char file=CA02A004M
 
-@Talk name=真優 voice=MAY000104
+@Talk name=Mayu voice=MAY000104
 「うー……早く来てね？」
 @Hitret id=555
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ。ポテチと一緒にな」
 @Hitret id=556
 
 @char file=CA02A008M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000105
+@Talk name=Mayu voice=MAY000105
 「ふふ、さすが一悟。分かってるね」
 @Hitret id=557
 
@@ -3119,17 +3185,17 @@
 
 @char file=CA02A014M
 
-@Talk name=真優 voice=MAY000106
+@Talk name=Mayu voice=MAY000106
 「またあとでね、一悟。行ってらっしゃい」
 @Hitret id=559
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ、行ってきます」
 @Hitret id=560
 
 @char file=CA02A012M
 
-@Talk name=真優 voice=MAY000107
+@Talk name=Mayu voice=MAY000107
 「千奈も……一応、行ってらっしゃい」
 @Hitret id=561
 
@@ -3140,7 +3206,7 @@
 「行ってきます、十川先輩……一応、です」
 @Hitret id=562
 
-@Talk name=一悟
+@Talk name=Ichigo
 「…………」
 @Hitret id=563
 
@@ -3159,7 +3225,7 @@
 「十川先輩は、これからずっと文芸部室登校なんですか？」
 @Hitret id=566
 
-@Talk name=一悟
+@Talk name=Ichigo
 「どうだろう……事情が事情だからな」
 @Hitret id=567
 
@@ -3189,7 +3255,7 @@
 「まあ、あだ名を付けられる前まではですけど」
 @Hitret id=571
 
-@Talk name=一悟
+@Talk name=Ichigo
 「はは……」
 @Hitret id=572
 
@@ -3203,7 +3269,7 @@
 「そもそも、どうして文芸部室登校なんですか？」
 @Hitret id=574
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それは……」
 @Hitret id=575
 
@@ -3243,18 +3309,18 @@
 @char file=CA03A001M tone=sepia
 
 
-@Talk name=真優 voice=MAY000108
+@Talk name=Mayu voice=MAY000108
 「文芸部ってことは物語を書くんだよね？」
 @Hitret id=581
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ」
 @Hitret id=582
 
 @char file=CA03A003M tone=sepia
 
 
-@Talk name=真優 voice=MAY000109
+@Talk name=Mayu voice=MAY000109
 「わあ……そっか。また、子どもの頃みたいに……
 　一悟が物語を作るんだ……」
 @Hitret id=583
@@ -3262,7 +3328,7 @@
 @char file=CA03A014M tone=sepia
 
 
-@Talk name=真優 voice=MAY000110
+@Talk name=Mayu voice=MAY000110
 「分かったよ、一悟！　安心して、わたしも
 　入部するから！」
 @Hitret id=584
@@ -3292,7 +3358,7 @@
 
 @回想復帰背景のみ bg=BG08a01	
 
-@Talk name=一悟
+@Talk name=Ichigo
 「……とまあ、経緯はこんな感じだな」
 @Hitret id=589
 
@@ -3302,7 +3368,7 @@
 「朝早くに登校してるのも、注目されるからなんですよね」
 @Hitret id=590
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうだな。ただでさえ目立つのに、おんぶしてくれ
 　なきゃ学園に行かないって言うから余計にな……」
 @Hitret id=591
@@ -3319,7 +3385,7 @@
 なんだかんだ言って、ナタリーは心配してくれるのだ。
 @Hitret id=593
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ありがとう。ナタリーは優しいな」
 @Hitret id=594
 
@@ -3331,7 +3397,7 @@
 　しっかりしてほしいと思っているだけですし……っ」
 @Hitret id=595
 
-@Talk name=一悟
+@Talk name=Ichigo
 「うん、そうだよな」
 @Hitret id=596
 
@@ -3410,7 +3476,7 @@
 「一悟もおはよ。一悟も元気？」
 @Hitret id=607
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ、おはよう。元気だよ」
 @Hitret id=608
 
@@ -3456,7 +3522,7 @@
 
 @autoPosition
 
-@Talk name=一悟
+@Talk name=Ichigo
 「おはようございます。今日は朝からエプロンなんですね」
 @Hitret id=615
 
@@ -3537,7 +3603,7 @@
 「そういう問題じゃないでしょう」
 @Hitret id=626
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それじゃあ、また放課後にな」
 @Hitret id=627
 
@@ -3557,7 +3623,7 @@
 
 @clearChar id=千奈
 
-@Talk name=一悟
+@Talk name=Ichigo
 「百花ちゃんは演劇部だろう？」
 @Hitret id=630
 
@@ -3567,7 +3633,7 @@
 「演劇部のおもな活動は、真優ちゃんのかんゆう」
 @Hitret id=631
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真優は文芸部の大切な部員だからなぁ……」
 @Hitret id=632
 
@@ -3599,7 +3665,7 @@
 　早めに終わらせておきますね」
 @Hitret id=636
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真里亜さん、今日は一日購買部でバイトする日
 　なんですか？」
 @Hitret id=637
@@ -3611,7 +3677,7 @@
 「はい。お昼と放課後にお店番をさせていただく予定です」
 @Hitret id=638
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それなら、昼休みに買いに行きますよ。ポテチを
 　取り置きしてもらってもいいですか？」
 @Hitret id=639
@@ -3623,7 +3689,7 @@
 　予約だぜ？」
 @Hitret id=640
 
-@Talk name=一悟
+@Talk name=Ichigo
 「その意味がよく分からないんだが……真優に
 　頼まれたんだよ」
 @Hitret id=641
@@ -3665,7 +3731,7 @@
 　おりますね」
 @Hitret id=646
 
-@Talk name=一悟
+@Talk name=Ichigo
 「はい。それじゃあまた後で」
 @Hitret id=647
 
@@ -3686,7 +3752,7 @@
 からかうのが好きなところがあるからな……
 @Hitret id=650
 
-@Talk name=一悟
+@Talk name=Ichigo
 「っと、俺も急がないとな」
 @Hitret id=651
 
@@ -3741,7 +3807,7 @@
 一人のクラスメイト――小野坂ひかるが近づいてきた。
 @Hitret id=659
 
-@Talk name=一悟
+@Talk name=Ichigo
 「おはよう、ひかる。余裕そうだな」
 @Hitret id=660
 
@@ -3752,7 +3818,7 @@
 「えっ、なにが？」
 @Hitret id=661
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ひかる、選択授業で地学だっただろう？」
 @Hitret id=662
 
@@ -3763,7 +3829,7 @@
 　余裕なかったみたいだね」
 @Hitret id=663
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ちょっと話しこんでたからな」
 @Hitret id=664
 
@@ -3773,7 +3839,7 @@
 「十川さんと？　本当に仲がいいね」
 @Hitret id=665
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いや、後輩とか、真里亜さんに会って」
 @Hitret id=666
 
@@ -3784,7 +3850,7 @@
 「ああ、なるほど。一悟はモテるね、うらやましいよ」
 @Hitret id=667
 
-@Talk name=一悟
+@Talk name=Ichigo
 「本当にモテる奴に言われると反応に困るな」
 @Hitret id=668
 
@@ -3795,7 +3861,7 @@
 「あはは、僕の場合は男女問わずだからね」
 @Hitret id=669
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ、そうだろうな」
 @Hitret id=670
 
@@ -3841,7 +3907,7 @@
 そう、小野坂ひかるはこの容姿で、男なのだ。
 @Hitret id=677
 
-@Talk name=一悟
+@Talk name=Ichigo
 「まあ、それで損もしてないだろう？　なんにせよ、
 　容姿が整ってるのは誇れることだと思うぞ」
 @Hitret id=678
@@ -3853,7 +3919,7 @@
 　ことだってあるじゃないか」
 @Hitret id=679
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ……そういえばそうだったな」
 @Hitret id=680
 
@@ -3870,7 +3936,7 @@
 @回想 bg=BG02a01 char=CA02A015L
 
 
-@Talk name=真優 voice=MAY000111
+@Talk name=Mayu voice=MAY000111
 「いきなりよそに女作るなんて、どういうつもりなの！？」
 @Hitret id=683
 
@@ -3907,7 +3973,7 @@
 「男子の制服着てるのにねぇ」
 @Hitret id=688
 
-@Talk name=一悟
+@Talk name=Ichigo
 「男装してるように見えるくらい、美人なんだってこと
 　だろう」
 @Hitret id=689
@@ -3943,7 +4009,7 @@
 　だったんだ、さすが文芸部の部長だって」
 @Hitret id=694
 
-@Talk name=一悟
+@Talk name=Ichigo
 「また機会があればな」
 @Hitret id=695
 
@@ -3963,7 +4029,7 @@
 「そういえば、文芸部は文化祭の準備は進んでる？」
 @Hitret id=698
 
-@Talk name=一悟
+@Talk name=Ichigo
 「アイディアを出し合ってはいるんだけどな……」
 @Hitret id=699
 
@@ -3988,7 +4054,7 @@
 　困った時は相談してよ」
 @Hitret id=702
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ、ありがとう……」
 @Hitret id=703
 
@@ -4021,7 +4087,7 @@
 @char file=CA02A004M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000112
+@Talk name=Mayu voice=MAY000112
 「…………」
 @Hitret id=707
 
@@ -4039,7 +4105,7 @@
 @ううっ id=真優
 @emotion id=真優 type=ハート02 target=頭
 
-@Talk name=真優 voice=MAY000113
+@Talk name=Mayu voice=MAY000113
 「『帰りにポテチを買ってやるから』だって……ふふふ」
 @Hitret id=710
 
@@ -4065,7 +4131,7 @@
 
 @char file=CA02A013M
 
-@Talk name=真優 voice=MAY000114
+@Talk name=Mayu voice=MAY000114
 「いつかは、もっとこう……ほら、女の子は、恋人に
 　甘えるのが仕事っていうし……堂々と……」
 @Hitret id=715
@@ -4073,7 +4139,7 @@
 @char file=CA02A014M
 @ううっ id=真優
 
-@Talk name=真優 voice=MAY000115
+@Talk name=Mayu voice=MAY000115
 「恋人……恋人かぁ……ふふふふふ」
 @Hitret id=716
 
@@ -4104,13 +4170,13 @@
 @char file=CA02A015M x=300
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000116
+@Talk name=Mayu voice=MAY000116
 「ひゃうっ！？　え、榎本先生？」
 @Hitret id=721
 
 @char file=CA02A016M
 
-@Talk name=真優 voice=MAY000117
+@Talk name=Mayu voice=MAY000117
 「……なんでわざわざ来たんですか？
 　部活の時間じゃないですけど」
 @Hitret id=722
@@ -4125,7 +4191,7 @@
 @char file=CA02A004M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000118
+@Talk name=Mayu voice=MAY000118
 「……先生は文芸部の顧問であって、わたしの担任じゃ
 　ないですよね？」
 @Hitret id=724
@@ -4152,7 +4218,7 @@
 @char file=CA02A006M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000119
+@Talk name=Mayu voice=MAY000119
 「あっ、やめて、勝手に見ないでください……っ」
 @Hitret id=728
 
@@ -4165,7 +4231,7 @@
 @char file=CA02A016M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000120
+@Talk name=Mayu voice=MAY000120
 「べ、別にそういうわけじゃ……ちょっと考えごとを
 　してて」
 @Hitret id=730
@@ -4185,7 +4251,7 @@
 
 @噴飯２ id=真優
 
-@Talk name=真優 voice=MAY000121
+@Talk name=Mayu voice=MAY000121
 「ふわっ！？　ちがっ、違います！　違うから離れてっ」
 @Hitret id=732
 
@@ -4226,7 +4292,7 @@
 @char file=CA02A001M
 @否定 id=真優
 
-@Talk name=真優 voice=MAY000122
+@Talk name=Mayu voice=MAY000122
 「ないです」
 @Hitret id=739
 
@@ -4273,7 +4339,7 @@
 
 @char file=CA02A001M
 
-@Talk name=真優 voice=MAY000123
+@Talk name=Mayu voice=MAY000123
 「先生の授業は体育なんだから、どっちみち教室では
 　受けられないと思います」
 @Hitret id=747
@@ -4287,7 +4353,7 @@
 
 @char file=CA02A013M
 
-@Talk name=真優 voice=MAY000124
+@Talk name=Mayu voice=MAY000124
 「保健の授業だけ受けに……つまり、わたしが一悟と
 　そういう関係になることを、先生は応援してくれて
 　るんだ」
@@ -4331,7 +4397,7 @@
 「あら、宮国様。いらっしゃいませ」
 @Hitret id=753
 
-@Talk name=一悟
+@Talk name=Ichigo
 「こんにちは、真里亜さん」
 @Hitret id=754
 
@@ -4348,7 +4414,7 @@
 「真優様は、放課後もお菓子のおねだりですか？」
 @Hitret id=756
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そういうわけじゃないんですけど……」
 @Hitret id=757
 
@@ -4368,7 +4434,7 @@
 「ふふ、真優様は幸せ者ですね」
 @Hitret id=760
 
-@Talk name=一悟
+@Talk name=Ichigo
 「甘いものでばっかり釣っているようで、気が
 　引けるんですけどね」
 @Hitret id=761
@@ -4381,7 +4447,7 @@
 　なにかをしてくれる――それは幸せなことですわ」
 @Hitret id=762
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そういうものですかね」
 @Hitret id=763
 
@@ -4415,7 +4481,7 @@
 　目立ちませんが、実は一番のおすすめ商品ですわ」
 @Hitret id=768
 
-@Talk name=一悟
+@Talk name=Ichigo
 「じゃあ、それをひとつ」
 @Hitret id=769
 
@@ -4438,7 +4504,7 @@
 「真優様や千奈様にもよろしくお伝えください」
 @Hitret id=772
 
-@Talk name=一悟
+@Talk name=Ichigo
 「はい。それじゃあ、また」
 @Hitret id=773
 
@@ -4460,7 +4526,7 @@
 @stopSe fade=1000
 
 
-@Talk name=一悟
+@Talk name=Ichigo
 「おお、どうしたんだ？　ひとりなのか？」
 @Hitret id=776
 
@@ -4488,7 +4554,7 @@
 だった。
 @Hitret id=779
 
-@Talk name=一悟
+@Talk name=Ichigo
 「こんにちは、アリス会長。散歩ですか？」
 @Hitret id=780
 
@@ -4499,7 +4565,7 @@
 　言いたくてね」
 @Hitret id=781
 
-@Talk name=一悟
+@Talk name=Ichigo
 「お礼ですか？」
 @Hitret id=782
 
@@ -4510,7 +4576,7 @@
 「ああ。ケルベロスを見つけてくれただろう？」
 @Hitret id=783
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ、たまたま文芸部の部室にいたんですよ。
 　ナタリーと遊んでたみたいです」
 @Hitret id=784
@@ -4522,7 +4588,7 @@
 「うん、そのようだね。真里亜から聞いたよ」
 @Hitret id=785
 
-@Talk name=一悟
+@Talk name=Ichigo
 「あれ、同じクラスでしたっけ？」
 @Hitret id=786
 
@@ -4532,11 +4598,11 @@
 「隣のクラスだけど、話す機会はいくらでもあるからね」
 @Hitret id=787
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうですか……」
 @Hitret id=788
 
-@Talk name=一悟
+@Talk name=Ichigo
 「でも本当に、礼を言われるようなことじゃないですよ」
 @Hitret id=789
 
@@ -4563,7 +4629,7 @@
 「ふふ、一悟くんは素直で嬉しいよ」
 @Hitret id=792
 
-@Talk name=一悟
+@Talk name=Ichigo
 「え？」
 @Hitret id=793
 
@@ -4574,7 +4640,7 @@
 　君は素直に握り返してくれる」
 @Hitret id=794
 
-@Talk name=一悟
+@Talk name=Ichigo
 「会長と話す機会があるから、慣れたんだと思います」
 @Hitret id=795
 
@@ -4597,7 +4663,7 @@
 お菓子にいきついた。
 @Hitret id=798
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ついさっき購買部で買ったんですよ。秋の新作らしい
 　です」
 @Hitret id=799
@@ -4616,7 +4682,7 @@
 　スナック菓子で摂りたいくらいだよ」
 @Hitret id=801
 
-@Talk name=一悟
+@Talk name=Ichigo
 「真優みたいなことを言いますね。栄養にはちゃんと
 　気を付けてください」
 @Hitret id=802
@@ -4629,7 +4695,7 @@
 　させてもらってる限りは大丈夫だよ」
 @Hitret id=803
 
-@Talk name=一悟
+@Talk name=Ichigo
 「なるほど。それなら安心ですね」
 @Hitret id=804
 
@@ -4641,7 +4707,7 @@
 　くることにしよう。引き留めて悪かったね」
 @Hitret id=805
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いえ……戻ってくるというと？」
 @Hitret id=806
 
@@ -4651,12 +4717,12 @@
 「演劇部にちょっとした用事があるんだ」
 @Hitret id=807
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ああ、そういえば百花ちゃんがそんな話をしてた覚えが
 　ありますね」
 @Hitret id=808
 
-@Talk name=一悟
+@Talk name=Ichigo
 「それじゃあ俺も、そろそろ行きますね」
 @Hitret id=809
 
@@ -4667,7 +4733,7 @@
 「ああ。早く真優ちゃんに顔を見せてあげてくれ」
 @Hitret id=810
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ははは……授業時間以外はほとんど一緒にいますから、
 　飽き飽きしてると思いますよ」
 @Hitret id=811
@@ -4692,7 +4758,7 @@
 　遊びに行くよ」
 @Hitret id=814
 
-@Talk name=一悟
+@Talk name=Ichigo
 「わ……分かりました」
 @Hitret id=815
 
@@ -4704,7 +4770,7 @@
 立ち去っていった。
 @Hitret id=816
 
-@Talk name=一悟
+@Talk name=Ichigo
 「来るとしたら、文化祭の話をするためだよな……」
 @Hitret id=817
 
@@ -4720,7 +4786,7 @@
 @char file=CA02A003M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000125
+@Talk name=Mayu voice=MAY000125
 「あっ、一悟！」
 @Hitret id=819
 
@@ -4730,11 +4796,11 @@
 
 @char file=CA02A006M
 
-@Talk name=真優 voice=MAY000126
+@Talk name=Mayu voice=MAY000126
 「遅いよ、一悟！　待ってたんだよ」
 @Hitret id=821
 
-@Talk name=一悟
+@Talk name=Ichigo
 「待ってたって、授業以外は一緒に……」
 @Hitret id=822
 
@@ -4745,18 +4811,18 @@
 
 @char file=CA02A001M
 
-@Talk name=真優 voice=MAY000127
+@Talk name=Mayu voice=MAY000127
 「どうしたの、一悟？」
 @Hitret id=824
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いや。お菓子買ってきたぞ」
 @Hitret id=825
 
 @char file=CA02A014M
 @ジャンプ id=真優
 
-@Talk name=真優 voice=MAY000128
+@Talk name=Mayu voice=MAY000128
 「わあ！　ありがと、一悟っ！」
 @Hitret id=826
 
@@ -4772,7 +4838,7 @@
 「餌付け上手ですね、みゃー先輩は」
 @Hitret id=828
 
-@Talk name=一悟
+@Talk name=Ichigo
 「うん？」
 @Hitret id=829
 
@@ -4783,7 +4849,7 @@
 
 @clearChar id=真優
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ごめん、うるさかったか？」
 @Hitret id=831
 
@@ -4795,7 +4861,7 @@
 「いいえ。むしろ静かになりましたね」
 @Hitret id=832
 
-@Talk name=一悟
+@Talk name=Ichigo
 「これで？」
 @Hitret id=833
 
@@ -4806,7 +4872,7 @@
 　のかも！？』って、ずーっと言ってたんですよ」
 @Hitret id=834
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そこまで心待ちにされるようなことがあったか？」
 @Hitret id=835
 
@@ -4823,7 +4889,7 @@
 
 @clearChar id=-1
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そういえば、さっきアリス会長と会ったよ。今度
 　来るそうだ」
 @Hitret id=838
@@ -4832,7 +4898,7 @@
 @ジャンプ id=真優
 @font face=39
 
-@Talk name=真優 voice=MAY000129
+@Talk name=Mayu voice=MAY000129
 「会長に捕まって遅くなったの！？」
 @Hitret id=839
 
@@ -4852,7 +4918,7 @@
 「それで、用件は？　ただ遊びに来るだけですか？」
 @Hitret id=841
 
-@Talk name=一悟
+@Talk name=Ichigo
 「いや……この時期に来るって言うくらいだから、
 　多分……」
 @Hitret id=842
@@ -5034,7 +5100,7 @@
 
 @回想復帰 bg=BG02a01 char=CA02A001M
 
-@Talk name=真優 voice=MAY000130
+@Talk name=Mayu voice=MAY000130
 「『文芸部の部誌を１００部売ること』」
 @Hitret id=867
 
@@ -5043,7 +5109,7 @@
 なぞる。
 @Hitret id=868
 
-@Talk name=一悟
+@Talk name=Ichigo
 「１００部か……」
 @Hitret id=869
 
@@ -5054,7 +5120,7 @@
 「去年は何部売れたんでしたっけ？」
 @Hitret id=870
 
-@Talk name=一悟
+@Talk name=Ichigo
 「刷ったのは５０部。売れたのは３５部だな」
 @Hitret id=871
 
@@ -5064,14 +5130,14 @@
 「それって多いんですか？　少ないんですか？」
 @Hitret id=872
 
-@Talk name=一悟
+@Talk name=Ichigo
 「どうだろう……でも、買ってくれたのは友達とか、
 　あとは先生たちくらいだな」
 @Hitret id=873
 
 @char file=CA02A008M
 
-@Talk name=真優 voice=MAY000131
+@Talk name=Mayu voice=MAY000131
 「あとは、ものすごく奇特な物好きが何人か買っていって
 　くれたんでしょ？」
 @Hitret id=874
@@ -5098,7 +5164,7 @@
 俺たちを見て、我に返ったようだった。
 @Hitret id=877
 
-@Talk name=一悟
+@Talk name=Ichigo
 「みなまで言うな、ナタリー。悲しくなるから」
 @Hitret id=878
 
@@ -5118,11 +5184,11 @@
 学生の小説など見向きもしないはずだ。
 @Hitret id=881
 
-@Talk name=一悟
+@Talk name=Ichigo
 「ちなみに残りは、記録用にそこの棚へ保管してある」
 @Hitret id=882
 
-@Talk name=一悟
+@Talk name=Ichigo
 「去年のだけじゃなくて、歴代の部誌は揃ってるはず
 　だから、興味があったら読んでみるといい」
 @Hitret id=883
@@ -5136,19 +5202,19 @@
 
 @char file=CA02A005M
 
-@Talk name=真優 voice=MAY000132
+@Talk name=Mayu voice=MAY000132
 「でも、今年はいままで以上に売らないといけないん
 　だからね」
 @Hitret id=885
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうだよなあ……」
 @Hitret id=886
 
 @char file=CA02A012M
 @おじぎ id=真優
 
-@Talk name=真優 voice=MAY000133
+@Talk name=Mayu voice=MAY000133
 「あ……千奈は一応プロでしょ。ここでしか読めない
 　書き下ろし小説！　とか言って売り出せば？」
 @Hitret id=887
@@ -5160,7 +5226,7 @@
 「だ、駄目ですっ！　学園には内緒にしているんですから」
 @Hitret id=888
 
-@Talk name=一悟
+@Talk name=Ichigo
 「前にもそれは駄目だって話で落ち着いただろう」
 @Hitret id=889
 
@@ -5184,7 +5250,7 @@
 
 @char file=CA02A004M
 
-@Talk name=真優 voice=MAY000134
+@Talk name=Mayu voice=MAY000134
 「……文芸部がなくなったら、わたし登校できなくなる」
 @Hitret id=893
 
@@ -5196,7 +5262,7 @@
 　ここで書いていた方が集中できますから」
 @Hitret id=894
 
-@Talk name=一悟
+@Talk name=Ichigo
 「代々続いてきた文芸部を、俺の代で潰してしまうのは
 　さすがに嫌だな……」
 @Hitret id=895
@@ -5218,14 +5284,14 @@
 　だけでは駄目なんでしょうね」
 @Hitret id=898
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうだな。内容が良くても、読んでもらえるのは
 　文化祭のあとだろうし、口コミは望めない」
 @Hitret id=899
 
 @char file=CA02A005M
 
-@Talk name=真優 voice=MAY000135
+@Talk name=Mayu voice=MAY000135
 「食べもの系だったら、口コミで売れたりするんだろうね。
 　料理研究部がうらやましい……」
 @Hitret id=900
@@ -5238,7 +5304,7 @@
 　頑張らないと……」
 @Hitret id=901
 
-@Talk name=一悟
+@Talk name=Ichigo
 「なるほどな……」
 @Hitret id=902
 
@@ -5273,14 +5339,14 @@
 　売り方を決めないことには、どうしようもないですね」
 @Hitret id=907
 
-@Talk name=一悟
+@Talk name=Ichigo
 「そうだな。去年までと同じでは通用しないだろうから、
 　一から準備する必要があるし……」
 @Hitret id=908
 
 @char file=CA02A004M
 
-@Talk name=真優 voice=MAY000136
+@Talk name=Mayu voice=MAY000136
 「二日間で１００部……去年の倍……」
 @Hitret id=909
 
@@ -5294,7 +5360,7 @@
 @action id=千奈 action=ActionAdvBow height=10 cycle=400 count=1
 @face hideOnce
 
-@Talk name=真優＆千奈＆一悟 voice=MAY000137/SEN000097
+@Talk name=Mayu＆千奈＆一悟 voice=MAY000137/SEN000097
 「はぁ……」
 「はぁ……」
 「はぁ……」
@@ -5321,7 +5387,7 @@
 「助けて！」
 @Hitret id=914
 
-@Talk name=一悟
+@Talk name=Ichigo
 「え！？」
 @Hitret id=915
 
@@ -5333,7 +5399,7 @@
 @メッセージ揺らし
 @font face=39
 
-@Talk name=一悟
+@Talk name=Ichigo
 「も、百花ちゃん！？」
 @Hitret id=917
 
@@ -5357,7 +5423,7 @@
 @ううっ id=真優 count=-1
 @font face=39
 
-@Talk name=真優 voice=MAY000138
+@Talk name=Mayu voice=MAY000138
 「ふきゃああっ！？　ななななにしてっ！？」
 @Hitret id=920
 
@@ -5382,7 +5448,7 @@
 @char file=CA02A001M
 @char file=CB02A004M
 
-@Talk name=一悟
+@Talk name=Ichigo
 「え？」
 @Hitret id=923
 

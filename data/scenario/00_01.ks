@@ -5,19 +5,18 @@
 @update time=3000
 @waitUpdate hitCancel
 
-@Talk name=Announcer voice=NPC030001
-本日はご来場誠にありがとうございます。まもなく
-　開演でございます
+@Talk name=Information Announcer voice=NPC030001
+Thank you very much for coming today. 
+The performance will be started very soon.
 @Hitret id=1
 
 
-@Talk name=案内アナウンス voice=NPC030002
-「ロビーのお客様はお席にお戻り下さいますよう
-　お願いいたします。繰り返します……」
+@Talk name=Information Announcer voice=NPC030002
+"Customers in the lobby, please return to your seats. I repeat..."
 @Hitret id=2
 
 @Talk name=心の声
-アナウンスに促され、劇場内へと滑り込む。
+Prompted by an announcement, I slipped into the theater.
 @Hitret id=3
 
 @playEnvSe file=SE110
@@ -27,68 +26,64 @@
 @waitUpdate
 
 @Talk name=心の声
-劇場は、静かな熱気に満ちていた。
+The theater was filled with quiet excitement.
 @Hitret id=4
 
 @Talk name=心の声
-周囲から聞こえてくる、さざ波のようなざわめき。
+A ripple-like noise can be heard from the surrounding area.
 @Hitret id=5
 
 @Talk name=心の声
-彼らの話題は、直前まで俺が会っていた
-とある女の子のことだ。
+The main topic they were talking about was a girl I had been seeing just before.
 @Hitret id=6
 
 
 @font face=21
 
-@Talk name=観客Ａ voice=NPC090001
-「まさか彼女が引退してしまうなんてねぇ」
+@Talk name=Audience Ａ voice=NPC090001
+“I never thought she would really retire.”
 @Hitret id=7
 
 
 @font face=21
 
-@Talk name=観客Ｂ voice=NPC100001
-「ええ、本当に。海外の劇場からもオファーが
-　来ていたらしいのに……」
+@Talk name=Audience Ｂ voice=NPC100001
+"Yes, really. 
+I heard that she had received offers from overseas theaters as well..."
 @Hitret id=8
 
 @Talk name=心の声
-俺はひそひそと会話をしている人々の間を縫って、
-自分の座席へと腰を下ろす。
+I weave through the people who are having quiet conversations and sit down in my seat.
 @Hitret id=9
 
 @フェード出し bg=BG25a03	
 
 @Talk name=心の声
-俺の座席は、会場の中心だった。
+My seat was in the center of the venue.
 @Hitret id=10
 
 
 
-@Talk name=真優 voice=MAY000001
-「最後の公演だから、一番良い席で観て欲しいの」
+@Talk name=Mayu voice=MAY000001
+“Since it’s my last performance, I want you to watch me from the best seats.”
 @Hitret id=11
 
 @Ruby mess=緞帳 read=どんちょう
 
 @Talk name=心の声
-そう言いながらチケットを手渡してきた幼なじみは今、
-緞帳の向こう側にいるはずだ。
+That 'childhood' friend who handed me the ticket whom said that word should be on the other side of the curtain now.
 @Hitret id=12
 
 @Talk name=心の声
-彼女がどんな思いでそこにいるのか、想像する。
+I can imagine how she feels there.
 @Hitret id=13
 
 @Talk name=心の声
-彼女が、期待と好奇の視線を一身に受けるその瞬間を
-想像する。
+I imagine that moment when she receives all the gazes of anticipation and curiosity.
 @Hitret id=14
 
 @Talk name=心の声
-その重圧に、初めて考えを巡らせる。
+For the first time, I thought about the pressure from audience.
 @Hitret id=15
 
 @playSe file=SE030	
@@ -97,16 +92,15 @@
 @blackout time=2000 hitCancel
 
 @Talk name=心の声
-場内灯が消え、辺りが真っ暗になった。
+The lights in the hall went out, and the aera became pitch black.
 @Hitret id=16
 
 @Talk name=心の声
-会場内の空気が、ぴりりと引き締まる。
+The atmosphere inside the venue became tense.
 @Hitret id=17
 
 @Talk name=心の声
-カラカラと歯車の回る音がして、再びうっすらと
-明かりが戻ってきた。
+There was the sound of gears turning, and the light came back on again.
 @Hitret id=18
 
 @stopSe fade=1000
@@ -116,19 +110,19 @@
 @waitUpdate
 
 @Talk name=心の声
-緞帳が上がった。
+The curtain was raised.
 @Hitret id=19
 
 @Talk name=心の声
-会場内の温度が、一気に下がったような気がする。
+It felt like the temperature in the venue suddenly dropped.
 @Hitret id=20
 
 @Talk name=心の声
-次の瞬間を想像して、瞬きもせず、誰もが微動だにしない。
+Everyone was motionless, not even blinking, imagining the next moment.
 @Hitret id=21
 
 @Talk name=心の声
-全身で、舞台が動くのを待っている。
+I was waiting for the stage to move.
 @Hitret id=22
 
 @playSe file=SE021	
@@ -138,75 +132,75 @@
 @waitUpdate
 
 @Talk name=心の声
-パチンという音と共に、ライトが点く。
+With a snapping sound, the light turns on.
 @Hitret id=23
 
 @Talk name=心の声
-立っているのは、一人の女の子だ。
+A figure of the girl is standing there.
 @Hitret id=24
 
 @Talk name=心の声
-華奢で、小さくて、可愛らしい女の子。
+A delicate, small, and cute girl.
 @Hitret id=25
 
 @Talk name=心の声
-さっきまで俺と会話をしていた幼なじみ。
+The same childhood friend who was talking to me a while ago.
 @Hitret id=26
 
 @Talk name=心の声
-そのはず、なのに――
+Well, It's supposed to be that way, but...
 @Hitret id=27
 
 @cg file=EA01CL		
 
 @Talk name=心の声
-ステージの上にいる彼女は、別人のようだった。
+She looked like a different person on stage.
 @Hitret id=28
 
 @Talk name=心の声
-何百もの視線の中心にいる彼女の全身から、
-気迫がほとばしっていた。
+何百もの視線の中心にいる彼女の全身から、気迫がほとばしっていた。? 
+She was the center of hundreds of gazes, and her whole body exuded energy.
 @Hitret id=29
 
 @Talk name=心の声
-ただそこにいるだけなのに、視線が釘付けになってしまう
-圧倒的な存在感……威圧感……
+Even though she's just there, she has an overwhelming presence that grabs your attention... an intimidating feeling...
+ただそこにいるだけなのに、視線が釘付けになってしまう圧倒的な存在感……威圧感……
 @Hitret id=30
 
 @Talk name=心の声
 ああ、彼女は天才なのだと感じる。
+Oh, I feel like she's a genius on stage.
 @Hitret id=31
 
 @Talk name=心の声
 自分の知っている女の子ではないのだと思わされる。
+It makes me feel that this is not the girl whom I knew.
 @Hitret id=32
 
 @Talk name=心の声
-その時――
+At that time――
 @Hitret id=33
 
 @cg file=EA01DL pos=0,0,64		
 
 @Talk name=心の声
-彼女は、確かに俺を見た。
+She definitely saw me.
 @Hitret id=34
 
 @Talk name=心の声
-まっすぐな視線――けれど、微かに不安げに
-陰っている。
+Her gaze was straight, but there was a hint of anxiety.
 @Hitret id=35
 
 @Talk name=心の声
-紛れもなく、俺の幼なじみの顔だった。
+It was unmistakably the face of my childhood friend.
 @Hitret id=36
 
 @Talk name=心の声
-たった一人の女の子だった。
+There was only one girl.
 @Hitret id=37
 
 @Talk name=心の声
-俺は、ステージ上を支配している天才にではなく、
-よく知っている幼なじみに向かって、そっと頷く。
+I nod gently, not at that genius who's dominating the stage right now, but at my childhood friend who I knew well.
 @Hitret id=38
 
 
@@ -215,42 +209,37 @@
 @Hitret id=39
 
 @Talk name=心の声
-揺れていた瞳に力が満ちたのが、これほど離れていても
-分かった。
+Even from this distance, I could see that her shaking eyes were filled with power.
 @Hitret id=40
 
 @cg file=EA01D		
 
 @Talk name=心の声
-誰もが彼女の第一声を待っている。
+Everyone is waiting for her first word.
 @Hitret id=41
 
 @Talk name=心の声
-その重圧を想像する。
+Can you imagine being pressed that pressure from entire theater.
 @Hitret id=42
 
 @Talk name=心の声
-それは、たった一人の女の子が耐えられるような
-ものなんだろうか？
+Is that something that just one girl can endure?
 @Hitret id=43
 
 @Talk name=心の声
-今さらながら、やっとそう思い至った俺の視線の先で、
-彼女の唇がわずかに開く。
+Even though it was only now, I finally realized this and her lips parted slightly as I gazed at her.
 @Hitret id=44
 
 @Talk name=心の声
-息を吸う音すら響くような、絶対的な静寂。
+Absolute silence, where even the sound of breathing can be heard.
 @Hitret id=45
 
 @hide
 @blackout time=2000 hitCancel
 
 @Talk name=心の声
-そこへ響く、第一声――
+The first voice that echoes there――
 @Hitret id=46
-
-
 
 @hide
 @stopSe fade=3000

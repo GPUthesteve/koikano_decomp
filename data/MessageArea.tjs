@@ -3,7 +3,7 @@
 */
 
 var FONT_DEFAULT_FACE = "メイリオ,HG丸ｺﾞｼｯｸM-PRO,ＭＳ ゴシック";
-var FONT_DEFAULT_SIZE = 18;				//
+var FONT_DEFAULT_SIZE = 15;				//
 var FONT_DEFAULT_INDENT = 20;			//
 var FONT_DEFAULT_INTERVAL = 1;			//
 var FONT_DEFAULT_BOLD = false;			//
