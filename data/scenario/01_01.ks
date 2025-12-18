@@ -131,7 +131,7 @@ Now, my childhood friend is shaking her upper body with sleepy eyes.
 @Hitret id=67
 
 @Talk name=Ichigo
-一悟「おはよう真優。学園へ行く支度をしてくれ」? 
+「おはよう真優。学園へ行く支度をしてくれ」? 
 "Good morning, Mayu. Get ready to go to school."
 @Hitret id=68
 
@@ -296,7 +296,7 @@ Mayu suddenly took off her pajamas.
 
 @Talk name=Mayu voice=MAY000015
 「えー？　ここにいてもいいんだよ？」
-“Eh? Is it okay if you stay here?”
+“Eh? Isn't it okay if you stay here?”
 @Hitret id=92
 
 @font face=39
@@ -916,8 +916,7 @@ Mayu pinches my cheek and I almost loses my balance.
 @face file=CA02A004	
 
 @Talk name=Mayu voice=MAY000044
-「部長じゃなくても、一悟がいれば嬉しいに決まってる
-　でしょ……」
+「部長じゃなくても、一悟がいれば嬉しいに決まってるでしょ……」
 @Hitret id=187
 
 @カメラ揺らし
